@@ -4,7 +4,7 @@
 
 @font-face {
   font-family: blanka;
-  src: url("./src/fonts/Blanka-Regular.otf");
+  src: url("./public/fonts/Blanka-Regular.otf");
 }
 .nanogram {
   font-family: blanka;
