@@ -1,0 +1,44 @@
+import React from 'react';
+import { ArrowRight } from 'lucide-react';
+
+const images = [
+    '/src/images/1.png',
+    '/src/images/1.png',
+    '/src/images/1.png',
+    '/src/images/1.png',
+    '/src/images/1.png',
+    '/src/images/1.png',
+    // Add more image paths as needed
+];
+
+const Gallery = () => {
+  return (
+    <section className="p-6 bg-white">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="max-w-7xl mx-auto grid grid-cols-3 lg:grid-cols-6 gap-y-12 gap-x-8 justify-items-center">
+          {images.map((img, index) => (
+            <div key={index} className="aspect-square">
+              <img 
+                src={img} 
+                alt={`Gallery image ${index + 1}`} 
+                className="object-cover w-full h-full rounded-lg mx-auto shadow-lg"
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Button */}
+      <div className="mt-8 text-center">
+        <button className="bg-blue-500 bg-opacity-50 text-white px-6 py-3 rounded-full inline-flex items-center hover:bg-opacity-70 transition-colors group">
+          Go to Gallery{" "}
+          <span className="ml-2 pt-1 flex items-center transition-transform duration-200 transform group-hover:translate-x-1">
+            <ArrowRight className="ml-2 h-5 w-5" />
+          </span>
+        </button>
+      </div>
+    </section>
+  );
+};
+
+export default Gallery;
