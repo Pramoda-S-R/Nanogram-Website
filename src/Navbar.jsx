@@ -64,7 +64,7 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <nav className="md:hidden mt-4 flex flex-col space-y-4">
+        <nav className="md:hidden mt-4 flex flex-col space-y-4 text-center">
           <a href="#" className="text-gray-600 hover:text-gray-900">
             Home
           </a>
