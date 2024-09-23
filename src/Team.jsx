@@ -2,29 +2,34 @@ import React from "react";
 import { ArrowRight } from "lucide-react";
 
 const images = [
-  "/src/images/1.png",
-  "/src/images/1.png",
-  "/src/images/1.png",
-  "/src/images/1.png",
-  "/src/images/1.png",
-  "/src/images/1.png",
-  "/src/images/1.png",
-  "/src/images/1.png",
-  "/src/images/1.png",
-  "/src/images/1.png",
-  "/src/images/1.png",
-  "/src/images/1.png",
+  "/1.png",
+  "/1.png",
+  "/1.png",
+  "/1.png",
+  "/1.png",
+  "/1.png",
+  "/1.png",
+  "/1.png",
+  "/1.png",
+  "/1.png",
+  "/1.png",
+  "/1.png",
   // Add more image paths as needed
 ];
 
 const Team = () => {
   return (
-    <section className="max-w-7xl mx-auto p-6 bg-white flex flex-col lg:flex-row"> {/* Responsive flex direction */}
+    <section className="max-w-7xl mx-auto p-6 bg-white flex flex-col lg:flex-row">
+      {" "}
+      {/* Responsive flex direction */}
       {/* Text Section */}
-      <div className="max-w-sm mb-6 lg:mb-0 lg:mr-8"> {/* Added margin adjustments for spacing */}
+      <div className="max-w-sm mb-6 lg:mb-0 lg:mr-8">
+        {" "}
+        {/* Added margin adjustments for spacing */}
         <h1 className="text-5xl font-medium mb-4">Meet Our Team</h1>
         <p className="text-lg text-gray-500">
-          Get to know the passionate and dedicated members behind Nanogram - The Tech Hub.
+          Get to know the passionate and dedicated members behind Nanogram - The
+          Tech Hub.
         </p>
         <a
           href="#"
@@ -36,7 +41,6 @@ const Team = () => {
           </span>
         </a>
       </div>
-      
       {/* Images Section */}
       <div className="px-4">
         <div className="grid grid-cols-6 gap-y-12 gap-x-8 justify-items-center">

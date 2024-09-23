@@ -1,14 +1,14 @@
-import React from 'react';
-import { ArrowRight } from 'lucide-react';
+import React from "react";
+import { ArrowRight } from "lucide-react";
 
 const images = [
-    '/src/images/1.png',
-    '/src/images/1.png',
-    '/src/images/1.png',
-    '/src/images/1.png',
-    '/src/images/1.png',
-    '/src/images/1.png',
-    // Add more image paths as needed
+  "/1.png",
+  "/1.png",
+  "/1.png",
+  "/1.png",
+  "/1.png",
+  "/1.png",
+  // Add more image paths as needed
 ];
 
 const Gallery = () => {
@@ -18,9 +18,9 @@ const Gallery = () => {
         <div className="max-w-7xl mx-auto grid grid-cols-3 lg:grid-cols-6 gap-y-12 gap-x-8 justify-items-center">
           {images.map((img, index) => (
             <div key={index} className="aspect-square">
-              <img 
-                src={img} 
-                alt={`Gallery image ${index + 1}`} 
+              <img
+                src={img}
+                alt={`Gallery image ${index + 1}`}
                 className="object-cover w-full h-full rounded-lg mx-auto shadow-lg"
               />
             </div>
