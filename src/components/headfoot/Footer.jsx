@@ -65,7 +65,7 @@ const Footer = () => {
               Dept. of Electronics and Communication Engineering <br />
               Dr. Ambedkar Institute of Technology, Bengaluru
             </p>
-            <p className="w-auto text-sm text-slate-600 lg:mt-0 dark:text-slate-400">
+            <p className="w-auto text-sm text-right text-slate-600 lg:mt-0 dark:text-slate-400">
               © Nanogram - The Tech Hub 2023, All Rights Reserved
               <br />
               Made with ❤️ by Pramoda S R - Viceroy, Nanogram
