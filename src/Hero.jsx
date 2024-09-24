@@ -3,7 +3,8 @@ import { ArrowRight, Menu, X, UserPlus } from "lucide-react";
 
 const Hero = () => {
   return (
-    <main className="flex-grow bg-blue-900 text-white p-8 ">
+    <main className="flex-grow bg-sky-900 text-slate-50 dark:bg-sky-950 p-8 border-none outline-none
+">
       <div className="max-w-6xl mx-auto text-center">
         <div className="max-w-2xl mx-auto mt-20 ">
           <h1 className="text-5xl font-bold mb-4">Welcome to Nanogram -</h1>

@@ -8,7 +8,7 @@ const AchievementCard = ({ title, value }) => (
 );
 
 const Dashboard = () => (
-  <div className="bg-blue-900 text-white p-8 font-sans">
+  <div className="bg-sky-900 text-slate-50 dark:bg-sky-950 p-8 font-sans border-none outline-none">
     <div className="max-w-7xl mx-auto">
       <h2 className="text-lg font-semibold tracking-wide mb-2 text-blue-200">
         Proud Moments

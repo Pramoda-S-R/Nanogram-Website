@@ -6,6 +6,8 @@ import Gallery from './Gallery';
 import Team from './Team';
 import Dashboard from './Dashboard';
 import EventHighlights from './EventHighlights';
+import Join from './Join';
+import Footer from './Footer';
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
       <Team />
       <Dashboard />
       <EventHighlights />
+      <Join />
+      <Footer />
     </div>
   );
 }
