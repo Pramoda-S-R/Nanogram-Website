@@ -12,8 +12,7 @@ const App = () => {
     <Router>
       <Suspense
         fallback={
-          <div className=" bg-slate-50 dark:bg-slate-800  text-slate-900 dark:text-slate-50 ">
-            Loading...
+          <div className="text-center">
           </div>
         }
       >
