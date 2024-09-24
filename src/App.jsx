@@ -10,7 +10,13 @@ const NotFound = lazy(() => import("./components/NotFound"));
 const App = () => {
   return (
     <Router>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense
+        fallback={
+          <div className=" bg-slate-50 dark:bg-slate-800  text-slate-900 dark:text-slate-50 ">
+            Loading...
+          </div>
+        }
+      >
         <Routes>
           {/* Landing page / Home page */}
           <Route path="/" element={<Home />} />
