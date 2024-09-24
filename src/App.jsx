@@ -1,28 +1,27 @@
-import React from 'react';
-import Navbar from './Navbar';
-import Hero from './Hero';
-import KeyIn from './KeyIn';
-import Gallery from './Gallery';
-import Team from './Team';
-import Dashboard from './Dashboard';
-import EventHighlights from './EventHighlights';
-import Join from './Join';
-import Footer from './Footer';
+import React, { lazy, Suspense } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Home from "./components/Home";
 
-function App() {
+// Lazy load the other components
+const AboutUs = lazy(() => import("./components/AboutUs"));
+const Events = lazy(() => import("./components/Events"));
+const NotFound = lazy(() => import("./components/NotFound"));
+
+const App = () => {
   return (
-    <div className="flex flex-col min-h-screen">
-      <Navbar />
-      <Hero />
-      <KeyIn />
-      <Gallery /> 
-      <Team />
-      <Dashboard />
-      <EventHighlights />
-      <Join />
-      <Footer />
-    </div>
+    <Router>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          {/* Landing page / Home page */}
+          <Route path="/" element={<Home />} />
+          <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/events" element={<Events />} />
+          {/* 404 Page */}
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Suspense>
+    </Router>
   );
-}
+};
 
 export default App;
