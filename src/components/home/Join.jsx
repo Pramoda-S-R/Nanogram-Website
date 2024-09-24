@@ -10,7 +10,7 @@ const Join = () => {
             <h2 className="text-lg font-semibold tracking-wide mb-2 text-blue-200">
               Be a Tech Enthusiast
             </h2>
-            <h1 className="text-4xl text-white font-bold mb-6">
+            <h1 className="text-4xl font-bold mb-6">
               Join Nanogram - The Tech Hub
             </h1>
 
@@ -20,7 +20,7 @@ const Join = () => {
                   the latest in technology.
                 </p>
             </div>
-            <button className="bg-blue-500 text-white px-4 py-2 rounded-md flex items-center justify-center hover:bg-blue-400 transition-colors">
+            <button className="bg-blue-500 px-4 py-2 rounded-md flex items-center justify-center hover:bg-blue-400 transition-colors">
               Join Now
             </button>
           </div>

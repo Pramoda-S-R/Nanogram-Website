@@ -31,13 +31,13 @@ const Navbar = () => {
 
         {/* Desktop Menu */}
         <nav className="hidden md:flex items-center space-x-4">
-          <a href="#" className="hover:text-sky-400  dark:hover:text-sky-400 focus:text-sky-500 dark:focus:text-sky-500 p-1">
+          <a href="/" className="hover:text-sky-400  dark:hover:text-sky-400 focus:text-sky-500 dark:focus:text-sky-500 p-1">
             Home
           </a>
-          <a href="#" className="hover:text-sky-400  dark:hover:text-sky-400 focus:text-sky-500 dark:focus:text-sky-500 p-1">
+          <a href="/about-us" className="hover:text-sky-400  dark:hover:text-sky-400 focus:text-sky-500 dark:focus:text-sky-500 p-1">
             About Us
           </a>
-          <a href="#" className="hover:text-sky-400  dark:hover:text-sky-400 focus:text-sky-500 dark:focus:text-sky-500 p-1">
+          <a href="/events" className="hover:text-sky-400  dark:hover:text-sky-400 focus:text-sky-500 dark:focus:text-sky-500 p-1">
             Events
           </a>
         </nav>
@@ -66,13 +66,13 @@ const Navbar = () => {
       {/* Mobile Menu */}
       {isMenuOpen && (
         <nav className="md:hidden mt-4 flex flex-col space-y-4 text-center">
-          <a href="#" className="hover:text-sky-400  dark:hover:text-sky-400 focus:text-sky-500 dark:focus:text-sky-500">
+          <a href="/" className="hover:text-sky-400  dark:hover:text-sky-400 focus:text-sky-500 dark:focus:text-sky-500">
             Home
           </a>
-          <a href="#" className="hover:text-sky-400  dark:hover:text-sky-400 focus:text-sky-500 dark:focus:text-sky-500">
+          <a href="/about-us" className="hover:text-sky-400  dark:hover:text-sky-400 focus:text-sky-500 dark:focus:text-sky-500">
             About Us
           </a>
-          <a href="#" className="hover:text-sky-400  dark:hover:text-sky-400 focus:text-sky-500 dark:focus:text-sky-500">
+          <a href="/events" className="hover:text-sky-400  dark:hover:text-sky-400 focus:text-sky-500 dark:focus:text-sky-500">
             Events
           </a>
           <button className="hover:text-sky-400  dark:hover:text-sky-400 focus:text-sky-500 dark:focus:text-sky-500 px-4 py-2 rounded-full flex items-center justify-center transition-colors">

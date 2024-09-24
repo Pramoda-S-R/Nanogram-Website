@@ -1,69 +1,65 @@
-import React, { lazy, Suspense } from 'react';
-import Navbar from './headfoot/Navbar';
-import Hero from './home/Hero';
-import Footer from './headfoot/Footer';
-import { motion } from 'framer-motion';
+import React, { lazy, Suspense } from "react";
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+import Navbar from "./headfoot/Navbar";
+import Hero from "./home/Hero";
+import Footer from "./headfoot/Footer";
 
-const KeyIn = lazy(() => import('./home/KeyIn'));
-const Gallery = lazy(() => import('./home/Gallery'));
-const Team = lazy(() => import('./home/Team'));
-const Dashboard = lazy(() => import('./home/Dashboard'));
-const EventHighlights = lazy(() => import('./home/EventHighlights'));
-const Join = lazy(() => import('./home/Join'));
+const KeyIn = lazy(() => import("./home/KeyIn"));
+const Gallery = lazy(() => import("./home/Gallery"));
+const Team = lazy(() => import("./home/Team"));
+const Dashboard = lazy(() => import("./home/Dashboard"));
+const EventHighlights = lazy(() => import("./home/EventHighlights"));
+const Join = lazy(() => import("./home/Join"));
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
 };
 
+const LazyMotionComponent = ({ children }) => {
+  // Use Intersection Observer
+  const [ref, inView] = useInView({
+    triggerOnce: true, // Ensures animation only triggers once per load
+    threshold: 0.2, // Adjust how much of the component should be visible before triggering
+  });
+
+  return (
+    <motion.div
+      ref={ref}
+      initial="hidden"
+      animate={inView ? "visible" : "hidden"}
+      variants={fadeInUp}
+    >
+      {children}
+    </motion.div>
+  );
+};
+
 function Home() {
   return (
-    <div className="min-h-screen">
+    <div className=" bg-slate-50 dark:bg-slate-800  text-slate-900 dark:text-slate-50 min-h-screen">
       <Navbar />
       <Hero />
       <Suspense fallback={<div>Loading...</div>}>
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={fadeInUp}
-        >
+        <LazyMotionComponent>
           <KeyIn />
-        </motion.div>
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={fadeInUp}
-        >
+        </LazyMotionComponent>
+        <LazyMotionComponent>
           <Gallery />
-        </motion.div>
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={fadeInUp}
-        >
+        </LazyMotionComponent>
+        <LazyMotionComponent>
           <Team />
-        </motion.div>
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={fadeInUp}
-        >
+        </LazyMotionComponent>
+        <LazyMotionComponent>
           <Dashboard />
-        </motion.div>
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={fadeInUp}
-        >
+        </LazyMotionComponent>
+        <LazyMotionComponent>
           <EventHighlights />
-        </motion.div>
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={fadeInUp}
-        >
+        </LazyMotionComponent>
+        <LazyMotionComponent>
           <Join />
-        </motion.div>
+        </LazyMotionComponent>
       </Suspense>
       <Footer />
     </div>

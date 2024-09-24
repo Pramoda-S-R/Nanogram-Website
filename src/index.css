@@ -9,3 +9,7 @@
 .nanogram {
   font-family: blanka;
 }
+
+html {
+  scroll-behavior: smooth;
+}
