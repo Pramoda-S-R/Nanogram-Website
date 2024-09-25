@@ -21,8 +21,8 @@ const Team = () => {
   return (
     <section className="max-w-full p-6 bg-slate-50 dark:bg-slate-800  text-slate-900 dark:text-slate-50 border-none outline-none"> {/* Responsive flex direction */}
       {/* Text Section */}
-      <div className="max-w-7xl flex flex-col lg:flex-row items-center p-10 mx-auto">
-      <div className="mb-6 lg:mb-0 lg:mr-8"> {/* Added margin adjustments for spacing */}
+      <div className="max-w-7xl flex flex-col lg:flex-row items-center mx-auto">
+      <div className="mb-6 lg:mb-0 lg:mr-8 pl-10 pt-10 pr-10 lg:pr-0 lg:py-10"> {/* Added margin adjustments for spacing */}
         <h1 className="text-5xl font-medium mb-4">Meet Our Team</h1>
         <p className="text-lg text-slate-600 dark:text-slate-300">
           Get to know the passionate and dedicated members behind Nanogram - The Tech Hub.
@@ -39,7 +39,7 @@ const Team = () => {
       </div>
       
       {/* Images Section */}
-      <div className="px-4">
+      <div className="px-0 lg:px-4">
         <div className="grid grid-cols-6 gap-y-6 gap-x-4 lg:gap-y-12 lg:gap-x-8  justify-items-center">
           {images.map((img, index) => (
             <div key={index} className="aspect-square">

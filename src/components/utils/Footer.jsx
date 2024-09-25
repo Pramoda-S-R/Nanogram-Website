@@ -1,5 +1,5 @@
 import React from "react";
-import { Linkedin, Facebook, Instagram, Github } from "lucide-react";
+import { Linkedin, Mail, Instagram, Github } from "lucide-react";
 import { Link } from "react-router-dom"; // Import Link for internal routing
 
 const FooterLink = ({ to, children }) => (
@@ -36,14 +36,7 @@ const Footer = () => {
               <FooterLink to="/">Home</FooterLink>
               <FooterLink to="/about-us">About Us</FooterLink>
               <FooterLink to="/events">Events</FooterLink>
-              <li>
-                <a
-                  href="/about-us"
-                  className="font-semibold text-slate-900 dark:text-slate-50 hover:text-sky-400 dark:hover:text-sky-400 focus:text-sky-500 dark:focus:text-sky-500"
-                >
-                  Contact
-                </a>
-              </li>
+              <FooterLink to="/events#faq">FAQ</FooterLink>
             </ul>
             <ul className="flex items-center gap-8">
               <SocialMediaLink href="https://www.linkedin.com/company/nanogramhub/">
@@ -52,8 +45,8 @@ const Footer = () => {
               <SocialMediaLink href="https://www.instagram.com/nanogram_drait">
                 <Instagram />
               </SocialMediaLink>
-              <SocialMediaLink href="https://www.facebook.com">
-                <Facebook />
+              <SocialMediaLink href="mailto:nanogramhub@gmail.com">
+                <Mail />
               </SocialMediaLink>
               <SocialMediaLink href="https://github.com">
                 <Github />

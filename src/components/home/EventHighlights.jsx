@@ -39,7 +39,7 @@ const EventHighlights = () => {
         <h1 className="text-2xl sm:text-3xl font-bold mb-2">
           Event Highlights
         </h1>
-        <p className="text-sm sm:text-base text-slate-300 mb-4 sm:mb-6">
+        <p className="text-sm sm:text-base text-slate-700 dark:text-slate-300 mb-4 sm:mb-6">
           A glimpse into our past events and activities.
         </p>
 

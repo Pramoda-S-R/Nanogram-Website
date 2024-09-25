@@ -35,17 +35,16 @@ const teamMembers = [
   // Add more team members here easily
 ];
 
-const Team = () => {
+const Pillars = () => {
   return (
     <section className="w-full bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-50">
       <div className="max-w-7xl mx-auto px-4 pb-16">
         <div className="mx-auto max-w-2xl sm:text-center">
           <h2 className="text-4xl font-extrabold text-slate-900 dark:text-white/90">
-            Meet Our Team
+            Pillars of Nanogram
           </h2>
           <p className="mt-6 text-base font-normal text-slate-700 dark:text-white/90">
-            Our team consists of passionate professionals dedicated to advancing
-            technology.
+            A tribute to the alumini who took Nanogram to greater heights.
           </p>
         </div>
 
@@ -109,4 +108,4 @@ const Team = () => {
   );
 };
 
-export default Team;
+export default Pillars;

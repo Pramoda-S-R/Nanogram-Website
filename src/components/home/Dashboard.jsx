@@ -2,15 +2,15 @@ import React from "react";
 
 const AchievementCard = ({ title, value }) => (
   <div className="text-center">
-    <h3 className="text-4xl font-bold text-white mb-2">{value}</h3>
-    <p className="text-sm text-gray-300">{title}</p>
+    <h3 className="text-4xl font-bold text-slate-800 dark:text-white mb-2">{value}</h3>
+    <p className="text-sm text-slate-800 dark:text-slate-200">{title}</p>
   </div>
 );
 
 const Dashboard = () => (
-  <div className="bg-sky-900 text-slate-50 dark:bg-sky-950 p-8 font-sans border-none outline-none">
+  <div className="bg-sky-200 dark:text-slate-50 dark:bg-sky-950 text-slate-950 p-8 font-sans border-none outline-none">
     <div className="max-w-7xl mx-auto">
-      <h2 className="text-lg font-semibold tracking-wide mb-2 text-blue-200">
+      <h2 className="text-lg font-semibold tracking-wide mb-2 text-blue-600 dark:text-blue-200 ">
         Proud Moments
       </h2>
       <h1 className="text-5xl font-bold mb-6">Our Achievements</h1>

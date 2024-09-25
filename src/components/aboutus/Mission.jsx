@@ -1,4 +1,5 @@
 import React from "react";
+import { ArrowRight } from "lucide-react";
 
 const Mission = () => {
   return (
@@ -89,6 +90,14 @@ const Mission = () => {
                 </dd>
               </div>
             </dl>
+            <div className="mt-10 flex">
+              <button className="text-lg group flex items-center gap-1 font-semibold leading-6 text-sky-700 dark:text-white hover:text-blue-500 hover:dark:text-blue-300">
+                Learn more about us
+                <span className="ml-2 pt-1 flex items-center h-4 w-4 transition-transform duration-200 transform group-hover:translate-x-1">
+                  <ArrowRight />
+                </span>
+              </button>
+            </div>
           </div>
         </div>
       </div>

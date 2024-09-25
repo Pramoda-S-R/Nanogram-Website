@@ -3,12 +3,12 @@ import { Cpu, Users, BookText } from "lucide-react";
 
 const Hero = () => {
   return (
-    <main className="relative isolate overflow-hidden bg-sky-900 text-slate-50 dark:bg-sky-950 py-24 sm:py-32">
+    <main className="relative isolate overflow-hidden bg-sky-200 dark:text-slate-50 dark:bg-sky-950 text-slate-950 py-24 sm:py-32">
       <div className="absolute inset-0 h-full w-full object-cover object-right md:object-center opacity-20">
         <img
           src="/1.png"
           alt=""
-          className="absolute inset-0 h-full w-full object-cover object-right md:object-center opacity-20"
+          className="absolute inset-0 h-full w-full object-cover object-right md:object-center opacity-20 bg-transparent"
         />
       </div>
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -16,13 +16,13 @@ const Hero = () => {
           <h2 className="text-4xl font-bold tracking-tight sm:text-6xl">
             Welcome to Nanogram - The Tech Hub
           </h2>
-          <p className="mt-6 text-lg leading-8 text-slate-300">
+          <p className="mt-6 text-lg leading-8 text-slate-700 dark:text-slate-300">
             Discover the forefront of electronics and technology with our
             dedicated club. Join us in our journey to innovate and inspire.
           </p>
         </div>
         <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-6 sm:mt-20 lg:mx-0 lg:max-w-none lg:grid-cols-3 lg:gap-8">
-          <div className="flex gap-x-4 rounded-xl bg-white/5 backdrop-blur-xl p-6 ring-1 ring-inset ring-white/10">
+          <div className="flex gap-x-4 rounded-xl dark:bg-white/5 bg-sky-50 backdrop-blur-md p-6 ring-1 ring-inset ring-white/10 transition-transform duration-300 hover:scale-110 hover:backdrop-blur-xl">
             <span>
               <div className="text-lg text-indigo-400 ">
                 <Cpu />
@@ -36,7 +36,7 @@ const Hero = () => {
               </p>
             </div>
           </div>
-          <div className="flex gap-x-4 rounded-xl bg-white/5 backdrop-blur-xl p-6 ring-1 ring-inset ring-white/10">
+          <div className="flex gap-x-4 rounded-xl dark:bg-white/5 bg-sky-50 backdrop-blur-md p-6 ring-1 ring-inset ring-white/10 transition-transform duration-300 hover:scale-110 hover:backdrop-blur-xl">
             <span>
               <div className="text-lg text-indigo-400 ">
                 <Users />
@@ -49,7 +49,7 @@ const Hero = () => {
               </p>
             </div>
           </div>
-          <div className="flex gap-x-4 rounded-xl bg-white/5 backdrop-blur-xl p-6 ring-1 ring-inset ring-white/10">
+          <div className="flex gap-x-4 rounded-xl dark:bg-white/5 bg-sky-50 backdrop-blur-md p-6 ring-1 ring-inset ring-white/10 transition-transform duration-300 hover:scale-110 hover:backdrop-blur-xl">
             <span>
               <div className="text-lg text-indigo-400 ">
                 <BookText />

@@ -7,6 +7,10 @@ import Footer from "./utils/Footer";
 
 const Mission = lazy(() => import("./aboutus/Mission"));
 const Team = lazy(() => import("./aboutus/Team"));
+const Pillars = lazy(() => import("./aboutus/Pillars"));
+const Quotes = lazy(() => import("./aboutus/Quotes"));
+const Dedication = lazy(() => import("./aboutus/Dedication"));
+const ContactUs = lazy(() => import("./aboutus/ContactUs"));
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },
@@ -43,6 +47,18 @@ function AboutUs() {
         </LazyMotionComponent>
         <LazyMotionComponent>
           <Team />
+        </LazyMotionComponent>
+        <LazyMotionComponent>
+          <Pillars />
+        </LazyMotionComponent>
+        <LazyMotionComponent>
+          <Quotes />
+        </LazyMotionComponent>
+        <LazyMotionComponent>
+          <Dedication />
+        </LazyMotionComponent>
+        <LazyMotionComponent>
+          <ContactUs />
         </LazyMotionComponent>
       </Suspense>
       <Footer />
