@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Join = () => {
   return (
@@ -15,14 +16,19 @@ const Join = () => {
             </h1>
 
             <div className="flex flex-col md:flex-row justify-between items-start">
-                <p className="mb-4 text-slate-800 dark:text-gray-300">
-                  Become a part of our vibrant community and stay updated with
-                  the latest in technology.
-                </p>
+              <p className="mb-4 text-slate-800 dark:text-gray-300">
+                Become a part of our vibrant community and stay updated with the
+                latest in technology.
+              </p>
             </div>
-            <button className="bg-blue-500 px-4 py-2 rounded-md flex items-center justify-center hover:bg-blue-400 transition-colors">
-              Join Now
-            </button>
+            <div className="mt-8 flex flex-col md:flex-row items-center justify-start">
+              <Link
+                to="/join"
+                className="bg-blue-500 px-4 py-2 rounded-md flex items-center justify-center hover:bg-blue-400 transition-colors"
+              >
+                Join Now
+              </Link>
+            </div>
           </div>
         </div>
       </div>

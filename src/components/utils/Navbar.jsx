@@ -47,7 +47,7 @@ const Navbar = () => {
             Events
           </Link>
           <Link
-            to="/about-us" // Change this link as needed
+            to="/join" // Change this link as needed
             className="hover:text-sky-400 dark:hover:text-sky-400 focus:text-sky-500 dark:focus:text-sky-500 px-4 py-2 rounded-full flex items-center transition-colors"
           >
             Join us <UserPlus className="ml-2 h-4 w-4" />
@@ -88,7 +88,7 @@ const Navbar = () => {
             Events
           </Link>
           <Link
-            to="/about-us" // Change this link as needed
+            to="/join" // Change this link as needed
             className="hover:text-sky-400 dark:hover:text-sky-400 focus:text-sky-500 dark:focus:text-sky-500 px-4 py-2 rounded-full flex items-center justify-center transition-colors"
           >
             Join us <UserPlus className="ml-2 h-4 w-4" />
