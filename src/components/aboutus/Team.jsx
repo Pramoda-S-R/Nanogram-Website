@@ -44,17 +44,18 @@ const Team = () => {
             Meet Our Team
           </h2>
           <p className="mt-6 text-base font-normal text-slate-700 dark:text-white/90">
-            Our team consists of passionate professionals dedicated to advancing technology.
+            Our team consists of passionate professionals dedicated to advancing
+            technology.
           </p>
         </div>
 
-        <ul className="mt-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10">
+        <ul className="mt-20 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-x-6 gap-y-10">
           {teamMembers.map((member, index) => (
             <li key={index} className="flex flex-col gap-6 xl:flex-row">
-              <div className="w-52 h-65 aspect-[4/5] flex-none rounded-2xl object-cover">
+              <div className="w-40 h-50 aspect-[4/5] flex-none rounded-2xl object-cover">
                 <img
                   alt={member.name}
-                  className="w-52 h-65 aspect-[4/5] flex-none rounded-2xl object-cover"
+                  className="w-40 h-50 aspect-[4/5] flex-none rounded-2xl object-cover"
                   src={member.image}
                 />
               </div>
