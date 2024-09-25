@@ -1,6 +1,6 @@
-import React, { lazy } from 'react';
-import Footer from "./headfoot/Footer";
-const Error = lazy(() => import("./headfoot/Error"));
+import React, { lazy } from "react";
+import Footer from "./utils/Footer";
+const Error = lazy(() => import("./utils/Error"));
 
 function NotFound() {
   return (

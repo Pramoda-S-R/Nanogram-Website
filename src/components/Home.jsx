@@ -1,9 +1,9 @@
 import React, { lazy, Suspense } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import Navbar from "./headfoot/Navbar";
+import Navbar from "./utils/Navbar";
 import Hero from "./home/Hero";
-import Footer from "./headfoot/Footer";
+import Footer from "./utils/Footer";
 
 const KeyIn = lazy(() => import("./home/KeyIn"));
 const Gallery = lazy(() => import("./home/Gallery"));

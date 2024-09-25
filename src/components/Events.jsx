@@ -1,6 +1,6 @@
 import React from "react";
-import Navbar from "./headfoot/Navbar";
-import Footer from "./headfoot/Footer";
+import Navbar from "./utils/Navbar";
+import Footer from "./utils/Footer";
 
 function Events() {
   return (
