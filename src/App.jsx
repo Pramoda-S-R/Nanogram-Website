@@ -5,6 +5,7 @@ import Home from "./components/Home";
 // Lazy load the other components
 const AboutUs = lazy(() => import("./components/AboutUs"));
 const Events = lazy(() => import("./components/Events"));
+const Gallery = lazy(() => import("./components/Gallery"));
 const NotFound = lazy(() => import("./components/NotFound"));
 
 const App = () => {
@@ -21,6 +22,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/events" element={<Events />} />
+          <Route path="/gallery" element={<Gallery />} />
           {/* 404 Page */}
           <Route path="*" element={<NotFound />} />
         </Routes>

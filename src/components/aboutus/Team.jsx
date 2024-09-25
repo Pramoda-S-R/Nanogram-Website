@@ -37,7 +37,10 @@ const teamMembers = [
 
 const Team = () => {
   return (
-    <section className="w-full bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-50">
+    <section
+      className="w-full bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-50"
+      id="team"
+    >
       <div className="max-w-7xl mx-auto px-4 pb-16">
         <div className="mx-auto max-w-2xl sm:text-center">
           <h2 className="text-4xl font-extrabold text-slate-900 dark:text-white/90">

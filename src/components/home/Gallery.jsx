@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom"; // Import Link
 import { ArrowRight } from "lucide-react";
 
 const images = [
@@ -28,14 +29,17 @@ const Gallery = () => {
         </div>
       </div>
 
-      {/* Button */}
+      {/* Link Button to navigate to /gallery */}
       <div className="mt-8 text-center">
-        <button className="bg-blue-500 bg-opacity-50 px-6 py-3 rounded-full inline-flex items-center hover:bg-opacity-70 transition-colors group">
+        <Link
+          to="/gallery"
+          className="bg-blue-500 bg-opacity-50 px-6 py-3 rounded-full inline-flex items-center hover:bg-opacity-70 transition-colors group"
+        >
           Go to Gallery{" "}
           <span className="ml-2 pt-1 flex items-center transition-transform duration-200 transform group-hover:translate-x-1">
             <ArrowRight className="ml-2 h-5 w-5" />
           </span>
-        </button>
+        </Link>
       </div>
     </section>
   );

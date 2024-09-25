@@ -3,7 +3,7 @@ import { MapPin } from "lucide-react";
 
 const ContactUs = () => {
   return (
-    <section className="relative w-full">
+    <section className="relative w-full" id="contact">
       <div className="max-w-7xl mx-auto py-28 px-4 ">
         <div className="absolute inset-0 w-full h-200">
           <iframe

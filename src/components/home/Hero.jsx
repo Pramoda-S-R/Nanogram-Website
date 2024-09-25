@@ -1,5 +1,6 @@
 import React from "react";
-import { ArrowRight, Menu, X, UserPlus } from "lucide-react";
+  import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
 
 const Hero = () => {
   return (
@@ -25,15 +26,21 @@ const Hero = () => {
 
               {/* Buttons */}
               <div className="mt-10 flex flex-col md:flex-row items-center justify-center gap-6">
-                <button className="inline-flex items-center justify-center text-white bg-sky-500 font-medium border-0 py-2 xl:py-3 px-6 focus:outline-none hover:bg-sky-400 rounded-lg text-sm sm:text-base 2xl:text-lg transition-colors duration-500">
+                <Link
+                  to="/events#new-events"
+                  className="inline-flex items-center justify-center text-white bg-sky-500 font-medium border-0 py-2 xl:py-3 px-6 focus:outline-none hover:bg-sky-400 rounded-lg text-sm sm:text-base 2xl:text-lg transition-colors duration-500"
+                >
                   Discover Our Activities
-                </button>
-                <button className="text-sm group flex items-center gap-1 font-semibold leading-6 text-sky-700 dark:text-white">
+                </Link>
+                <Link
+                  to="/about-us#team"
+                  className="text-sm group flex items-center gap-1 font-semibold leading-6 text-sky-700 dark:text-white"
+                >
                   Meet the Team
                   <span className="ml-2 pt-1 flex items-center h-4 w-4 transition-transform duration-200 transform group-hover:translate-x-1">
                     <ArrowRight />
                   </span>
-                </button>
+                </Link>
               </div>
             </div>
 
