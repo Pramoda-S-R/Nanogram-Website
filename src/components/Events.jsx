@@ -7,6 +7,7 @@ import Footer from "./utils/Footer";
 
 const EventTime = lazy(() => import("./events/EventTime"));
 const Highlights = lazy(() => import("./events/Highlights"));
+const Involved = lazy(() => import("./events/Involved"));
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },
@@ -54,6 +55,9 @@ function Events() {
         </LazyMotionComponent>
         <LazyMotionComponent>
           <Highlights />
+        </LazyMotionComponent>
+        <LazyMotionComponent>
+          <Involved />
         </LazyMotionComponent>
       </Suspense>
       <Footer />

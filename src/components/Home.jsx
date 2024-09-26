@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React, { useEffect, lazy, Suspense } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import Navbar from "./utils/Navbar";
@@ -37,6 +37,16 @@ const LazyMotionComponent = ({ children }) => {
 };
 
 function Home() {
+  useEffect(() => {
+    // Check if there's a hash in the URL and scroll to the corresponding section
+    if (window.location.hash) {
+      const id = window.location.hash.substring(1); // Remove the '#' from the hash
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, []);
   return (
     <div className=" bg-slate-50 dark:bg-slate-800  text-slate-900 dark:text-slate-50 min-h-screen">
       <Navbar />

@@ -8,7 +8,7 @@ const Join = () => {
         <img src="/1.png" alt="Join Us" className=" w-full" />
         <div className="max-w-full p-10 mx-auto ">
           <div className="max-w-lg ">
-            <h2 className="text-lg font-semibold tracking-wide mb-2 text-blue-200">
+            <h2 className="text-lg font-semibold tracking-wide mb-2 text-blue-600 dark:text-blue-200">
               Be a Tech Enthusiast
             </h2>
             <h1 className="text-4xl font-bold mb-6">

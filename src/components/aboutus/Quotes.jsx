@@ -59,7 +59,7 @@ const Quotes = () => {
             </div>
 
             {/* Quote Text */}
-            <div className="relative mb-9">
+            <div className="relative mb-9 min-h-[80px]">
               {quotes.map((quote, index) => (
                 <div
                   key={index}
@@ -77,7 +77,7 @@ const Quotes = () => {
             </div>
 
             {/* Profile Buttons */}
-            <div className="flex flex-wrap justify-center -m-1.5 pt-20 sm:pt-30">
+            <div className="flex flex-wrap justify-center -m-1.5 pt-20 sm:pt-30 ">
               {quotes.map((quote, index) => (
                 <button
                   key={index}

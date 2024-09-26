@@ -10,7 +10,10 @@ const Navbar = () => {
   };
 
   return (
-    <header className="bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-50 p-2 border-none outline-none">
+    <header
+      className="bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-50 p-2 border-none outline-none"
+      id="top"
+    >
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         <div className="flex items-center">
           <img

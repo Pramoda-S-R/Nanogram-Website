@@ -33,9 +33,9 @@ const Footer = () => {
         <div className="mx-auto max-w-7xl flex flex-col gap-12">
           <div className="flex flex-col items-center gap-8 md:justify-between md:flex-row">
             <ul className="flex items-center gap-8">
-              <FooterLink to="/">Home</FooterLink>
-              <FooterLink to="/about-us">About Us</FooterLink>
-              <FooterLink to="/events">Events</FooterLink>
+              <FooterLink to="/#top">Home</FooterLink>
+              <FooterLink to="/about-us#top">About Us</FooterLink>
+              <FooterLink to="/events#top">Events</FooterLink>
               <FooterLink to="/events#faq">FAQ</FooterLink>
             </ul>
             <ul className="flex items-center gap-8">
@@ -54,11 +54,12 @@ const Footer = () => {
             </ul>
           </div>
           <div className="flex flex-col items-center gap-8 md:justify-between md:flex-row">
-            <p className="w-auto text-sm text-slate-600 lg:mt-0 dark:text-slate-400">
-              Dept. of Electronics and Communication Engineering <br />
+            <p className="w-auto text-sm lg:text-left text-slate-600 lg:mt-0 dark:text-slate-400 sm:text-justify">
+              Dept. of Electronics and Communication Engineering
+              <br />
               Dr. Ambedkar Institute of Technology, Bengaluru
             </p>
-            <p className="w-auto text-sm text-right text-slate-600 lg:mt-0 dark:text-slate-400">
+            <p className="w-auto text-sm lg:text-right text-slate-600 lg:mt-0 dark:text-slate-400 sm:text-justify">
               © Nanogram - The Tech Hub 2023, All Rights Reserved
               <br />
               Made with ❤️ by Pramoda S R - Viceroy, Nanogram

@@ -1,5 +1,6 @@
 import React from "react";
 import { MapPin } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const ContactUs = () => {
   return (
@@ -21,12 +22,14 @@ const ContactUs = () => {
             Visit us at our headquarters and explore the vibrant environment
             where innovation happens.
           </p>
-          <p className="flex items-center text-sky-500">
-            <span>
-              <MapPin />
-            </span>
-            <span className="ml-2">Nanogram HQ</span>
-          </p>
+
+          <Link
+            to="https://maps.app.goo.gl/EfTzvMRGeyo8tt717"
+            className="flex items-center text-sky-500 "
+          >
+            <MapPin className="mr-2" />
+            Nanogram HQ
+          </Link>
         </div>
       </div>
     </section>

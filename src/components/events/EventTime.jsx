@@ -50,7 +50,10 @@ const EventTime = () => {
   ];
 
   return (
-    <div className="bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-50 py-16 sm:py-20" id="new-events">
+    <section
+      className="bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-50 py-16 sm:py-20"
+      id="new-events"
+    >
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto grid max-w-2xl grid-cols-1 gap-8 overflow-hidden lg:mx-0 lg:max-w-none lg:grid-cols-4">
           {eventData.map((event, index) => (
@@ -63,7 +66,7 @@ const EventTime = () => {
           ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

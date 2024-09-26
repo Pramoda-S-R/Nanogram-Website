@@ -2,7 +2,7 @@ import React from "react";
 
 const Hero = () => {
   return (
-    <div className="relative isolate overflow-hidden bg-sky-200 dark:text-slate-50 dark:bg-sky-950 text-slate-950 py-24 sm:py-32">
+    <main className="relative isolate overflow-hidden bg-sky-200 dark:text-slate-50 dark:bg-sky-950 text-slate-950 py-24 sm:py-32">
       <div className="absolute inset-0 opacity-20 -z-10 h-full w-full object-cover object-right md:object-center rounded-lg bg-slate-100 bg-transparent ">
         <img
           alt="Design Studio"
@@ -57,7 +57,7 @@ const Hero = () => {
           </dl>
         </div>
       </div>
-    </div>
+    </main>
   );
 };
 
