@@ -2,6 +2,9 @@ import React from "react";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
+let eventUpcoming = false;
+const isEvent = eventUpcoming ? "View Upcoming Events" : "Coming soon";
+
 const Involved = () => {
   return (
     <section className="overflow-hidden bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-50">
@@ -23,10 +26,10 @@ const Involved = () => {
 
               <div className="mt-10 flex">
                 <Link
-                  to=""
+                  to="event-reg-link-here" //Change this to link of event planned next
                   className="flex group gap-1 items-center justify-center text-white bg-sky-500 font-medium border-0 py-2 xl:py-3 px-6 focus:outline-none hover:bg-sky-400 rounded-lg text-sm sm:text-base 2xl:text-lg transition-colors duration-500 dark:hover:bg-slate-600"
                 >
-                  View Upcoming Events
+                  {isEvent}
                   <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-all duration-300" />
                 </Link>
               </div>
