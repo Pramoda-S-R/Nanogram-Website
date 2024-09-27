@@ -19,7 +19,7 @@ const Hero = () => {
                 Welcome to Nanogram - The Tech Hub
               </h1>
               <p className="mt-6 text-lg leading-8 text-slate-800 dark:text-slate-300">
-                Join us in exploring the cutting-edge world of electronics and
+                Join us in exploring the fascinating world of electronics and
                 technology. Discover our activities, events, and resources
                 designed for tech enthusiasts.
               </p>

@@ -1,11 +1,26 @@
 import React, { useState } from "react";
 
 const images = [
-  "/gallery/1.jpg",
-  "/gallery/2.jpg",
-  "/gallery/3.jpg",
-  "/gallery/4.jpg",
-  "/gallery/5.jpg",
+  "/gallery/1.webp",
+  "/gallery/2.webp",
+  "/gallery/3.webp",
+  "/gallery/4.webp",
+  "/gallery/5.webp",
+  "/gallery/6.webp",
+  "/gallery/7.webp",
+  "/gallery/8.webp",
+  "/gallery/9.webp",
+  "/gallery/10.webp",
+  "/gallery/11.webp",
+  "/gallery/12.webp",
+  "/gallery/13.webp",
+  "/gallery/14.webp",
+  "/gallery/15.webp",
+  "/gallery/16.webp",
+  "/gallery/17.webp",
+  "/gallery/18.webp",
+  "/gallery/19.webp",
+  "/gallery/20.webp",
   // Add more images here
 ];
 

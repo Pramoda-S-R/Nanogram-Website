@@ -26,12 +26,28 @@ const HighlightCard = ({ title, subtitle, imgSrc }) => {
 const Highlights = () => {
   // Data for the highlights
   const highlightData = [
-    { title: "AI Workshop", subtitle: "Workshop", imgSrc: "/1.png" },
-    { title: "Robotics Hackathon", subtitle: "Hackathon", imgSrc: "/1.png" },
-    { title: "Electronics Expo", subtitle: "Expo", imgSrc: "/1.png" },
-    { title: "IoT Seminar", subtitle: "Seminar", imgSrc: "/1.png" },
-    { title: "Tech Conference", subtitle: "Conference", imgSrc: "/1.png" },
-    { title: "Innovation Meetup", subtitle: "Meetup", imgSrc: "/1.png" },
+    {
+      title: "Colossus Hackathon",
+      subtitle: "Hackathon",
+      imgSrc: "/gallery/17.webp",
+    },
+    { title: "Debug This!!", subtitle: "Workshop", imgSrc: "/gallery/18.webp" },
+    { title: "Talk on EV", subtitle: "Seminar", imgSrc: "/gallery/6.webp" },
+    {
+      title: "Techno Exhibition",
+      subtitle: "Representation",
+      imgSrc: "/gallery/20.webp",
+    },
+    {
+      title: "Industrial Visit",
+      subtitle: "Exposure",
+      imgSrc: "/gallery/2.webp",
+    },
+    {
+      title: "Inauguration",
+      subtitle: "The Start",
+      imgSrc: "/gallery/19.webp",
+    },
   ];
 
   return (

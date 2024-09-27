@@ -3,33 +3,30 @@ import { Linkedin, Instagram, Github } from "lucide-react";
 
 const teamMembers = [
   {
-    name: "Alex Smith",
-    role: "President",
-    image: "/1.png",
+    name: "Akshay Shandilya",
+    role: "Viceroy & Treasurer - 2024",
+    image: "/team/A1.webp",
     socials: {
-      linkedin: "https://www.linkedin.com/in/alex-smith",
-      instagram: "https://www.instagram.com/alex-smith",
-      github: "https://github.com/alex-smith",
+      linkedin: "https://www.linkedin.com/in/akshay-r-792a78205",
+      instagram: "https://www.instagram.com/_.akshay_r",
     },
   },
   {
-    name: "Jordan Lee",
-    role: "Vice President",
-    image: "/1.png",
+    name: "Anirudh Harish Bhat",
+    role: "General Secretary & Operations Officer - 2024",
+    image: "/team/A2.webp",
     socials: {
-      linkedin: "https://www.linkedin.com/in/jordan-lee",
-      instagram: "https://www.instagram.com/jordan-lee",
-      github: "https://github.com/jordan-lee",
+      linkedin: "https://www.linkedin.com/company/wix-com",
+      instagram: "https://www.instagram.com/just_a_dope_dude",
     },
   },
   {
-    name: "Taylor Kim",
-    role: "Events Coordinator",
-    image: "/1.png",
+    name: "Arun Kumar",
+    role: "Legacy Sentinal - 2024",
+    image: "/team/A3.webp",
     socials: {
-      linkedin: "https://www.linkedin.com/in/taylor-kim",
-      instagram: "https://www.instagram.com/taylor-kim",
-      github: "https://github.com/taylor-kim",
+      linkedin: "https://www.linkedin.com/in/arun-kumar-n-58b321208",
+      instagram: "https://www.instagram.com/_its_me_arun_006",
     },
   },
   // Add more team members here easily
@@ -41,7 +38,7 @@ const Pillars = () => {
       <div className="max-w-7xl mx-auto px-4 pb-16">
         <div className="mx-auto max-w-2xl sm:text-center">
           <h2 className="text-4xl font-extrabold text-slate-900 dark:text-white/90">
-            Pillars of Nanogram
+            Core Collective
           </h2>
           <p className="mt-6 text-base font-normal text-slate-700 dark:text-white/90">
             A tribute to the alumini who took Nanogram to greater heights.
@@ -54,6 +51,7 @@ const Pillars = () => {
               <div className="w-40 h-50 aspect-[4/5] flex-none rounded-2xl object-cover">
                 <img
                   alt={member.name}
+                  loading="lazy"
                   className="w-40 h-50 aspect-[4/5] flex-none rounded-2xl object-cover"
                   src={member.image}
                 />

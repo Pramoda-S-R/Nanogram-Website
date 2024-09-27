@@ -35,16 +35,30 @@ const LazyMotionComponent = ({ children }) => {
 };
 
 function Events() {
-  useEffect(() => {
-    // Check if there's a hash in the URL and scroll to the corresponding section
+  const scrollToSection = () => {
     if (window.location.hash) {
-      const id = window.location.hash.substring(1); // Remove the '#' from the hash
+      const id = window.location.hash.substring(1);
       const element = document.getElementById(id);
       if (element) {
         element.scrollIntoView({ behavior: "smooth" });
       }
     }
-  }, []); // Empty dependency array ensures this runs only once on mount
+  };
+
+  // Trigger scroll on mount and hash change
+  useEffect(() => {
+    scrollToSection();
+    // Add a hash change listener
+    const handleHashChange = () => {
+      scrollToSection();
+    };
+    window.addEventListener("hashchange", handleHashChange);
+
+    // Clean up listener
+    return () => {
+      window.removeEventListener("hashchange", handleHashChange);
+    };
+  }, []);
 
   return (
     <div className=" bg-slate-50 dark:bg-slate-800  text-slate-900 dark:text-slate-50 min-h-screen">

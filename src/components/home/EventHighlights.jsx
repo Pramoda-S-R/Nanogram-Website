@@ -2,12 +2,12 @@ import React from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const events = [
-  { title: "Annual Tech Workshop", image: "/1.png" },
-  { title: "Robotics Championship", image: "/1.png" },
-  { title: "Tech Seminar", image: "/1.png" },
-  { title: "Coding Bootcamp", image: "/1.png" },
-  { title: "Innovation Lab", image: "/1.png" },
-  { title: "Tech Expo", image: "/1.png" },
+  { title: "Colossus Hackathon", image: "/gallery/13.webp" },
+  { title: "Debug This!!", image: "/gallery/16.webp" },
+  { title: "Talk on EV", image: "/gallery/15.webp" },
+  { title: "Techno Exhibition", image: "/gallery/10.webp" },
+  { title: "Industrial Visit", image: "/gallery/11.webp" },
+  { title: "Inauguration", image: "/gallery/12.webp" },
   // Add more events here as needed
 ];
 
@@ -56,14 +56,14 @@ const EventHighlights = () => {
 
           <button
             onClick={() => scroll("left")}
-            className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-slate-50 dark:bg-slate-800 p-1 sm:p-2 rounded-full shadow-md"
+            className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-slate-50 dark:bg-slate-800 p-1 sm:p-2 rounded-full shadow-md transition-transform duration-300 hover:scale-110"
             aria-label="Scroll left"
           >
             <ChevronLeft size={20} />
           </button>
           <button
             onClick={() => scroll("right")}
-            className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-slate-50 dark:bg-slate-800 p-1 sm:p-2 rounded-full shadow-md"
+            className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-slate-50 dark:bg-slate-800 p-1 sm:p-2 rounded-full shadow-md transition-transform duration-300 hover:scale-110"
             aria-label="Scroll right"
           >
             <ChevronRight size={20} />

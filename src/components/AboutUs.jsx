@@ -36,16 +36,32 @@ const LazyMotionComponent = ({ children }) => {
 };
 
 function AboutUs() {
-  useEffect(() => {
-    // Check if there's a hash in the URL and scroll to the corresponding section
+  const scrollToSection = () => {
     if (window.location.hash) {
-      const id = window.location.hash.substring(1); // Remove the '#' from the hash
+      const id = window.location.hash.substring(1);
       const element = document.getElementById(id);
       if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
+        element.scrollIntoView({ behavior: "smooth", block: "start" });
       }
     }
-  }, []); // Empty dependency array ensures this runs only once on mount
+  };
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      setTimeout(scrollToSection, 100); // Delay for lazy-loaded components to render
+    };
+
+    // Initial scroll on load
+    setTimeout(scrollToSection, 100); // Initial delay on load
+
+    // Add hash change listener
+    window.addEventListener("hashchange", handleHashChange);
+
+    // Clean up listener on unmount
+    return () => {
+      window.removeEventListener("hashchange", handleHashChange);
+    };
+  }, []);
 
   return (
     <div className="bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-50 min-h-screen">

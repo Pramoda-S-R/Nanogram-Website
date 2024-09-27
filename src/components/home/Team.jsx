@@ -2,29 +2,26 @@ import React from "react";
 import { ArrowRight } from "lucide-react";
 
 const images = [
-  "/1.png",
-  "/1.png",
-  "/1.png",
-  "/1.png",
-  "/1.png",
-  "/1.png",
-  "/1.png",
-  "/1.png",
-  "/1.png",
-  "/1.png",
-  "/1.png",
-  "/1.png",
+  "/team/1.webp",
+  "/team/2.webp",
+  "/team/3.webp",
+  "/team/4sq.webp",
+  "/team/5.webp",
+  "/team/6.webp",
+  "/team/7.webp",
+  "/team/8.webp",
+  "/team/9.webp",
   // Add more image paths as needed
 ];
 
 const Team = () => {
   return (
-    <section className="max-w-full p-6 bg-slate-50 dark:bg-slate-800  text-slate-900 dark:text-slate-50 border-none outline-none">
+    <section className="max-w-full p-6 bg-slate-50 dark:bg-slate-800  text-slate-900 dark:text-slate-50 border-none outline-none py-20">
       {" "}
       {/* Responsive flex direction */}
       {/* Text Section */}
       <div className="max-w-7xl flex flex-col lg:flex-row items-center mx-auto">
-        <div className="mb-6 lg:mb-0 lg:mr-8 pl-10 pt-10 pr-10 lg:pr-0 lg:py-10">
+        <div className="min-w-lg mb-6 lg:mb-0 lg:mr-8 pl-10 pt-10 pr-10 lg:pr-0 lg:py-10">
           {" "}
           {/* Added margin adjustments for spacing */}
           <h1 className="text-5xl font-medium mb-4">Meet Our Team</h1>
@@ -44,13 +41,14 @@ const Team = () => {
         </div>
 
         {/* Images Section */}
-        <div className="px-0 lg:px-4">
-          <div className="grid grid-cols-6 gap-y-6 gap-x-4 lg:gap-y-12 lg:gap-x-8  justify-items-center">
+        <div className="max-w-3xl px-0 lg:px-4">
+          <div className="grid grid-cols-5 gap-y-6 gap-x-4 lg:gap-y-12 lg:gap-x-8  justify-items-center">
             {images.map((img, index) => (
               <div key={index} className="aspect-square">
                 <img
                   src={img}
                   alt={`Gallery image ${index + 1}`}
+                  loading="lazy"
                   className="object-cover w-full h-full rounded-full mx-auto shadow-lg"
                 />
               </div>

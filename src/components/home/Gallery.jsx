@@ -3,12 +3,12 @@ import { Link } from "react-router-dom"; // Import Link
 import { ArrowRight } from "lucide-react";
 
 const images = [
-  "/1.png",
-  "/1.png",
-  "/1.png",
-  "/1.png",
-  "/1.png",
-  "/1.png",
+  "/gallery/2.webp",
+  "/gallery/3.webp",
+  "/gallery/1.webp",
+  "/gallery/6.webp",
+  "/gallery/9.webp",
+  "/gallery/8.webp",
   // Add more image paths as needed
 ];
 
@@ -22,6 +22,7 @@ const Gallery = () => {
               <img
                 src={img}
                 alt={`Gallery image ${index + 1}`}
+                loading="lazy"
                 className="object-cover w-full h-full rounded-lg mx-auto shadow-lg"
               />
             </div>

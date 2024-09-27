@@ -3,33 +3,78 @@ import { Linkedin, Instagram, Github } from "lucide-react";
 
 const teamMembers = [
   {
-    name: "Alex Smith",
-    role: "President",
-    image: "/1.png",
+    name: "Pramoda S R",
+    role: "Viceroy",
+    image: "team/1.webp",
     socials: {
-      linkedin: "https://www.linkedin.com/in/alex-smith",
-      instagram: "https://www.instagram.com/alex-smith",
-      github: "https://github.com/alex-smith",
+      linkedin: "https://www.linkedin.com/in/pramoda-s-r-1957382b0/",
+      github: "https://github.com/Pramoda-S-R/",
     },
   },
   {
-    name: "Jordan Lee",
-    role: "Vice President",
-    image: "/1.png",
+    name: "Varun D",
+    role: "General Secretary",
+    image: "/team/2.webp",
     socials: {
-      linkedin: "https://www.linkedin.com/in/jordan-lee",
-      instagram: "https://www.instagram.com/jordan-lee",
-      github: "https://github.com/jordan-lee",
+      linkedin: "https://www.linkedin.com/in/gengeek",
+      instagram: "https://www.instagram.com/wildly_mystic",
     },
   },
   {
-    name: "Taylor Kim",
-    role: "Events Coordinator",
-    image: "/1.png",
+    name: "Fardeen S Khadri",
+    role: "Legacy Sentinal",
+    image: "/team/3.webp",
     socials: {
-      linkedin: "https://www.linkedin.com/in/taylor-kim",
-      instagram: "https://www.instagram.com/taylor-kim",
-      github: "https://github.com/taylor-kim",
+      linkedin: "https://www.linkedin.com/in/fardeen-khadri-58a842220",
+      github: "https://www.linkedin.com/in/fardeen-khadri-58a842220",
+    },
+  },
+  {
+    name: "S Nidhi",
+    role: "HR & Operations Officer",
+    image: "/team/4.webp",
+    socials: {
+      linkedin: "https://www.linkedin.com/in/s-nidhi-b0475b232",
+    },
+  },
+  {
+    name: "Anusha Rao M",
+    role: "Operations Officer",
+    image: "/team/5.webp",
+    socials: {
+      linkedin: "https://www.linkedin.com/in/anusha-rao-m-3ab3711b3",
+    },
+  },
+  {
+    name: "Chetan P",
+    role: "Treasurer",
+    image: "/team/6.webp",
+    socials: {
+      linkedin: "https://www.linkedin.com/in/chethan-p-87766b232",
+    },
+  },
+  {
+    name: "Chandana B L",
+    role: "Project Manager",
+    image: "/team/7.webp",
+    socials: {
+      linkedin: "https://www.linkedin.com/in/chandana-bl",
+    },
+  },
+  {
+    name: "Chetana N Raj",
+    role: "Chronicler",
+    image: "/team/8.webp",
+    socials: {
+      linkedin: "https://www.linkedin.com/in/chethana-n-raj-97ba93279",
+    },
+  },
+  {
+    name: "Hrithik Jaiswal",
+    role: "Marketing Lead",
+    image: "/team/9.webp",
+    socials: {
+      linkedin: "https://www.linkedin.com/in/hritik-jaiswal-a54a91276",
     },
   },
   // Add more team members here easily
@@ -58,6 +103,7 @@ const Team = () => {
               <div className="w-40 h-50 aspect-[4/5] flex-none rounded-2xl object-cover">
                 <img
                   alt={member.name}
+                  loading="lazy"
                   className="w-40 h-50 aspect-[4/5] flex-none rounded-2xl object-cover"
                   src={member.image}
                 />
