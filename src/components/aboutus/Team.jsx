@@ -26,7 +26,7 @@ const teamMembers = [
     image: "/team/3.webp",
     socials: {
       linkedin: "https://www.linkedin.com/in/fardeen-khadri-58a842220",
-      github: "https://www.linkedin.com/in/fardeen-khadri-58a842220",
+      github: "https://github.com/fardeenKhadri",
     },
   },
   {
