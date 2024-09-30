@@ -59,7 +59,7 @@ const Quotes = () => {
             </div>
 
             {/* Quote Text */}
-            <div className="relative mb-9 min-h-[80px]">
+            <div className="relative mb-9 min-h-[120px]">
               {quotes.map((quote, index) => (
                 <div
                   key={index}
