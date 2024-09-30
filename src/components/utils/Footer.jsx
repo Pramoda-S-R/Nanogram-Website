@@ -48,7 +48,7 @@ const Footer = () => {
               <SocialMediaLink href="mailto:nanogramhub@gmail.com">
                 <Mail />
               </SocialMediaLink>
-              <SocialMediaLink href="https://github.com">
+              <SocialMediaLink href="https://github.com/nanogramhub">
                 <Github />
               </SocialMediaLink>
             </ul>
@@ -60,7 +60,7 @@ const Footer = () => {
               Dr. Ambedkar Institute of Technology, Bengaluru
             </p>
             <p className="w-auto text-sm lg:text-right text-slate-600 lg:mt-0 dark:text-slate-400 sm:text-justify">
-              © Nanogram - The Tech Hub 2023, All Rights Reserved
+              © Nanogram - The Tech Hub 2024, All Rights Reserved
               <br />
               Made with ❤️ by Pramoda S R - Viceroy, Nanogram
             </p>

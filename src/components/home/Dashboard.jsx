@@ -2,7 +2,9 @@ import React from "react";
 
 const AchievementCard = ({ title, value }) => (
   <div className="text-center">
-    <h3 className="text-4xl font-bold text-slate-800 dark:text-white mb-2">{value}</h3>
+    <h3 className="text-4xl font-bold text-slate-800 dark:text-white mb-2">
+      {value}
+    </h3>
     <p className="text-sm text-slate-800 dark:text-slate-200">{title}</p>
   </div>
 );
@@ -36,9 +38,9 @@ const Dashboard = () => (
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
         <AchievementCard title="Founded" value="2024" />
-        <AchievementCard title="Workshops Conducted" value="50+" />
-        <AchievementCard title="Members" value="200+" />
-        <AchievementCard title="Competitions Won" value="15" />
+        <AchievementCard title="Active Members" value="50+" />
+        <AchievementCard title="Workshops & Events" value="5+" />
+        <AchievementCard title="Students Reached" value="300+" />
       </div>
     </div>
   </div>

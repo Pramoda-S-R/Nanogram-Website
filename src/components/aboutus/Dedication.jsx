@@ -24,10 +24,10 @@ const Dedication = () => {
         <dl className="mt-16 grid max-w-xl grid-cols-1 gap-8 sm:mt-20 sm:grid-cols-2 xl:mt-16">
           <div className="flex flex-col gap-y-3 border-l border-black/20 dark:border-white/20 pl-6">
             <dt className="text-sm leading-6 text-slate-600 dark:text-white/80">
-              <div>Innovative Projects</div>
+              <div>Founded</div>
             </dt>
             <dd className="order-first text-3xl font-semibold tracking-tight text-slate-900 dark:text-white/80">
-              <div>200+</div>
+              <div>2024</div>
             </dd>
           </div>
           <div className="flex flex-col gap-y-3 border-l border-black/20 dark:border-white/20 pl-6">
@@ -35,23 +35,23 @@ const Dedication = () => {
               <div>Active Members</div>
             </dt>
             <dd className="order-first text-3xl font-semibold tracking-tight text-slate-900 dark:text-white/80">
-              <div>500+</div>
+              <div>50+</div>
             </dd>
           </div>
           <div className="flex flex-col gap-y-3 border-l border-black/20 dark:border-white/20 pl-6">
             <dt className="text-sm leading-6 text-slate-600 dark:text-white/80">
-              <div>Professional Awards</div>
+              <div>Workshops & Events</div>
             </dt>
             <dd className="order-first text-3xl font-semibold tracking-tight text-slate-900 dark:text-white/80">
-              <div>15</div>
+              <div>5+</div>
             </dd>
           </div>
           <div className="flex flex-col gap-y-3 border-l border-black/20 dark:border-white/20 pl-6">
             <dt className="text-sm leading-6 text-slate-600 dark:text-white/80">
-              <div>Years of Service</div>
+              <div>Students Reached</div>
             </dt>
             <dd className="order-first text-3xl font-semibold tracking-tight text-slate-900 dark:text-white/80">
-              <div>9+</div>
+              <div>300+</div>
             </dd>
           </div>
         </dl>

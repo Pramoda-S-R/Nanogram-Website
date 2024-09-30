@@ -1,5 +1,6 @@
 import React from "react";
 import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Mission = () => {
   return (
@@ -27,7 +28,7 @@ const Mission = () => {
                 </blockquote>
                 <figcaption className="mt-6 text-sm leading-6 text-gray-300">
                   <span>
-                    <div>Jamie Doe, Member</div>
+                    <div>Akshay Shandilya, Viceroy 2024</div>
                   </span>
                 </figcaption>
               </figure>
@@ -62,15 +63,15 @@ const Mission = () => {
                   <div>Founded</div>
                 </dt>
                 <dd className="mt-2 text-3xl font-bold leading-10 tracking-tight text-gray-900 dark:text-slate-50">
-                  <div>2015</div>
+                  <div>2024</div>
                 </dd>
               </div>
               <div>
                 <dt className="text-sm font-semibold leading-6 text-gray-600 dark:text-slate-400 text-nowrap">
-                  <div>Projects Completed</div>
+                  <div>Workshops & Events</div>
                 </dt>
                 <dd className="mt-2 text-3xl font-bold leading-10 tracking-tight text-gray-900 dark:text-slate-50">
-                  <div>200+</div>
+                  <div>5+</div>
                 </dd>
               </div>
               <div>
@@ -83,20 +84,23 @@ const Mission = () => {
               </div>
               <div>
                 <dt className="text-sm font-semibold leading-6 text-gray-600 dark:text-slate-400 text-nowrap">
-                  <div>Awards Won</div>
+                  <div>Students Reached</div>
                 </dt>
                 <dd className="mt-2 text-3xl font-bold leading-10 tracking-tight text-gray-900 dark:text-slate-50">
-                  <div>15</div>
+                  <div>300+</div>
                 </dd>
               </div>
             </dl>
             <div className="mt-10 flex">
-              <button className="text-lg group flex items-center gap-1 font-semibold leading-6 text-sky-700 dark:text-white hover:text-blue-500 hover:dark:text-blue-300">
+              <Link
+                to="https://www.linkedin.com/company/nanogramhub/"
+                className="text-lg group flex items-center gap-1 font-semibold leading-6 text-sky-700 dark:text-white hover:text-blue-500 hover:dark:text-blue-300"
+              >
                 Learn more about us
                 <span className="ml-2 pt-1 flex items-center h-4 w-4 transition-transform duration-200 transform group-hover:translate-x-1">
                   <ArrowRight />
                 </span>
-              </button>
+              </Link>
             </div>
           </div>
         </div>

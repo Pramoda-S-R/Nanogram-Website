@@ -1,6 +1,6 @@
 import React from "react";
 import {
-  Wrench,
+  ContactRound,
   Folder,
   Users,
   Cpu,
@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 
 const initiatives = [
-  { Icon: Wrench, label: "Hands-On Learning" },
+  { Icon: ContactRound, label: "Networking" },
   { Icon: Folder, label: "Project-Based Learning" },
   { Icon: Users, label: "Collaborative Learning" },
   { Icon: Cpu, label: "Technical Skill Development" },

@@ -2,22 +2,22 @@ import React, { useState, useEffect } from "react";
 
 const quotes = [
   {
-    name: "Chris P.",
-    role: "Software Engineer",
-    image: "/1.png",
+    name: "Akshay Shandilya",
+    role: "Viceroy - 2024",
+    image: "/team/A1.webp",
     text: "Joining Nanogram has been one of the best decisions of my life. The opportunities to learn and grow are endless.",
   },
   {
-    name: "Sam K.",
-    role: "Hardware Developer",
-    image: "/1.png",
-    text: "The community at Nanogram is incredibly supportive and inspiring. I've gained so much from my time here.",
+    name: "Anirudh Harish Bhat",
+    role: "General Secretary - 2024",
+    image: "/team/A2.webp",
+    text: "Establishment of Nanogram was a testament to the power of collaboration and innovation. I hope our upcoming members help it to grow into something impactful  and inspiring.",
   },
   {
-    name: "Taylor R.",
-    role: "Tech Enthusiast",
-    image: "/1.png",
-    text: "Nanogram has provided me with the resources and connections to take my projects to the next level.",
+    name: "Arun Kumar",
+    role: "Legacy Sentinal - 2024",
+    image: "/team/A3.webp",
+    text: "The best tech journey starts with a strong technical team with all efforts Let's make the future tech together.",
   },
   // Add more quotes here as needed
 ];

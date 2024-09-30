@@ -24,10 +24,10 @@ const Hero = () => {
           <dl className="mt-16 grid grid-cols-2 gap-8 sm:mt-20 lg:grid-cols-4">
             <div className="flex flex-col-reverse">
               <dt className="text-base leading-7 text-slate-700 dark:text-slate-300">
-                Events Held
+                Founded
               </dt>
               <dd className="text-2xl font-bold leading-9 tracking-tight text-slate-700 dark:text-slate-300">
-                50+
+                2024
               </dd>
             </div>
             <div className="flex flex-col-reverse">
@@ -35,23 +35,23 @@ const Hero = () => {
                 Active Members
               </dt>
               <dd className="text-2xl font-bold leading-9 tracking-tight text-slate-700 dark:text-slate-300">
-                200+
+                50+
               </dd>
             </div>
             <div className="flex flex-col-reverse">
               <dt className="text-base leading-7 text-slate-700 dark:text-slate-300">
-                Workshops
+                Workshops & Events
               </dt>
               <dd className="text-2xl font-bold leading-9 tracking-tight text-slate-700 dark:text-slate-300">
-                30+
+                5+
               </dd>
             </div>
             <div className="flex flex-col-reverse">
               <dt className="text-base leading-7 text-slate-700 dark:text-slate-300">
-                Hackathons
+                Students Reached
               </dt>
               <dd className="text-2xl font-bold leading-9 tracking-tight text-slate-700 dark:text-slate-300">
-                10+
+                300+
               </dd>
             </div>
           </dl>
