@@ -11,7 +11,7 @@ const Mission = () => {
             <div className="relative overflow-hidden rounded-3xl bg-gray-900 px-6 pb-9 pt-64 shadow-2xl sm:px-12 lg:max-w-lg lg:px-8 lg:pb-8 xl:px-10 xl:pb-10">
               <div className="absolute inset-0 h-full w-full object-cover">
                 <img
-                  src="/1.png"
+                  src="/show/4.webp"
                   alt="img"
                   className="absolute inset-0 h-full w-full object-cover"
                 />
@@ -21,14 +21,14 @@ const Mission = () => {
                 <blockquote className="mt-6 text-xl font-semibold leading-8 text-white">
                   <span>
                     <div>
-                      "Nanogram has been a pivotal part of my growth as a tech
-                      enthusiast. The community and resources are unparalleled."
+                      "Creativity is seeing what others see and thinking what no
+                      one else ever thought."
                     </div>
                   </span>
                 </blockquote>
                 <figcaption className="mt-6 text-sm leading-6 text-gray-300">
                   <span>
-                    <div>Akshay Shandilya, Viceroy 2024</div>
+                    <div>Albert Einstein, Renowned Physicist</div>
                   </span>
                 </figcaption>
               </figure>

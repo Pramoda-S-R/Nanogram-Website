@@ -5,7 +5,7 @@ const Join = () => {
   return (
     <section>
       <div className="bg-sky-200 dark:text-slate-50 dark:bg-sky-950 text-slate-950 max-w-full grid  sm:grid-cols-1 lg:grid-cols-2 items-center border-none outline-none">
-        <img src="/1.png" alt="Join Us" className=" w-full" />
+        <img src="/show/2.webp" alt="Join Us" className=" w-full " />
         <div className="max-w-full p-10 mx-auto ">
           <div className="max-w-lg ">
             <h2 className="text-lg font-semibold tracking-wide mb-2 text-blue-600 dark:text-blue-200">

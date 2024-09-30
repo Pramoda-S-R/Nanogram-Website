@@ -27,9 +27,9 @@ const Dashboard = () => (
             We are proud of our accomplishments and the growth of our community.
           </p>
         </div>
-        <div className="md:w-1/2 p-4">
+        <div className="max-w-[200] md:w-1/2 p-4">
           <img
-            src="/dash.png"
+            src="/show/1.webp"
             alt="Dashboard Preview"
             className="w-full rounded-lg shadow-lg"
           />

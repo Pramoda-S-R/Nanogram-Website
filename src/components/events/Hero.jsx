@@ -7,7 +7,7 @@ const Hero = () => {
         <img
           alt="Design Studio"
           className="absolute inset-0 opacity-20 -z-10 h-full w-full object-cover object-right md:object-center rounded-lg bg-slate-100"
-          src="/1.png"
+          src="/show/5.webp"
         />
       </div>
       <div className="mx-auto max-w-7xl px-6 lg:px-8">

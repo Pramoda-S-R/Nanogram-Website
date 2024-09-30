@@ -5,7 +5,7 @@ const quotes = [
     name: "Akshay Shandilya",
     role: "Viceroy - 2024",
     image: "/team/A1.webp",
-    text: "Joining Nanogram has been one of the best decisions of my life. The opportunities to learn and grow are endless.",
+    text: "As a small spark can ignite a vast forest, let's ignite the world of technology in Nanogram with our innovative ideas, creating a future that shines brighter with every step",
   },
   {
     name: "Anirudh Harish Bhat",

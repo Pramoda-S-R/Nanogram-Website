@@ -49,7 +49,7 @@ const Hero = () => {
               <img
                 alt="Hero Img"
                 className="mt-16 rounded-md bg-white/5 shadow-2xl ring-1 ring-white/10 sm:mt-24 w-full h-auto aspect-[16/9] object-cover"
-                src="/1.png"
+                src="/show/12.webp"
               />
             </div>
           </div>

@@ -6,7 +6,7 @@ const Hero = () => {
     <main className="relative isolate overflow-hidden bg-sky-200 dark:text-slate-50 dark:bg-sky-950 text-slate-950 py-24 sm:py-32">
       <div className="absolute inset-0 h-full w-full object-cover object-right md:object-center opacity-20">
         <img
-          src="/1.png"
+          src="/show/3.webp"
           alt=""
           className="absolute inset-0 h-full w-full object-cover object-right md:object-center opacity-20 bg-transparent"
         />

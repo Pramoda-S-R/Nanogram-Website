@@ -5,24 +5,30 @@ import { motion, AnimatePresence } from "framer-motion";
 // FAQ Data (You can easily add new items here)
 const faqData = [
   {
-    question: "How can I join an event?",
+    question: "What kind of activities does the technical club organize?",
     answer:
-      "You can join an event by registering on our website. Visit the Events page and select the event you are interested in.",
+      "We host workshops, project building, hackathons, and guest lectures. Our projects range from beginner-friendly to advanced, covering various technical domains.",
   },
   {
-    question: "Are the events free?",
+    question:
+      "Who can become a member of the technical club, and who can join our events?",
     answer:
-      "Most of our events are free for members. Some specialized workshops may have a nominal fee.",
+      "ECE students can officially become members, while students from other branches are welcome to attend our events and workshops!",
   },
   {
-    question: "Do I need prior knowledge to attend?",
+    question: "How can I become a member of the technical club?",
     answer:
-      "No prior knowledge is required for most events. We welcome enthusiasts of all skill levels.",
+      "Simply fill out our membership form on the website. We welcome new members throughout the year, and the best part is there are no membership fees!",
   },
   {
-    question: "How can I become a member?",
+    question: "Do I need prior experience to participate?",
     answer:
-      "You can become a member by signing up on our website. Visit the Membership page for more details.",
+      "No prior experience is required! The club is beginner-friendly, though some workshops may need a basic understanding of the topic. Most importantly, anyone with an interest and passion for learning is encouraged to participate.",
+  },
+  {
+    question: "How can I stay updated on club activities?",
+    answer:
+      "Follow us on our social media platforms and regularly check our website for updates on meetings, events, and workshops.",
   },
 ];
 
@@ -30,7 +36,7 @@ const faqData = [
 const FaqItem = ({ question, answer, isOpen, onClick }) => (
   <div className="py-8">
     <button
-      className="flex items-center justify-between w-full py-6 text-lg font-bold"
+      className="flex items-center text-left justify-between w-full py-6 text-lg font-bold"
       onClick={onClick}
     >
       {question}{" "}
@@ -68,7 +74,10 @@ const Faq = () => {
   };
 
   return (
-    <section className="py-10 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-50" id="faq">
+    <section
+      className="py-10 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-50"
+      id="faq"
+    >
       <div className="px-4 py-10 mx-auto max-w-7xl">
         <div className="grid grid-cols-1 items-center gap-16 md:grid-cols-2 md:gap-24">
           {/* Image Section */}
@@ -76,7 +85,7 @@ const Faq = () => {
             <img
               alt="Image"
               className="object-cover w-full h-auto aspect-[4/3] md:aspect-[3/4] rounded-2xl"
-              src="/1.png"
+              src="/show/8.webp"
             />
           </div>
           {/* FAQ Section */}

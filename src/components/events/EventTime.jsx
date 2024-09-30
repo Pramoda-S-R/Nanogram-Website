@@ -25,27 +25,27 @@ const EventTime = () => {
   const eventData = [
     {
       date: "Oct 2024",
-      title: "AI Workshop",
+      title: "Introduction to Microcontrollers",
       description:
-        "Dive into the world of Artificial Intelligence with hands-on sessions and expert talks.",
+        "Fundamental concepts of microcontrollers and their applications in embedded systems.",
+    },
+    {
+      date: "Oct 2024",
+      title: "Arduino Microcontrollers",
+      description:
+        "Introduction to programming and controlling hardware using Arduino boards.",
     },
     {
       date: "Nov 2024",
-      title: "Robotics Hackathon",
+      title: "Career Guidance",
       description:
-        "Join our hackathon to build and showcase innovative robotics projects.",
+        "Advice on career planning, skills development, and professional growth strategies.",
     },
     {
-      date: "Dec 2024",
-      title: "Electronics Expo",
+      date: "Nov 2024",
+      title: "Linux Basics",
       description:
-        "Explore the latest in electronics technology at our annual expo.",
-    },
-    {
-      date: "Jan 2025",
-      title: "IoT Seminar",
-      description:
-        "Learn about the Internet of Things and its applications in modern technology.",
+        "Overview of essential Linux commands and system navigation for beginners.",
     },
   ];
 

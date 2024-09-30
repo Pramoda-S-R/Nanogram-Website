@@ -40,7 +40,7 @@ const Involved = () => {
                   <img
                     alt="Image"
                     className="aspect-[7/5] w-[37rem] max-w-none rounded-2xl bg-slate-100 object-cover"
-                    src="/1.png"
+                    src="/show/7.webp"
                   />
                 </div>
               </div>
@@ -50,7 +50,7 @@ const Involved = () => {
                     <img
                       alt="Image"
                       className="aspect-[4/3] w-[18rem] max-w-none flex-none rounded-2xl bg-slate-100 object-cover"
-                      src="/1.png"
+                      src="/show/6.webp"
                     />
                   </div>
                 </div>
@@ -59,7 +59,7 @@ const Involved = () => {
                     <img
                       alt="Image"
                       className="aspect-[7/5] w-[37rem] max-w-none flex-none rounded-2xl bg-slate-100 object-cover"
-                      src="/1.png"
+                      src="/show/9.webp"
                     />
                   </div>
                 </div>
@@ -68,7 +68,7 @@ const Involved = () => {
                     <img
                       alt="Image"
                       className="aspect-[4/3] w-[24rem] max-w-none rounded-2xl bg-slate-100 object-cover"
-                      src="/1.png"
+                      src="/show/10.webp"
                     />
                   </div>
                 </div>

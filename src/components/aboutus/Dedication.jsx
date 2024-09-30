@@ -7,7 +7,7 @@ const Dedication = () => {
         <img
           alt="Img"
           className="w-full h-auto object-cover bg-slate-100 aspect-[16/9] md:aspect-[1/1]"
-          src="/1.png"
+          src="/show/11.webp"
         />
       </div>
       <div className="mx-auto max-w-2xl lg:mr-0 lg:max-w-lg">
