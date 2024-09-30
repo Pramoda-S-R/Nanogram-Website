@@ -16,7 +16,7 @@ const teamMembers = [
     role: "General Secretary & Operations Officer - 2024",
     image: "/team/A2.webp",
     socials: {
-      linkedin: "https://www.linkedin.com/company/wix-com",
+      linkedin: "https://www.linkedin.com/in/anirudh-harish-bhat-3801a6288",
       instagram: "https://www.instagram.com/just_a_dope_dude",
     },
   },
