@@ -79,7 +79,7 @@ const Mission = () => {
                   <div>Active Members</div>
                 </dt>
                 <dd className="mt-2 text-3xl font-bold leading-10 tracking-tight text-gray-900 dark:text-slate-50">
-                  <div>500+</div>
+                  <div>50+</div>
                 </dd>
               </div>
               <div>
