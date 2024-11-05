@@ -2,8 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { BatteryWarning } from "lucide-react";
 
-let accepting = false;
-// let accepting = true;
+// let accepting = false;
+let accepting = true;
 
 function Apply() {
   if (accepting) {
@@ -27,7 +27,7 @@ function Apply() {
         </div>
         <div className="mt-10 flex flex-col md:flex-row items-center justify-around">
           <Link
-            to="https://google.com"
+            to="https://forms.gle/zHupGgHdgDLqxNSk9"
             className="inline-flex items-center justify-center text-white bg-sky-500 font-medium border-0 py-2 xl:py-3 px-6 focus:outline-none hover:bg-sky-400 rounded-lg text-sm sm:text-base 2xl:text-lg transition-colors duration-500"
           >
             Join Nanogram
