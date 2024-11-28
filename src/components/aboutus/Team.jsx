@@ -62,14 +62,6 @@ const teamMembers = [
     },
   },
   {
-    name: "Chetana N Raj",
-    role: "Chronicler",
-    image: "/team/8.webp",
-    socials: {
-      linkedin: "https://www.linkedin.com/in/chethana-n-raj-97ba93279",
-    },
-  },
-  {
     name: "Hrithik Jaiswal",
     role: "Marketing Lead",
     image: "/team/9.webp",

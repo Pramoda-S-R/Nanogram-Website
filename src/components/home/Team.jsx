@@ -9,7 +9,6 @@ const images = [
   "/team/5.webp",
   "/team/6.webp",
   "/team/7.webp",
-  "/team/8.webp",
   "/team/9.webp",
   // Add more image paths as needed
 ];
@@ -41,8 +40,8 @@ const Team = () => {
         </div>
 
         {/* Images Section */}
-        <div className="max-w-3xl px-0 lg:px-4">
-          <div className="grid grid-cols-5 gap-y-6 gap-x-4 lg:gap-y-12 lg:gap-x-8  justify-items-center">
+        <div className="max-w-xl px-0 lg:px-4">
+          <div className="grid grid-cols-4 gap-y-6 gap-x-4 lg:gap-y-12 lg:gap-x-8  justify-items-center">
             {images.map((img, index) => (
               <div key={index} className="aspect-square">
                 <img

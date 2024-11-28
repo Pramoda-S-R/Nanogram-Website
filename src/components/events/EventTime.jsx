@@ -24,25 +24,25 @@ const EventTime = () => {
   // Data for the events
   const eventData = [
     {
-      date: "Oct 2024",
+      date: "Dec 2024",
       title: "Introduction to Microcontrollers",
       description:
         "Fundamental concepts of microcontrollers and their applications in embedded systems.",
     },
     {
-      date: "Oct 2024",
+      date: "Dec 2024",
       title: "Arduino Microcontrollers",
       description:
         "Introduction to programming and controlling hardware using Arduino boards.",
     },
     {
-      date: "Nov 2024",
+      date: "Jan 2025",
       title: "Career Guidance",
       description:
         "Advice on career planning, skills development, and professional growth strategies.",
     },
     {
-      date: "Nov 2024",
+      date: "Jan 2025",
       title: "Linux Basics",
       description:
         "Overview of essential Linux commands and system navigation for beginners.",
