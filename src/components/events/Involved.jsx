@@ -20,7 +20,7 @@ const Involved = () => {
                 </h2>
                 <p className="mt-6 text-xl leading-8 text-slate-700 dark:text-slate-300">
                   Welcome to Nanogram's <strong>Tech Events Hub</strong> – where
-                  innovation meets community. Join us for exciting workshops,
+                  innovation meets curiosity. Join us for exciting workshops,
                   hackathons, and seminars designed to ignite your curiosity and
                   expand your skills.
                 </p>
