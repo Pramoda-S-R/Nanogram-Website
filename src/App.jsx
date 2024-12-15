@@ -1,32 +1,31 @@
-import React, { lazy, Suspense } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Home from "./components/Home";
-
-// Lazy load the other components
-const AboutUs = lazy(() => import("./components/AboutUs"));
-const Events = lazy(() => import("./components/Events"));
-const Gallery = lazy(() => import("./components/Gallery"));
-const NotFound = lazy(() => import("./components/NotFound"));
-const Join = lazy(() => import("./components/Join"));
-const Active = lazy(() => import("./components/Active"));
+import { Routes, Route } from "react-router-dom";
+import { AboutUS, Home } from "./_root/pages";
+import SigninForm from "./_auth/forms/SigninForm";
+import SignupForm from "./_auth/forms/SignupForm";
+import AuthLayout from "./_auth/AuthLayout";
+import RootLayout from "./_root/RootLayout";
+import { AnimatePresence } from "framer-motion";
+import { ToastProvider } from "./components/ui/Toast";
 
 const App = () => {
   return (
-    <Router>
-      <Suspense fallback={<div className="text-center"></div>}>
-        <Routes>
-          {/* Landing page / Home page */}
-          <Route path="/" element={<Home />} />
-          <Route path="/about-us" element={<AboutUs />} />
-          <Route path="/events" element={<Events />} />
-          <Route path="/gallery" element={<Gallery />} />
-          <Route path="/join" element={<Join />} />
-          <Route path="/events-active" element={<Active />} />
-          {/* 404 Page */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </Suspense>
-    </Router>
+    <ToastProvider>
+      <AnimatePresence>
+        <main className="flex h-screen bg-neutral-white">
+          <Routes location={location} key={location.pathname}>
+            {/* public routes */}
+            <Route element={<AuthLayout />}>
+              <Route path="/sign-in" element={<SigninForm />} />
+              <Route path="/sign-up" element={<SignupForm />} />
+            </Route>
+            {/* private routes */}
+            <Route element={<RootLayout />}>
+              <Route index element={<Home />} />
+            </Route>
+          </Routes>
+        </main>
+      </AnimatePresence>
+    </ToastProvider>
   );
 };
 
