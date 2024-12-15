@@ -1,3 +1,4 @@
+import { title } from "framer-motion/client";
 import React from "react";
 
 // HighlightCard Component
@@ -26,6 +27,7 @@ const HighlightCard = ({ title, subtitle, imgSrc }) => {
 const Highlights = () => {
   // Data for the highlights
   const highlightData = [
+    { title: "Microcoded", subtitle: "Workshop", imgSrc: "/gallery/21.webp" },
     {
       title: "Colossus Hackathon",
       subtitle: "Hackathon",
@@ -60,7 +62,7 @@ const Highlights = () => {
             excitement and innovation at Nanogram - The Tech Hub.
           </p>
         </div>
-        <div className="grid grid-cols-2 gap-4 text-center md:grid-cols-3 lg:grid-cols-6">
+        <div className="grid grid-cols-2 gap-4 text-center md:grid-cols-3 lg:grid-cols-7">
           {highlightData.map((highlight, index) => (
             <HighlightCard
               key={index}

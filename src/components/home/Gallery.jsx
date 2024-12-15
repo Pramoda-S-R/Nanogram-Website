@@ -6,6 +6,7 @@ const images = [
   "/gallery/2.webp",
   "/gallery/3.webp",
   "/gallery/1.webp",
+  "/gallery/22.webp",
   "/gallery/6.webp",
   "/gallery/9.webp",
   "/gallery/8.webp",
@@ -16,7 +17,7 @@ const Gallery = () => {
   return (
     <section className="p-6 bg-slate-50 dark:bg-slate-800  text-slate-900 dark:text-slate-50 border-none outline-none">
       <div className="max-w-7xl mx-auto px-4">
-        <div className="grid grid-cols-3 lg:grid-cols-6 gap-y-12 gap-x-8 justify-items-center">
+        <div className="grid grid-cols-3 lg:grid-cols-7 gap-y-12 gap-x-8 justify-items-center">
           {images.map((img, index) => (
             <div key={index} className="aspect-square">
               <img

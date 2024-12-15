@@ -3,8 +3,8 @@ import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
 // Update this variable to toggle event content
-// let eventUpcoming = false;
-let eventUpcoming = true;
+let eventUpcoming = false;
+// let eventUpcoming = true;
 
 const Involved = () => {
   return (
@@ -25,11 +25,10 @@ const Involved = () => {
                   expand your skills.
                 </p>
                 <p className="mt-6 text-base leading-7 text-slate-700 dark:text-slate-300">
-                  📅 <strong>Upcoming Event:</strong> Microcoded
+                  📅 <strong>Upcoming Event:</strong> Microcoded 2.0
                   <br />
-                  🕒 <strong>Date & Time:</strong> 2024, Dec - 5 & 6 <br />
-                  📍 <strong>Location:</strong> Dr. Ambedkar Institute of
-                  Technology
+                  🕒 <strong>Date & Time:</strong> 2024, Dec - 18 <br />
+                  📍 <strong>Location:</strong> ECE - Seminar Hall
                 </p>
                 <p className="mt-6 text-base leading-7 text-slate-700 dark:text-slate-300">
                   Don't miss the chance to learn, network, and grow with

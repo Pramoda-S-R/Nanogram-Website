@@ -1,7 +1,9 @@
 import React from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { image } from "framer-motion/client";
 
 const events = [
+  { title: "Microcoded", image: "/gallery/22.webp" },
   { title: "Colossus Hackathon", image: "/gallery/13.webp" },
   { title: "Debug This!!", image: "/gallery/16.webp" },
   { title: "Talk on EV", image: "/gallery/15.webp" },

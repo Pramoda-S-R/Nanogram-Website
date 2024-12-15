@@ -21,6 +21,8 @@ const images = [
   "/gallery/18.webp",
   "/gallery/19.webp",
   "/gallery/20.webp",
+  "/gallery/21.webp",
+  "/gallery/22.webp",
   // Add more images here
 ];
 

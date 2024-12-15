@@ -30,12 +30,6 @@ const EventTime = () => {
         "Fundamental concepts of microcontrollers and their applications in embedded systems.",
     },
     {
-      date: "Dec 2024",
-      title: "Arduino Microcontrollers",
-      description:
-        "Introduction to programming and controlling hardware using Arduino boards.",
-    },
-    {
       date: "Jan 2025",
       title: "Career Guidance",
       description:
@@ -47,6 +41,11 @@ const EventTime = () => {
       description:
         "Overview of essential Linux commands and system navigation for beginners.",
     },
+    {
+      date: "Jan 2025",
+      title: "Debug This!!",
+      description:"Debugging every last line of code and Programming together one more time."
+    }
   ];
 
   return (
