@@ -61,7 +61,7 @@ function DepartmentCheck() {
           >
             <h2 className="text-3xl font-bold mb-4">Welcome, ECE Wizard! 🧑‍🔧</h2>
             <Link
-              to="https://forms.gle/jbhTNbGSuAQEtBLN6"
+              to="https://docs.google.com/forms/d/e/1FAIpQLScq8YMtB4X3uNJY60dDJ1rvck3qzjvvY080o7mLwC9g40UWOQ/viewform?usp=sharing"
               className="inline-flex items-center justify-center gap-2 text-white bg-sky-500 font-medium border-0 py-2 xl:py-3 px-6 focus:outline-none hover:bg-sky-400 rounded-lg text-sm sm:text-base 2xl:text-lg transition-colors duration-500 shadow-md"
             >
               <BatteryCharging />
@@ -79,7 +79,7 @@ function DepartmentCheck() {
               Oops! You're Not in ECE 😅
             </h2>
             <Link
-              to="https://forms.gle/gjEDJE2MEGp5fuCT9"
+              to="https://docs.google.com/forms/d/e/1FAIpQLSfQlfQ1S-w-wvyPXsSQz0M5OZzCf2433GbHbzH6E2ZfJJNcGQ/viewform?usp=sharing"
               className="inline-flex items-center justify-center gap-2 text-white bg-red-500 font-medium border-0 py-2 xl:py-3 px-6 focus:outline-none hover:bg-red-400 rounded-lg text-sm sm:text-base 2xl:text-lg transition-colors duration-500 shadow-md"
             >
               <AlertTriangle />
