@@ -27,7 +27,7 @@ const Involved = () => {
                 <p className="mt-6 text-base leading-7 text-slate-700 dark:text-slate-300">
                   📅 <strong>Upcoming Event:</strong> Microcoded 2.0
                   <br />
-                  🕒 <strong>Date & Time:</strong> 2024, Dec - 18 <br />
+                  🕒 <strong>Date & Time:</strong> 2024, Dec - 23 <br />
                   📍 <strong>Location:</strong> ECE - Seminar Hall
                 </p>
                 <p className="mt-6 text-base leading-7 text-slate-700 dark:text-slate-300">
