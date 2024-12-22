@@ -1,7 +1,7 @@
 import React from "react";
 
 const AboutUs = () => {
-  return <div className="">AboutUs</div>;
+  return <div className="h-screen-top">AboutUs</div>;
 };
 
 export default AboutUs;

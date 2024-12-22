@@ -1,9 +1,9 @@
 import React from "react";
 import clsx from "clsx";
 
-const Button = ({ children, onClick, variant = "primary", className, disabled }) => {
+const Button = ({ children, onClick, variant = "primary", className, disabled, type = "button" }) => {
   const baseStyles =
-    "px-4 py-2 rounded-md font-semibold text-sm flex gap-3 items-center";
+    "px-4 py-2 rounded-md font-semibold text-sm flex gap-3 items-center justify-center text-center";
   const variantStyles = {
     primary: "bg-primary text-neutral-white hover:bg-primary/85",
     secondary: "bg-secondary text-neutral-black hover:bg-secondary/50",
@@ -21,6 +21,7 @@ const Button = ({ children, onClick, variant = "primary", className, disabled })
       })}
       onClick={!disabled ? onClick : undefined} // Prevent clicking when disabled
       disabled={disabled}
+      type={type}
     >
       {children}
     </button>

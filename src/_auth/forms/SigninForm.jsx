@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -13,6 +13,8 @@ import { useUserContext } from "../../context/AuthContext";
 const SigninForm = () => {
   const toast = useToast();
   const navigate = useNavigate();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isRouting, setIsRouting] = useState(false);
 
   const { checkAuthUser, isPending: isUserLoading } = useUserContext();
 
@@ -46,11 +48,13 @@ const SigninForm = () => {
   }, [checkAuthUser, navigate]);
 
   async function onSubmit(data) {
+    setIsSubmitting(true);
     const session = await signInAccount({
       username: data.username,
       password: data.password,
     });
     if (!session) {
+      setIsSubmitting(false);
       return toast({
         title: "Sign in failed.",
         description:
@@ -73,7 +77,7 @@ const SigninForm = () => {
   }
 
   return (
-    <div className="mx-auto ">
+    <div className={`mx-auto ${isRouting ? "slide-out-right" : ""}`}>
       {/* TODO: Add the Nanogram branding here */}
       <h2 className="text-2xl font-bold text-[#0D2DA2] mb-6 text-center">
         Sign In
@@ -113,9 +117,9 @@ const SigninForm = () => {
           type="submit"
           variant="primary"
           className="w-full"
-          disabled={isUserLoading}
+          disabled={isSubmitting}
         >
-          {isUserLoading ? "Signing In..." : "Sign In"}
+          {isSubmitting ? "Signing In..." : "Sign In"}
         </Button>
       </form>
 
@@ -126,7 +130,16 @@ const SigninForm = () => {
           <a href="#" className="text-[#0D2DA2] hover:underline">
             Forgot Password?
           </a>
-          <Button variant="link" onClick={() => navigate("/sign-up")}>
+          <Button
+            type="button"
+            variant="link"
+            onClick={() => {
+              setIsRouting(true);
+              setTimeout(() => {
+                navigate("/sign-up");
+              }, 500);
+            }}
+          >
             Sign Up
           </Button>
         </div>

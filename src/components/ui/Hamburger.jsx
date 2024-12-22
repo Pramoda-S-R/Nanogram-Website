@@ -20,7 +20,7 @@ export const Hamburger = ({ onClick }) => {
         initial={false}
         animate={active ? "open" : "closed"}
         onClick={handleClick}
-        className="relative w-16 h-16 rounded-full bg-neutral-white/0 transition-colors hover:bg-neutral-white/20"
+        className="lg:hidden relative w-16 h-16 rounded-full bg-neutral-white/0 transition-colors hover:bg-neutral-white/20"
       >
         <motion.span
           variants={VARIANTS.top}

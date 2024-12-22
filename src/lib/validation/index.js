@@ -25,3 +25,9 @@ export const signUpSchema = z.object({
         "Password must contain at least one letter, one number, and one special character",
     }),
 });
+
+export const postFormSchema = z.object({
+  caption: z.string().min(1, "Caption is required").max(3000, "Caption is too long"),
+  tags: z.string().optional(),
+  image: z.any().nullable(),
+});

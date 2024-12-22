@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -16,6 +16,9 @@ import { useUserContext } from "../../context/AuthContext";
 const SignupForm = () => {
   const toast = useToast();
   const navigate = useNavigate();
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isRouting, setIsRouting] = useState(false);
 
   const { checkAuthUser, isPending: isUserLoading } = useUserContext();
 
@@ -53,6 +56,7 @@ const SignupForm = () => {
   }, [checkAuthUser, navigate]);
 
   async function onSubmit(data) {
+    setIsSubmitting(true);
     const newUser = await createUserAccount(data);
 
     if (!newUser) {
@@ -89,12 +93,12 @@ const SignupForm = () => {
   }
 
   return (
-    <div>
+    <div className={`mx-auto ${isRouting ? "slide-out-right" : ""}`}>
       <h2 className="text-2xl font-bold text-[#0D2DA2] mb-6 text-center">
         Sign Up
       </h2>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+      <form onSubmit={handleSubmit(onSubmit)} className={"space-y-4"}>
         <div>
           <Input
             icon={<User size={20} />}
@@ -165,7 +169,12 @@ const SignupForm = () => {
         <Button
           variant="link"
           className="w-full"
-          onClick={() => navigate("/sign-in")}
+          onClick={() => {
+            setIsRouting(true);
+            setTimeout(() => {
+              navigate("/sign-in");
+            }, 500);
+          }}
         >
           Already have an account? Sign In
         </Button>

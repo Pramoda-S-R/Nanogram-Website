@@ -8,7 +8,8 @@ export default {
   theme: {
     extend: {
       screens: {
-        hd: "1080px"
+        hd: "1080px", 
+        xs: "480px",
       },
       colors: {
         primary: {
@@ -25,6 +26,9 @@ export default {
           yellow: "#EAE38F",
           gray: "#C8CBC8",
         },
+      },
+      height: {
+        "screen-top": "calc(100vh - 96px)",
       },
       animation: {
         fadeIn: "fadeIn 0.5s ease-in-out",

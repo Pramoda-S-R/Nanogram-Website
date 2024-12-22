@@ -14,6 +14,16 @@ const AuthLayout = () => {
         <Navigate to="/" />
       ) : (
         <>
+          <div className="absolute h-screen w-1/2 left-[-24%] overflow-hidden">
+            <Player
+              autoplay
+              loop
+              src="https://lottie.host/8160f306-be03-4268-b093-3549bc73dcea/vqAfkRJUo8.json"
+              style={{ height: "100vh", width: "50vw" }}
+            >
+              <Controls visible={false} />
+            </Player>
+          </div>
           <Button
             variant="link"
             className="absolute h-12 m-10 items-center"
@@ -21,19 +31,17 @@ const AuthLayout = () => {
           >
             <ArrowLeft /> Home
           </Button>
-          <section className="flex flex-1 justify-center items-center flex-col py-10">
+          <section className="flex flex-1 justify-center items-center flex-col py-10 w-1/2 h-screen">
             <Outlet />
           </section>
           <div className="hidden xl:block h-screen w-1/2 object-cover bg-no-repeat">
             <Player
               autoplay
               loop
-              src="https://lottie.host/d2c3220d-7f05-481e-9f23-4d22f67fad20/z19J5GYRIf.json"
+              src="https://lottie.host/3dbcb94a-b753-4f43-a28c-b7c39b968833/LuwT4MaJgv.json"
               style={{ height: "100vh", width: "50vw" }}
             >
-              <Controls
-                visible={false}
-              />
+              <Controls visible={false} />
             </Player>
           </div>
         </>

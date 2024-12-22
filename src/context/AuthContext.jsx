@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { getCurrentUser } from "../lib/appwrite/api";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import { privateRoutes } from "../constants";
 
 export const INITIAL_USER = {
   id: "",
@@ -28,6 +29,7 @@ const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   const checkAuthUser = async () => {
     try {
@@ -59,14 +61,19 @@ const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    if (
-      localStorage.getItem("cookieFallback") === "[]" ||
-      localStorage.getItem("cookieFallback") === null
-    )
-      navigate("/sign-in");
+    const handleAuthCheck = async () => {
+      const isPrivateRoute = privateRoutes.includes(location.pathname);
 
-    checkAuthUser();
-  }, []);
+      if (isPrivateRoute) {
+        const isAuthenticated = await checkAuthUser(); // Wait for the result
+        if (!isAuthenticated) {
+          navigate("/sign-in");
+        }
+      }
+    };
+
+    handleAuthCheck(); // Call the async function
+  }, [location.pathname, navigate, checkAuthUser]);
 
   const value = {
     user,
