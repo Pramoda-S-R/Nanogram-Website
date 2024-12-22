@@ -1,15 +1,20 @@
 import { Link, useLocation } from "react-router-dom";
-import { SIDEBAR_ITEMS } from "../../constants";
+import { BOTTOMBAR_ITEMS } from "../../constants";
 
 const Bottombar = () => {
   const { pathname } = useLocation();
   return (
     <section className="bottom-bar">
-      {SIDEBAR_ITEMS.map(({ to, icon: Icon, label }) => {
+      {BOTTOMBAR_ITEMS.map(({ to, icon: Icon, label }) => {
         const isActive = pathname === to;
 
         return (
-          <div key={label} className={`${isActive && "bg-primary p-2 rounded-lg text-neutral-white"}`} >
+          <div
+            key={label}
+            className={`${
+              isActive && "bg-primary p-2 rounded-lg text-neutral-white"
+            }`}
+          >
             <Link to={to}>
               <Icon />
             </Link>

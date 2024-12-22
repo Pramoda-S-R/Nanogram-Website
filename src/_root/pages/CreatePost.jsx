@@ -14,6 +14,7 @@ const CreatePost = () => {
       document.body.style.overflow = "";
     };
   }, []);
+
   return (
     <div className="flex flex-1 flex-col h-screen-top overflow-y-scroll custom-scrollbar">
       <div className="common-container">
@@ -22,7 +23,7 @@ const CreatePost = () => {
           <h2 className="h3-bold md:h2-bold text-left w-full">Create Post</h2>
         </div>
       </div>
-      <PostForm />
+      <PostForm action="Post" />
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { getCurrentUser } from "../lib/appwrite/api";
 import { useNavigate, useLocation } from "react-router-dom";
-import { privateRoutes } from "../constants";
+import { publicRoutes } from "../constants";
 
 export const INITIAL_USER = {
   id: "",
@@ -62,9 +62,8 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const handleAuthCheck = async () => {
-      const isPrivateRoute = privateRoutes.includes(location.pathname);
-
-      if (isPrivateRoute) {
+      const isPublicRoute = publicRoutes.includes(location.pathname);
+      if (!!!isPublicRoute) {
         const isAuthenticated = await checkAuthUser(); // Wait for the result
         if (!isAuthenticated) {
           navigate("/sign-in");

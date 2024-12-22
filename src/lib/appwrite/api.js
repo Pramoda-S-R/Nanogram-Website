@@ -86,7 +86,7 @@ export async function getAccount() {
 
     return currentAccount;
   } catch (error) {
-    console.log(error);
+    console.log("Line 89", error);
     throw Error;
   }
 }
@@ -107,7 +107,7 @@ export async function getCurrentUser() {
 
     return currentUser.documents[0];
   } catch (error) {
-    console.log(error);
+    console.log("Line 110 api",error);
     throw Error;
   }
 }
@@ -144,7 +144,7 @@ export async function createPost(post) {
     // Convert tags into array
     const tags = post.tags?.replace(/ /g, "").split(",") || [];
 
-    // Create post
+    // Create post in database
     const newPost = await database.createDocument(
       appwriteConfig.databaseId,
       appwriteConfig.postsCollectionId,
@@ -211,13 +211,78 @@ export async function deleteFile(fileId) {
     console.log(error);
   }
 }
+// Update post
+export async function updatePost(post) {
+  const hasFileTOUpdate = post.image > 0;
+  try {
+    let image = {
+      imageUrl: post.imageUrl,
+      imageId: post.imageId,
+    };
+
+    if (hasFileTOUpdate) {
+      // Upload file to appwrite storage
+      const uploadedFile = await uploadFile(post.image);
+      if (!uploadedFile) throw Error;
+
+      // Get file url
+      const fileUrl = getFilePreview(uploadedFile.$id);
+      if (!fileUrl) {
+        await deleteFile(uploadedFile.$id);
+        throw Error;
+      }
+
+      image = { ...image, imageUrl: fileUrl, imageId: uploadedFile.$id };
+    }
+
+    // Convert tags into array
+    const tags = post.tags?.replace(/ /g, "").split(",") || [];
+
+    // Update post to database
+    const updatedPost = await database.updateDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.postsCollectionId,
+      post.postId,
+      {
+        caption: post.caption,
+        imageUrl: image.imageUrl,
+        imageId: image.imageId,
+        tags: tags,
+      }
+    );
+
+    if (!updatedPost) {
+      await deleteFile(post.imageId);
+      throw Error;
+    }
+
+    return updatedPost;
+  } catch (error) {
+    console.log(error);
+  }
+}
+// Delete post
+export async function deletePost(postId, imageId) {
+  if (!postId || !imageId) throw Error;
+  try {
+    await database.deleteDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.postsCollectionId,
+      postId
+    );
+
+    return { status: "ok" };
+  } catch (error) {
+    console.log(error);
+  }
+}
 // Get recent posts
 export async function getRecentPosts() {
   try {
     const posts = await database.listDocuments(
       appwriteConfig.databaseId,
       appwriteConfig.postsCollectionId,
-      [(Query.orderDesc("$createdAt"), Query.limit(20))]
+      [Query.orderDesc("$createdAt"), Query.limit(20)]
     );
 
     if (!posts || posts.total === 0) {
@@ -241,7 +306,6 @@ export async function likePost(postId, likesArray) {
         likes: likesArray,
       }
     );
-
     if (!updatedPost) throw Error;
 
     return updatedPost;
@@ -283,5 +347,72 @@ export async function unSavePost(savedRecordId) {
     return { status: "ok" };
   } catch (error) {
     console.log(error);
+  }
+}
+// Get post by ID
+export async function getPostById(postId) {
+  try {
+    const post = await database.getDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.postsCollectionId,
+      postId
+    );
+
+    if (!post) throw Error;
+
+    return post;
+  } catch (error) {
+    console.log(error);
+  }
+}
+// Get Infinite Posts
+export async function getInfinitePosts(pageParam) {
+  const queries = [Query.orderDesc("$updatedAt"), Query.limit(10)];
+
+  // Ensure pageParam is valid and not undefined or null
+  if (pageParam && typeof pageParam === "string") {
+    queries.push(Query.cursorAfter(pageParam));
+  }
+
+  try {
+    const posts = await database.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.postsCollectionId,
+      queries
+    );
+
+    if (!posts) throw new Error("Failed to fetch posts");
+
+    return posts;
+  } catch (error) {
+    console.error("Error in getInfinitePosts:", error);
+  }
+}
+// Search posts
+export async function searchPosts(searchTerm) {
+  try {
+    // Determine the query field based on input
+    const queries = [];
+    if (searchTerm.startsWith("#")) {
+      // Search in 'tags' field
+      const tagTerm = searchTerm.slice(1); // Remove '#' from the search term
+      queries.push(Query.search("tags", tagTerm));
+    } else {
+      // Search in 'caption' field
+      queries.push(Query.search("caption", searchTerm));
+    }
+
+    // Fetch posts based on the generated query
+    const posts = await database.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.postsCollectionId,
+      queries
+    );
+
+    if (!posts) throw new Error("No posts found");
+
+    return posts;
+  } catch (error) {
+    console.error("Error in searchPosts:", error);
   }
 }

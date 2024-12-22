@@ -7,12 +7,18 @@ import {
 import {
   createPost,
   createUserAccount,
+  deletePost,
+  getCurrentUser,
+  getInfinitePosts,
+  getPostById,
   getRecentPosts,
   likePost,
   savePost,
+  searchPosts,
   signInAccount,
   signOutAccount,
   unSavePost,
+  updatePost,
 } from "../appwrite/api";
 import { QUERY_KEYS } from "./queryKeys";
 
@@ -65,13 +71,37 @@ export const useGetRecentPosts = () => {
   });
 };
 
-export const useLikePosts = () => {
+export const useUpdatePost = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ({ postId, likesArray }) => likePost({ postId, likesArray }),
+    mutationFn: (post) => updatePost(post),
     onSuccess: (data) => {
       queryClient.invalidateQueries({
         queryKey: [QUERY_KEYS.GET_POST_BY_ID, data.$id],
+      });
+    },
+  });
+};
+
+export const useDeletePost = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({ postId, imageId }) => deletePost(postId, imageId),
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_RECENT_POSTS],
+      });
+    },
+  });
+};
+
+export const useLikePosts = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({ postId, likesArray }) => likePost(postId, likesArray),
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_POST_BY_ID, data?.$id],
       });
       queryClient.invalidateQueries({
         queryKey: [QUERY_KEYS.GET_RECENT_POSTS],
@@ -89,7 +119,7 @@ export const useLikePosts = () => {
 export const useSavePosts = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (savedRecordId) => savePost(savedRecordId),
+    mutationFn: ({ postId, userId }) => savePost(postId, userId),
     onSuccess: (data) => {
       queryClient.invalidateQueries({
         queryKey: [QUERY_KEYS.GET_RECENT_POSTS],
@@ -119,5 +149,50 @@ export const useUnSavePosts = () => {
         queryKey: [QUERY_KEYS.GET_CURRENT_USER],
       });
     },
+  });
+};
+
+export const useGetPostById = (postId) => {
+  return useQuery({
+    queryKey: [QUERY_KEYS.GET_POST_BY_ID, postId],
+    queryFn: () => getPostById(postId),
+    enabled: !!postId,
+  });
+};
+
+export const useGetPosts = () => {
+  return useInfiniteQuery({
+    queryKey: [QUERY_KEYS.GET_INFINITE_POSTS],
+    queryFn: ({ pageParam = null }) => getInfinitePosts(pageParam),
+    getNextPageParam: (lastPage) => {
+      // If the lastPage has no documents, return null to stop fetching
+      if (!lastPage || lastPage.documents.length === 0) {
+        return null;
+      }
+
+      // Get the $id of the last document in the current page
+      const lastDocument = lastPage.documents[lastPage.documents.length - 1];
+
+      // Validate lastDocument and return its $id
+      return lastDocument && lastDocument.$id ? lastDocument.$id : null;
+    },
+  });
+};
+
+export const useSearchPosts = (searchTerm) => {
+  return useQuery({
+    queryKey: [QUERY_KEYS.SEARCH_POSTS, searchTerm],
+    queryFn: () => searchPosts(searchTerm),
+    enabled: !!searchTerm,
+  });
+};
+
+// ==================
+// User Queries
+// ==================
+export const useGetCurrentUser = () => {
+  return useQuery({
+    queryKey: [QUERY_KEYS.GET_CURRENT_USER],
+    queryFn: getCurrentUser,
   });
 };

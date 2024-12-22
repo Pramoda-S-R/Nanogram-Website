@@ -182,9 +182,35 @@ html {
   animation: slide-out-right 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
 }
 
+/* Explore */
+.explore-container {
+  @apply h-screen-top flex flex-col flex-1 items-center py-10 px-5 md:p-14 overflow-y-scroll custom-scrollbar;
+}
+
+.explore-inner_container {
+  @apply max-w-5xl flex flex-col items-center w-full gap-6 md:gap-9;
+}
+
+.explore-search {
+  @apply h-12 bg-accent-gray border-none placeholder:text-neutral-black focus-visible:ring-0 focus-visible:ring-offset-0 ring-offset-0 !important;
+}
+
+/* Grid Post List */
+.grid-container {
+  @apply w-full mx-auto overflow-hidden grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-7 max-w-5xl;
+}
+
+.grid-post_link {
+  @apply flex rounded-[24px] border border-neutral-black overflow-hidden cursor-pointer w-full h-full;
+}
+
+.grid-post_user {
+  @apply absolute bottom-0 p-5 flex-between w-full bg-gradient-to-t from-secondary to-transparent rounded-b-[24px] gap-2;
+}
+
 /* Home */
 .home-container {
-  @apply flex flex-col flex-1 items-center gap-10 overflow-scroll py-10 px-5 md:px-8 lg:p-14 custom-scrollbar;
+  @apply flex flex-col flex-1 items-center gap-10 overflow-scroll py-10 px-5 md:px-8 lg:p-14 overflow-y-scroll custom-scrollbar;
 }
 
 .home-posts {
@@ -232,5 +258,26 @@ html {
 }
 
 .common-container {
-  @apply flex flex-col flex-1 items-center gap-10 py-4 px-5 md:px-8 lg:p-4 custom-scrollbar;
+  @apply flex items-center gap-10 py-4 px-5 md:px-8 lg:p-4 custom-scrollbar;
+}
+
+/* Post Details */
+.post_details-container {
+  @apply h-screen-top flex flex-col flex-1 gap-10 overflow-scroll py-10 px-5 md:p-14 custom-scrollbar items-center;
+}
+
+.post_details-card {
+  @apply bg-accent-gray w-full max-w-5xl rounded-[30px] flex flex-col xl:flex-row border border-neutral-black xl:rounded-l-[24px];
+}
+
+.post_details-img {
+  @apply h-fit xl:w-[48%] rounded-t-[30px] xl:rounded-l-[24px] xl:rounded-tr-none object-cover p-5 bg-accent-gray;
+}
+
+.post_details-info {
+  @apply bg-accent-gray flex flex-col gap-5 lg:gap-7 flex-1 items-start p-8 rounded-[30px];
+}
+
+.post_details-delete_btn {
+  @apply p-0 flex gap-3 hover:bg-transparent hover:text-pink-500  text-orange-500 small-medium;
 }

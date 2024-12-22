@@ -25,7 +25,7 @@ const App = () => {
   return (
     <ToastProvider>
       <AnimatePresence>
-        <main className="flex bg-primary overflow-hidden">
+        <main className="flex bg-neutral-white overflow-hidden">
           <Routes location={location} key={location.pathname}>
             {/* public routes */}
             <Route element={<AuthLayout />}>

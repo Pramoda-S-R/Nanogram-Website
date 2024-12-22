@@ -8,7 +8,7 @@ const Home = () => {
   const toast = useToast();
 
   const { data: posts, isPending: isPostLoading, isError: isErrorPosts } = useGetRecentPosts();
-
+  
   const hasPosts = posts?.documents && posts.documents.length > 0;
 
   return (
@@ -26,7 +26,7 @@ const Home = () => {
               ))}
             </ul>
           ) : (
-            <div className="text-center text-accent-gray">No posts available.</div>
+            <div className="text-center text-neutral-black/50 ">No posts available.</div>
           )}
         </div>
       </div>

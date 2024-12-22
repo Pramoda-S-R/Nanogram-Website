@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 const Input = forwardRef(({ type = "text", placeholder = "", icon, className, ...props }, ref) => {
   return (
-    <div className="flex items-center relative">
+    <div className="flex w-full items-center relative">
       {icon && (
         <div className="absolute left-3 text-neutral-black flex items-center justify-center">
           {icon}

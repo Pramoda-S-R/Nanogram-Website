@@ -26,6 +26,14 @@ export const SIDEBAR_ITEMS = [
   { to: "/create-post", icon: SquarePlus, label: "Create Post" },
 ];
 
+export const BOTTOMBAR_ITEMS = [
+  { to: "/community", icon: Play, label: "FYP" },
+  { to: "/explore", icon: Compass, label: "Explore" },
+  { to: "/create-post", icon: SquarePlus, label: "Create Post" },
+  { to: "/all-users", icon: Users, label: "People" },
+  { to: "/saved", icon: Album, label: "Saved" },
+];
+
 export const communityPaths = [
   "/community",
   "/explore",
@@ -39,16 +47,10 @@ export const communityPaths = [
   "/update-profile",
 ];
 
-export const privateRoutes = [
-  "/community",
-  "/blog",
-  "/explore",
-  "/all-users",
-  "/saved",
-  "/create-post",
-  "/liked-post",
-  "/update-post",
-  "/posts",
-  "/profile",
-  "/update-profile",
+export const publicRoutes = [
+  "/sign-in",
+  "/sign-up",
+  "/",
+  "/about-us",
+  "/events",
 ];

@@ -8,17 +8,22 @@ import Input from "../ui/Input";
 import { useToast } from "../ui/Toast";
 import FileUploader from "../shared/FileUploader";
 import { postFormSchema } from "../../lib/validation";
-import { useCreatePost } from "../../lib/react_query/queriesAndMutations";
+import {
+  useCreatePost,
+  useUpdatePost,
+} from "../../lib/react_query/queriesAndMutations";
 import { useUserContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
-const PostForm = ({ post }) => {
+const PostForm = ({ post, action }) => {
   const toast = useToast();
   const navigate = useNavigate();
 
   const { user } = useUserContext();
   const { mutateAsync: createPost, isPending: isLoadingCreate } =
     useCreatePost();
+  const { mutateAsync: updatePost, isPending: isLoadingUpdate } =
+    useUpdatePost();
 
   // Form State
   const {
@@ -37,7 +42,27 @@ const PostForm = ({ post }) => {
 
   // Form Submission
   const onSubmit = async (data) => {
-    console.log(data);
+    if (post && action === "Update") {
+      const updatedPost = await updatePost({
+        ...data,
+        postId: post.$id,
+        imageId: post?.imageId,
+        imageUrl: post?.imageUrl,
+      });
+
+      if (!updatedPost) {
+        toast({
+          title: "Update Failed!",
+          description:
+            "There was an error in updating your post. Please try again.",
+        });
+      }
+      toast({
+        title: "Update Successful!",
+        description: "Your post has been updated successfully. 🎉",
+      });
+      return navigate(`/posts/${post.$id}`);
+    }
     const newPost = await createPost({
       ...data,
       userId: user.id,
@@ -111,11 +136,13 @@ const PostForm = ({ post }) => {
         </div>
 
         {/* Submit & Cancel Buttons */}
-        <div className="flex gap-4 items-center justify-end mb-24">
+        <div className="flex gap-4 items-center justify-end mb-14 md:mb-0">
           <Button type="button" variant="destructive">
             Cancel
           </Button>
-          <Button type="submit">Submit</Button>
+          <Button type="submit" disabled={isLoadingCreate || isLoadingUpdate}>
+            {isLoadingCreate || (isLoadingUpdate && "Validating...  ")} {action}
+          </Button>
         </div>
       </form>
     </div>
