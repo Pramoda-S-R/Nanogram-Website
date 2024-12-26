@@ -3,8 +3,8 @@ import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
 // Update this variable to toggle event content
-// let eventUpcoming = false;
-let eventUpcoming = true;
+let eventUpcoming = false;
+// let eventUpcoming = true;
 
 const Involved = () => {
   return (
