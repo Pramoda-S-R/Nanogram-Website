@@ -2,6 +2,7 @@ import { Outlet, Navigate, useNavigate } from "react-router-dom";
 import Button from "../components/ui/Button";
 import { ArrowLeft } from "lucide-react";
 import { Player, Controls } from "@lottiefiles/react-lottie-player";
+import React from "react";
 
 const AuthLayout = () => {
   const isAuthenticated = false;

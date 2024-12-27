@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Hash } from "lucide-react";
@@ -137,7 +137,12 @@ const PostForm = ({ post, action }) => {
 
         {/* Submit & Cancel Buttons */}
         <div className="flex gap-4 items-center justify-end mb-14 md:mb-0">
-          <Button type="button" variant="destructive" onClick={() => navigate(-1)} disabled={isLoadingCreate || isLoadingUpdate}>
+          <Button
+            type="button"
+            variant="destructive"
+            onClick={() => navigate(-1)}
+            disabled={isLoadingCreate || isLoadingUpdate}
+          >
             Cancel
           </Button>
           <Button type="submit" disabled={isLoadingCreate || isLoadingUpdate}>

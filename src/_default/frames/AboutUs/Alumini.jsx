@@ -1,4 +1,5 @@
 import GridTeamList from "../../../components/shared/GridTeamList";
+import React from "react";
 
 const teamMembers = [
   {

@@ -1,6 +1,6 @@
 import { ImagePlus } from "lucide-react";
 import PostForm from "../../components/forms/PostForm";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 
 const CreatePost = () => {
   useEffect(() => {

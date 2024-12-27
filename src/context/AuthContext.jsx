@@ -1,4 +1,4 @@
-import {
+import React, {
   createContext,
   useContext,
   useEffect,
@@ -58,7 +58,10 @@ const AuthProvider = ({ children }) => {
         return false;
       }
     } catch (error) {
-      if (error?.message === "User (role: guests) missing scope (account)" || "401 (Unauthorized)") {
+      if (
+        error?.message === "User (role: guests) missing scope (account)" ||
+        "401 (Unauthorized)"
+      ) {
         // Expected behavior when there is no logged-in user
         console.log("No user session found. Proceeding as unauthenticated.");
       } else {

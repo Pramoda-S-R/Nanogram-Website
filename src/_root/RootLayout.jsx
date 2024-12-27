@@ -2,6 +2,8 @@ import { Outlet, Navigate } from "react-router-dom";
 import Navbar from "../components/shared/Navbar";
 import Sidebar from "../components/shared/Sidebar";
 import Bottombar from "../components/shared/Bottombar";
+import React from "react";
+
 
 const RootLayout = () => {
   return (

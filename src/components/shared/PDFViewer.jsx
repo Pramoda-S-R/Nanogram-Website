@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 import Button from "../ui/Button";
 import { StepBack, StepForward } from "lucide-react";

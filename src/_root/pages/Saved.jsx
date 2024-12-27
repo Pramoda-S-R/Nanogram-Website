@@ -1,3 +1,4 @@
+import React from "react";
 import { Album } from "lucide-react";
 import Loader from "../../components/shared/Loader";
 import GridPostList from "../../components/shared/GridPostList";

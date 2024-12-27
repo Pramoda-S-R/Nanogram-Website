@@ -1,3 +1,4 @@
+import React from "react";
 import { useAnimate } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 

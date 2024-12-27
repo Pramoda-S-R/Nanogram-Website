@@ -21,7 +21,7 @@ import DefaultLayout from "./_default/DefaultLayout";
 import RootLayout from "./_root/RootLayout";
 import { AnimatePresence } from "framer-motion";
 import { ToastProvider } from "./components/ui/Toast";
-import { Suspense } from "react";
+import React, { Suspense } from "react";
 
 const App = () => {
   return (

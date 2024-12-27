@@ -1,6 +1,6 @@
 import { ImagePlus } from "lucide-react";
 import PostForm from "../../components/forms/PostForm";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useGetPostById } from "../../lib/react_query/queriesAndMutations";
 import SpinLoader from "../../components/shared/SpinLoader";
