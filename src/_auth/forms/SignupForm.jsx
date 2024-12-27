@@ -12,11 +12,14 @@ import {
   useSignInAccount,
 } from "../../lib/react_query/queriesAndMutations";
 import { useUserContext } from "../../context/AuthContext";
+import useDebounce from "../../hooks/useDebounce";
 
 const SignupForm = () => {
   const toast = useToast();
   const navigate = useNavigate();
 
+  const [searchUsername, setSearchValue] = useState("");
+  const debouncedValue = useDebounce(searchUsername, 300);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isRouting, setIsRouting] = useState(false);
 
@@ -38,15 +41,14 @@ const SignupForm = () => {
 
   useEffect(() => {
     const checkAndRedirect = async () => {
-      const isLoggedIn = localStorage.getItem("isAuthenticated");
+      const isLoggedIn = await checkAuthUser();
 
       if (isLoggedIn) {
-        localStorage.setItem("isAuthenticated", "true");
+        console.log("User is already logged in. Redirecting to home.");
         navigate("/");
       } else {
         const isLoggedIn = await checkAuthUser();
         if (isLoggedIn) {
-          localStorage.setItem("isAuthenticated", "true");
           navigate("/");
         }
       }
@@ -67,10 +69,13 @@ const SignupForm = () => {
       });
     }
 
+    console.log("New User in signup", newUser);
+
     const session = await signInAccount({
       email: data.email,
       password: data.password,
     });
+    console.log("Session in signup", session);
     if (!session) {
       return toast({
         title: "Sign up failed.",
@@ -98,11 +103,12 @@ const SignupForm = () => {
         Sign Up
       </h2>
 
-      <form onSubmit={handleSubmit(onSubmit)} className={"space-y-4"}>
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 max-w-60">
         <div>
           <Input
             icon={<User size={20} />}
             placeholder="Username"
+            onChange={(e) => setSearchValue(e.target.value)}
             {...register("username")}
             className={errors.username ? "border-red-500" : ""}
           />

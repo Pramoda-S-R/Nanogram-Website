@@ -27,8 +27,6 @@ const Navbar = () => {
 
   const { pathname } = useLocation();
 
-  const isLoggedIn = localStorage.getItem("isAuthenticated");
-
   const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
@@ -36,43 +34,52 @@ const Navbar = () => {
   }, [isSuccess]);
 
   return (
-    <section className="navbar relative">
-      <div className=" bg-primary w-full md:py-4 md:px-5 p-0 gap-5 flex">
-        <div className=" w-full justify-start items-center flex gap-2">
+    <section className="navbar absolute w-full z-50">
+      <div className=" bg-primary w-full p-2 md:px-5 gap-5 flex">
+        <div className=" w-full md:justify-start justify-between items-center flex gap-2">
           <Hamburger onClick={() => setIsActive((prev) => !prev)}></Hamburger>
           <Link to="/" className="flex md:gap-3 gap-1 items-center">
             <img
-              src="/assets/images/nano.svg"
+              src="/assets/images/nanogram_logo-no-bg.svg"
               alt="Logo"
-              className=" md:size-16 size-8"
+              className=" md:size-[3.75rem] md:flex hidden"
+              loading="lazy"
             />
-            <h1 className=" md:text-3xl text-2xl font-bold text-neutral-white ">
+            <h1 className=" md:text-3xl text-2xl font-bold text-neutral-white md:flex hidden nanogram ">
               NANOGRAM
             </h1>
           </Link>
         </div>
-        <div className="w-full justify-center items-center lg:flex hidden">
-          <SlideTabs />
+        <div className="w-full flex justify-center items-center">
+          <img
+            src="/assets/images/nanogram_logo-no-bg.svg"
+            alt="Logo"
+            className="size-14 md:hidden flex "
+            loading="lazy"
+          />
+          <div className="lg:flex hidden">
+            <SlideTabs />
+          </div>
         </div>
-        <div className="hd:w-full w-[40rem] justify-end flex items-center overflow-hidden pr-2">
+        <div className="w-full justify-end flex items-center overflow-hidden pr-2">
           {isLoading ? (
-            <PulseLoader />
-          ) : isLoggedIn && user.imageUrl ? (
-            <div className="flex md:gap-3">
-              <Button variant="ghost" onClick={() => handleSignOut()}>
-                <LogOut className="text-neutral-white" />
-              </Button>
+            <PulseLoader className="md:size-[56px] size-10  " />
+          ) : user?.id !== "" ? (
+            <div className="flex-center gap-3">
+              <LogOut
+                className="text-neutral-white cursor-pointer"
+                onClick={() => handleSignOut()}
+              />
               <Link
                 to={`/profile/${user.id}`}
                 className="flex gap-3 items-center"
               >
-                <div className="bg-neutral-white rounded-full md:p-1 p-0.5">
-                  <img
-                    src={user.imageUrl || "/assets/icons/user.svg"}
-                    alt="Avatar"
-                    className="md:size-[56px] size-7 rounded-full"
-                  />
-                </div>
+                <img
+                  src={user.imageUrl || "/assets/icons/user.svg"}
+                  alt="Avatar"
+                  className="size-14 rounded-full bg-neutral-white md:p-0.5 p-[1px]"
+                  loading="lazy"
+                />
               </Link>
             </div>
           ) : (
@@ -85,7 +92,7 @@ const Navbar = () => {
       {isActive && (
         <nav
           className={
-            "p-3 text-xl text-neutral-black bg-primary gap-3 flex justify-center"
+            "p-3 text-xl text-neutral-black bg-secondary bg-opacity-50 backdrop-blur-sm gap-3 flex justify-center"
           }
         >
           <div className="rounded-3xl border-neutral-black border-2 w-fit bg-neutral-white p-2">
@@ -138,11 +145,11 @@ const SlideTabs = () => {
         className="relative mx-auto flex w-[28rem] h-[3rem] md:h-[3.75rem] rounded-full border-2 border-neutral-black bg-neutral-white p-1 shadow-md"
       >
         {NAV_ITEMS.map(({ to, label }) => (
-          <Tab setPosition={setPosition} key={to}>
-            <Link to={to} key={to}>
+          <Link to={to} key={to}>
+            <Tab setPosition={setPosition} key={to}>
               {label}
-            </Link>
-          </Tab>
+            </Tab>
+          </Link>
         ))}
 
         <Cursor position={position} />

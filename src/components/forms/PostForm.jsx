@@ -87,7 +87,7 @@ const PostForm = ({ post, action }) => {
     <div>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col gap-4 w-full max-w-5xl px-3"
+        className="flex flex-col gap-4 w-full px-3"
       >
         {/* Caption Field */}
         <div className="px-3">
@@ -137,7 +137,7 @@ const PostForm = ({ post, action }) => {
 
         {/* Submit & Cancel Buttons */}
         <div className="flex gap-4 items-center justify-end mb-14 md:mb-0">
-          <Button type="button" variant="destructive">
+          <Button type="button" variant="destructive" onClick={() => navigate(-1)} disabled={isLoadingCreate || isLoadingUpdate}>
             Cancel
           </Button>
           <Button type="submit" disabled={isLoadingCreate || isLoadingUpdate}>

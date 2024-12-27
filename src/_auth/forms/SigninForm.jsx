@@ -31,14 +31,13 @@ const SigninForm = () => {
 
   useEffect(() => {
     const checkAndRedirect = async () => {
-      const isLoggedIn = localStorage.getItem("isAuthenticated");
+      const isLoggedIn = await checkAuthUser();
 
       if (isLoggedIn) {
         navigate("/");
       } else {
         const isLoggedIn = await checkAuthUser();
         if (isLoggedIn) {
-          localStorage.setItem("isAuthenticated", "true");
           navigate("/");
         }
       }
@@ -65,7 +64,6 @@ const SigninForm = () => {
     const isLoggedIn = await checkAuthUser();
 
     if (isLoggedIn) {
-      localStorage.setItem("isAuthenticated", "true");
       navigate("/");
     } else {
       toast({

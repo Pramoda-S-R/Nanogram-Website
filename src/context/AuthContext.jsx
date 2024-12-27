@@ -1,4 +1,10 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  useCallback,
+} from "react";
 import { getCurrentUser } from "../lib/appwrite/api";
 import { useNavigate, useLocation } from "react-router-dom";
 import { publicRoutes } from "../constants";
@@ -25,13 +31,14 @@ const AuthContext = createContext(INITIAL_STATE);
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(INITIAL_USER);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true); // Initially loading
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const navigate = useNavigate();
   const location = useLocation();
 
-  const checkAuthUser = async () => {
+  // **Check Current User Authentication**
+  const checkAuthUser = useCallback(async () => {
     try {
       const currentAccount = await getCurrentUser();
       if (currentAccount) {
@@ -45,35 +52,43 @@ const AuthProvider = ({ children }) => {
         });
 
         setIsAuthenticated(true);
-
         return true;
       } else {
         setIsAuthenticated(false);
         return false;
       }
     } catch (error) {
+      if (error?.message === "User (role: guests) missing scope (account)" || "401 (Unauthorized)") {
+        // Expected behavior when there is no logged-in user
+        console.log("No user session found. Proceeding as unauthenticated.");
+      } else {
+        console.error("Error checking user authentication", error);
+      }
       setIsAuthenticated(false);
-      console.log(error);
       return false;
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
 
+  // **Effect to Handle Auth Check**
   useEffect(() => {
-    const handleAuthCheck = async () => {
-      const isPublicRoute = publicRoutes.includes(location.pathname);
-      if (!!!isPublicRoute) {
-        const isAuthenticated = await checkAuthUser(); // Wait for the result
-        if (!isAuthenticated) {
-          navigate("/sign-in");
-        }
-      }
-    };
+    const isPublicRoute = publicRoutes.includes(location.pathname);
 
-    handleAuthCheck(); // Call the async function
-  }, [location.pathname, navigate, checkAuthUser]);
+    const cookieFallback = localStorage.getItem("cookieFallback");
+    if (
+      !isPublicRoute &&
+      (cookieFallback === "[]" ||
+        cookieFallback === null ||
+        cookieFallback === undefined)
+    ) {
+      navigate("/sign-in");
+    }
 
+    checkAuthUser();
+  }, [location.pathname, navigate, publicRoutes]);
+
+  // **Provider Value**
   const value = {
     user,
     setUser,

@@ -2,7 +2,12 @@ import GridPostList from "./GridPostList";
 import Loader from "./Loader";
 
 const SearchResults = ({ isSearchFetching, searchedPosts }) => {
-  if (isSearchFetching) return <Loader />;
+  if (isSearchFetching)
+    return (
+      <div className="flex-center w-full">
+        <Loader />
+      </div>
+    );
 
   if (searchedPosts && searchedPosts.documents.length > 0)
     return <GridPostList posts={searchedPosts.documents} />;

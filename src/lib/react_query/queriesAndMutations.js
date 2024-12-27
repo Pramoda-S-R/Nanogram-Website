@@ -12,9 +12,15 @@ import {
   getInfinitePosts,
   getPostById,
   getRecentPosts,
+  getSavedPosts,
+  getUserById,
+  getUserPosts,
+  getUsers,
   likePost,
+  relatedPosts,
   savePost,
   searchPosts,
+  searchUsers,
   signInAccount,
   signOutAccount,
   unSavePost,
@@ -187,12 +193,60 @@ export const useSearchPosts = (searchTerm) => {
   });
 };
 
+export const useRelatedPosts = (post) => {
+  return useQuery({
+    queryKey: [QUERY_KEYS.SEARCH_POSTS, post],
+    queryFn: () => relatedPosts(post),
+    enabled: !!post,
+  });
+};
+
+export const useGetSavedPosts = (currentUser) => {
+  return useQuery({
+    queryKey: [QUERY_KEYS.GET_SAVED_POSTS, currentUser?.$id],
+    queryFn: () => getSavedPosts(currentUser),
+    enabled: !!currentUser,
+  });
+};
+
+export const useGetUserPosts = (userId) => {
+  return useQuery({
+    queryKey: [QUERY_KEYS.GET_USER_POSTS, userId],
+    queryFn: () => getUserPosts(userId),
+    enabled: !!userId,
+  });
+};
+
+export const useGetUserById = (userId) => {
+  return useQuery({
+    queryKey: [QUERY_KEYS.GET_USER_BY_ID, userId],
+    queryFn: () => getUserById(userId),
+    enabled: !!userId,
+  });
+};
+
 // ==================
 // User Queries
 // ==================
+
 export const useGetCurrentUser = () => {
   return useQuery({
     queryKey: [QUERY_KEYS.GET_CURRENT_USER],
     queryFn: getCurrentUser,
+  });
+};
+
+export const useGetUsers = (limit) => {
+  return useQuery({
+    queryKey: [QUERY_KEYS.GET_USERS],
+    queryFn: () => getUsers(limit),
+  });
+};
+
+export const useSearchUsers = (searchTerm) => {
+  return useQuery({
+    queryKey: [QUERY_KEYS.SEARCH_USERS, searchTerm],
+    queryFn: () => searchUsers(searchTerm),
+    enabled: !!searchTerm,
   });
 };

@@ -5,6 +5,23 @@ import { account, appwriteConfig, avatars, database, storage } from "./config";
 // Auth Functions
 // ==================
 
+// Check if username is available
+export async function checkUsernameAvailability(username) {
+  try {
+    const sanitizedUsername = username.trim();
+
+    const userDocuments = await database.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.userCollectionId,
+      [Query.equal("username", sanitizedUsername)]
+    );
+
+    return userDocuments.total === 0;
+  } catch (error) {
+    console.error("Error checking username availability:", error);
+    return false;
+  }
+}
 // Create a new user account
 export async function createUserAccount(user) {
   try {
@@ -86,8 +103,10 @@ export async function getAccount() {
 
     return currentAccount;
   } catch (error) {
-    console.log("Line 89", error);
-    throw Error;
+    if (error?.message === "User (role: guests) missing scope (account)") {
+      console.log("No user session found. Proceeding as unauthenticated.");
+      return null;
+    }
   }
 }
 // Get current user details
@@ -107,7 +126,7 @@ export async function getCurrentUser() {
 
     return currentUser.documents[0];
   } catch (error) {
-    console.log("Line 110 api",error);
+    console.log(error);
     throw Error;
   }
 }
@@ -115,7 +134,6 @@ export async function getCurrentUser() {
 export async function signOutAccount() {
   try {
     const session = await account.deleteSession("current");
-    localStorage.removeItem("isAuthenticated");
     return session;
   } catch (error) {
     console.log(error);
@@ -263,17 +281,21 @@ export async function updatePost(post) {
 }
 // Delete post
 export async function deletePost(postId, imageId) {
-  if (!postId || !imageId) throw Error;
+  if (!postId || !imageId) throw new Error("Missing postId or imageId");
   try {
+    // Delete the post from the database
     await database.deleteDocument(
       appwriteConfig.databaseId,
       appwriteConfig.postsCollectionId,
       postId
     );
 
+    // Delete the image associated with the post
+    await deleteFile(imageId);
+
     return { status: "ok" };
   } catch (error) {
-    console.log(error);
+    console.error("Error deleting post or related saves:", error);
   }
 }
 // Get recent posts
@@ -369,7 +391,6 @@ export async function getPostById(postId) {
 export async function getInfinitePosts(pageParam) {
   const queries = [Query.orderDesc("$updatedAt"), Query.limit(10)];
 
-  // Ensure pageParam is valid and not undefined or null
   if (pageParam && typeof pageParam === "string") {
     queries.push(Query.cursorAfter(pageParam));
   }
@@ -414,5 +435,159 @@ export async function searchPosts(searchTerm) {
     return posts;
   } catch (error) {
     console.error("Error in searchPosts:", error);
+  }
+}
+// Related posts
+export async function relatedPosts(post) {
+  try {
+    const words = post?.caption.split(" ").filter((word) => word.trim() !== "");
+    const tagQueries = post?.tags.map((tag) => Query.search("tags", tag));
+
+    // Create an array of promises for caption search queries
+    const captionQueries = words.map((word) => Query.search("caption", word));
+
+    // Run all queries concurrently for both captions and tags using Promise.all
+    const results = await Promise.all([
+      ...captionQueries.map((query) =>
+        database.listDocuments(
+          appwriteConfig.databaseId,
+          appwriteConfig.postsCollectionId,
+          [query]
+        )
+      ),
+      ...tagQueries.map((query) =>
+        database.listDocuments(
+          appwriteConfig.databaseId,
+          appwriteConfig.postsCollectionId,
+          [query]
+        )
+      ),
+    ]);
+
+    // Use a Set to keep track of unique post IDs
+    const uniquePostIds = new Set();
+    const relatedPosts = [];
+
+    // Process the results
+    results.forEach((res) => {
+      if (res?.documents) {
+        res.documents.forEach((relatedPost) => {
+          if (
+            relatedPost.$id !== post.$id &&
+            !uniquePostIds.has(relatedPost.$id)
+          ) {
+            relatedPosts.push(relatedPost);
+            uniquePostIds.add(relatedPost.$id);
+          }
+        });
+      }
+    });
+
+    return relatedPosts;
+  } catch (error) {
+    console.error("Error searching posts:", error);
+  }
+}
+// Get saved posts
+export async function getSavedPosts(currentUser) {
+  if (!currentUser?.save?.length) {
+    return [];
+  }
+  try {
+    const savedPosts = await Promise.all(
+      currentUser.save.map((save) => getPostById(save.post.$id))
+    );
+    if (!savedPosts) throw Error;
+    return savedPosts.reverse();
+  } catch (error) {
+    console.error("Error fetching saved posts:", error);
+  }
+}
+// Get user posts
+export async function getUserPosts(userId) {
+  if (!userId) return;
+
+  try {
+    const post = await database.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.postsCollectionId,
+      [Query.equal("creator", userId), Query.orderDesc("$createdAt")]
+    );
+
+    if (!post) throw Error;
+
+    return post;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+// ==================
+// User Functions
+// ==================
+// Get users
+export async function getUsers(limit) {
+  const queries = [Query.orderDesc("$createdAt")];
+
+  if (limit) {
+    queries.push(Query.limit(limit));
+  }
+
+  try {
+    const users = await database.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.userCollectionId,
+      queries
+    );
+
+    if (!users) throw Error;
+
+    return users;
+  } catch (error) {
+    console.log(error);
+  }
+}
+// Search users
+export async function searchUsers(searchTerm) {
+  try {
+    // Determine the query field based on input
+    const queries = [];
+    if (searchTerm.startsWith("@")) {
+      // Search in 'username' field
+      const usernameTerm = searchTerm.slice(1); // Remove '@' from the search term
+      queries.push(Query.search("username", usernameTerm));
+    } else {
+      // Search in 'name' field
+      queries.push(Query.search("name", searchTerm));
+    }
+
+    // Fetch posts based on the generated query
+    const users = await database.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.userCollectionId,
+      queries
+    );
+
+    if (!users) throw new Error("No users found");
+
+    return users;
+  } catch (error) {
+    console.error("Error in searchPosts:", error);
+  }
+}
+// Get user by ID
+export async function getUserById(userId) {
+  try {
+    const user = await database.getDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.userCollectionId,
+      userId
+    );
+
+    if (!user) throw Error;
+
+    return user;
+  } catch (error) {
+    console.log(error);
   }
 }

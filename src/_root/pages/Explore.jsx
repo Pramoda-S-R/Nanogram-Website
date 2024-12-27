@@ -39,7 +39,7 @@ const Explore = () => {
 
   if (!posts)
     return (
-      <div className="flex-center w-full h-screen-top p-5">
+      <div className="flex-center w-full h-screen md:py-24 py-16">
         <Loader />
       </div>
     );

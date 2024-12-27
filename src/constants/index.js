@@ -45,6 +45,7 @@ export const communityPaths = [
   "/posts",
   "/profile",
   "/update-profile",
+  "/newsletter",
 ];
 
 export const publicRoutes = [

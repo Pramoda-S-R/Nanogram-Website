@@ -8,7 +8,7 @@ export default {
   theme: {
     extend: {
       screens: {
-        hd: "1080px", 
+        hd: "1080px",
         xs: "480px",
       },
       colors: {
@@ -19,12 +19,12 @@ export default {
           DEFAULT: "#8DE3FF",
         },
         neutral: {
-          white: "#E6E8E6",
+          white: "#FFFFFF",
           black: "#0A0A1A",
         },
         accent: {
           yellow: "#EAE38F",
-          gray: "#C8CBC8",
+          gray: "#E6E8E6",
         },
       },
       height: {

@@ -10,7 +10,7 @@ const PostCard = ({ post }) => {
   if (!post.creator) return;
 
   return (
-    <div className="post-card">
+    <div className="post-card shadow-2xl">
       <div className="flex-between">
         <div className="flex items-center gap-3">
           <Link to={`/profile/${post.creator.$id}`}>
@@ -18,6 +18,7 @@ const PostCard = ({ post }) => {
               src={post?.creator?.imageUrl || "/assets/icons/user.svg"}
               alt={post?.creator.name || "creator"}
               className="rounded-full size-12"
+              loading="lazy"
             />
           </Link>
           <div className="flex flex-col">
@@ -49,7 +50,12 @@ const PostCard = ({ post }) => {
             ))}
           </ul>
         </div>
-        <img src={post.imageUrl || "/assets/icons/user.svg"} alt={post.caption || "post image"} className="post-card_img" />
+        <img
+          src={post.imageUrl || "/assets/icons/user.svg"}
+          alt={post.caption || "post image"}
+          className="post-card_img shadow-lg"
+          loading="lazy"
+        />
       </Link>
 
       <PostStats post={post} userId={user.id} />

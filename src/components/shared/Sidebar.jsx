@@ -6,7 +6,7 @@ const Sidebar = () => {
 
   return (
     <nav className="sidebar">
-      <div className="flex flex-col gap-11 bg-neutral-white rounded-3xl border-neutral-black border-2 p-2">
+      <div className="flex flex-col gap-11 bg-neutral-white border-neutral-black border-2 p-2">
         <ul className="flex flex-col gap-6">
           {SIDEBAR_ITEMS.map(({ to, icon: Icon, label }) => {
             const isActive = pathname === to;

@@ -16,9 +16,9 @@ const CreatePost = () => {
   }, []);
 
   return (
-    <div className="flex flex-1 flex-col h-screen-top overflow-y-scroll custom-scrollbar">
+    <div className="flex flex-1 flex-col h-screen overflow-y-scroll custom-scrollbar md:pt-24 py-2">
       <div className="common-container">
-        <div className="max-w-5xl flex-start gap-3 justify-start w-full">
+        <div className="w-full flex-start gap-3 justify-start">
           <ImagePlus size={36} />
           <h2 className="h3-bold md:h2-bold text-left w-full">Create Post</h2>
         </div>

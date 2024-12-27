@@ -2,7 +2,10 @@ import React from 'react'
 
 const UpdateProfile = () => {
   return (
-    <div>UpdateProfile</div>
+    <div>
+      <div>Main</div>
+      <div>Profile</div>
+    </div>
   )
 }
 

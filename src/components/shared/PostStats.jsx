@@ -9,6 +9,8 @@ import { checkIsLiked } from "../../lib/utils";
 import SpinLoader from "./SpinLoader";
 
 const PostStats = ({ post, userId }) => {
+  if (!post) return null;
+
   const likesList = post.likes.map((user) => user.$id);
 
   const [likes, setLikes] = useState(likesList);

@@ -1,6 +1,10 @@
-const PulseLoader = () => {
+import clsx from "clsx";
+
+const PulseLoader = ({ className }) => {
+  const baseStyles = "animate-pulse rounded-full bg-neutral-white";
+
   return (
-    <div className="animate-pulse rounded-full bg-neutral-white w-10 h-10"></div>
+    <div className={clsx(baseStyles, className)}></div>
   );
 };
 
