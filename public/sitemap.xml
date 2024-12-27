@@ -6,17 +6,17 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://nanogram.studio/about</loc>
+    <loc>https://nanogram.studio/about-us</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://nanogram.studio/projects</loc>
+    <loc>https://nanogram.studio/events</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://nanogram.studio/contact</loc>
+    <loc>https://nanogram.studio/gallery</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
