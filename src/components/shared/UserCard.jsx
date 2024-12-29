@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Button from "../ui/Button";
+import FollowButton from "./FollowButton";
 
-const UserCard = ({ user }) => {
+const UserCard = ({ currentUser, user }) => {
   return (
     <div className="user-card">
       <Link to={`/profile/${user.$id}`} className="flex-center flex-col gap-4">
@@ -22,9 +22,7 @@ const UserCard = ({ user }) => {
           </p>
         </div>
       </Link>
-      <Button type="button" variant="primary" className="w-20">
-        Follow
-      </Button>
+      <FollowButton follower={currentUser} followed={user} />
     </div>
   );
 };

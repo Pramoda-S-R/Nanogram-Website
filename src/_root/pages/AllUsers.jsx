@@ -12,7 +12,7 @@ import Input from "../../components/ui/Input";
 import { useState } from "react";
 import useDebounce from "../../hooks/useDebounce";
 import { Link } from "react-router-dom";
-import Button from "../../components/ui/Button";
+import FollowButton from "../../components/shared/FollowButton";
 
 const AllUsers = () => {
   const toast = useToast();
@@ -70,7 +70,7 @@ const AllUsers = () => {
                       src={creator.imageUrl || "/assets/icons/user.svg"}
                       alt={creator.name || "creator"}
                       className="size-16 rounded-full"
-                       loading="lazy"
+                      loading="lazy"
                     />
                     <div className="flex justify-start flex-col gap-1">
                       <p className="base-medium text-light-1 text-left line-clamp-1">
@@ -81,13 +81,16 @@ const AllUsers = () => {
                       </p>
                     </div>
                   </Link>
-                  <Button
+                  <div
                     className={`${
                       creator.$id === currentUser.$id ? "hidden" : ""
                     } flex-end`}
                   >
-                    Follow
-                  </Button>
+                    <FollowButton
+                      follower={currentUser}
+                      followed={creator}
+                    />
+                  </div>
                 </div>
                 <hr className="w-full border-neutral-black mt-2" />
               </li>
@@ -103,7 +106,7 @@ const AllUsers = () => {
             <ul className="user-grid">
               {newCreators?.map((creator) => (
                 <li key={creator?.$id} className="flex-1 min-w-0 w-full  ">
-                  <UserCard user={creator} />
+                  <UserCard currentUser={currentUser} user={creator} />
                 </li>
               ))}
             </ul>
@@ -114,7 +117,9 @@ const AllUsers = () => {
           <Loader />
         </div>
       ) : (
-        <div className="text-center text-neutral-black/50 py-24 md:py-14">No users available.</div>
+        <div className="text-center text-neutral-black/50 py-24 md:py-14">
+          No users available.
+        </div>
       )}
     </div>
   );

@@ -8,6 +8,7 @@ import {
   createPost,
   createUserAccount,
   deletePost,
+  followUser,
   getCurrentUser,
   getInfinitePosts,
   getPostById,
@@ -23,6 +24,7 @@ import {
   searchUsers,
   signInAccount,
   signOutAccount,
+  unFollowUser,
   unSavePost,
   updatePost,
 } from "../appwrite/api";
@@ -248,5 +250,36 @@ export const useSearchUsers = (searchTerm) => {
     queryKey: [QUERY_KEYS.SEARCH_USERS, searchTerm],
     queryFn: () => searchUsers(searchTerm),
     enabled: !!searchTerm,
+  });
+};
+
+export const useFollowUser = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({ followerId, followedId }) =>
+      followUser(followerId, followedId),
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_CURRENT_USER],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_USER_BY_ID, data.followed],
+      });
+    },
+  });
+};
+
+export const useUnFollowUser = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (followedRecordId) => unFollowUser(followedRecordId),
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_CURRENT_USER],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_USER_BY_ID, data.followed],
+      });
+    },
   });
 };

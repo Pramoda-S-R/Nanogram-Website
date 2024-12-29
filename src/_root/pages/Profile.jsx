@@ -9,9 +9,9 @@ import GridPostList from "../../components/shared/GridPostList";
 import Loader from "../../components/shared/Loader";
 import { useParams } from "react-router-dom";
 import { FilePenLine } from "lucide-react";
+import FollowButton from "../../components/shared/FollowButton";
 
 const Profile = () => {
-
   const { id } = useParams();
   const { data: posts, isLoading, isError } = useGetUserPosts(id || "");
   const { data: user } = useGetUserById(id || "");
@@ -26,7 +26,7 @@ const Profile = () => {
               src={user?.imageUrl || "/assets/icons/user.svg"}
               alt="user"
               className="rounded-full md:size-24 size-16"
-               loading="lazy"
+              loading="lazy"
             />
             <div className="flex justify-start flex-col gap-1">
               <p className="text-xl font-semibold">{user?.name}</p>
@@ -55,7 +55,10 @@ const Profile = () => {
             </div>
           ) : (
             <div className="flex md:w-fit w-full items-start gap-4 pt-4 ml-[5.5rem]">
-              <Button variant="outline">Follow</Button>
+              <FollowButton
+                follower={currentUser}
+                followed={user}
+              />
               <Button
                 variant="secondary"
                 className={"border-2 border-neutral-white"}

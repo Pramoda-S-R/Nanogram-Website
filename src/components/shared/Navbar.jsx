@@ -35,7 +35,7 @@ const Navbar = () => {
 
   return (
     <section className="navbar absolute w-full z-50">
-      <div className=" bg-primary w-full p-2 md:px-5 gap-5 flex">
+      <div className="bg-primary w-full p-2 md:px-5 gap-5 flex">
         <div className=" w-full md:justify-start justify-between items-center flex gap-2">
           <Hamburger onClick={() => setIsActive((prev) => !prev)}></Hamburger>
           <Link to="/" className="flex md:gap-3 gap-1 items-center">

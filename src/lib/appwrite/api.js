@@ -591,3 +591,42 @@ export async function getUserById(userId) {
     console.log(error);
   }
 }
+// Follow user
+export async function followUser(followerId, followedId) {
+  try {
+    if (!followerId || !followedId) {
+      throw new Error("One or both user IDs do not exist");
+    }
+    const updatedUser = await database.createDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.followsCollectionId,
+      ID.unique(),
+      {
+        follower: followerId,
+        followed: followedId,
+      }
+    );
+
+    if (!updatedUser) throw Error;
+
+    return updatedUser;
+  } catch (error) {
+    console.log(error);
+  }
+}
+// Unfollow user
+export async function unFollowUser(followedRecordId) {
+  try {
+    const statusCode = await database.deleteDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.followsCollectionId,
+      followedRecordId
+    );
+
+    if (!statusCode) throw Error;
+
+    return { status: "ok" };
+  } catch (error) {
+    console.log(error);
+  }
+}
