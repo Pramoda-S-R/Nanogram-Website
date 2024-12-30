@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
 import ParticleRing from "../../../components/motion/ParticleRing";
 import Button from "../../../components/ui/Button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Plus } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
@@ -43,16 +43,72 @@ const Hero = () => {
           </div>
         </div>
       </div>
-      <div className="w-full h-1/6 flex md:justify-start justify-center items-center overflow-hidden md:px-20 px-0">
+      <div className="w-full h-fit flex md:flex-row flex-col gap-5 md:justify-start justify-center items-center overflow-hidden py-6 md:px-20 px-0">
         <div className="flex -space-x-6">
-          <div className="size-16 rounded-full bg-neutral-black z-10"></div>
-          <div className="size-16 rounded-full bg-primary z-[9]"></div>
-          <div className="size-16 rounded-full bg-neutral-black z-[8]"></div>
-          <div className="size-16 rounded-full bg-primary z-[7]"></div>
-          <div className="size-16 rounded-full bg-neutral-black z-[6]"></div>
-          <div className="size-16 rounded-full bg-primary z-[5]"></div>
-          <div className="size-16 rounded-full bg-neutral-black z-[4]"></div>
-          <div className="size-16 rounded-full bg-primary z-[3]"></div>
+          <div className="size-16 shadow-lg rounded-full bg-accent-gray z-10">
+            <img
+              src="/assets/images/placeholder.png"
+              alt="img"
+              className="rounded-full"
+            />
+          </div>
+          <div className="size-16 shadow-lg rounded-full bg-accent-gray z-[9]">
+            <img
+              src="/assets/images/placeholder.png"
+              alt="img"
+              className="rounded-full"
+            />
+          </div>
+          <div className="size-16 shadow-lg rounded-full bg-accent-gray z-[8]">
+            <img
+              src="/assets/images/placeholder.png"
+              alt="img"
+              className="rounded-full"
+            />
+          </div>
+          <div className="size-16 shadow-lg rounded-full bg-accent-gray z-[7]">
+            <img
+              src="/assets/images/placeholder.png"
+              alt="img"
+              className="rounded-full"
+            />
+          </div>
+          <div className="size-16 shadow-lg rounded-full bg-accent-gray z-[6]">
+            <img
+              src="/assets/images/placeholder.png"
+              alt="img"
+              className="rounded-full"
+            />
+          </div>
+          <div className="size-16 shadow-lg rounded-full bg-accent-gray z-[5]">
+            <img
+              src="/assets/images/placeholder.png"
+              alt="img"
+              className="rounded-full"
+            />
+          </div>
+          <div className="size-16 shadow-lg rounded-full bg-accent-gray z-[4]">
+            <img
+              src="/assets/images/placeholder.png"
+              alt="img"
+              className="rounded-full"
+            />
+          </div>
+          <div className="size-16 shadow-lg rounded-full bg-accent-gray z-[3]">
+            <img
+              src="/assets/images/placeholder.png"
+              alt="img"
+              className="rounded-full"
+            />
+          </div>
+          <div className="flex-center size-16 shadow-lg rounded-full bg-accent-gray z-[2]">
+            <Plus />
+          </div>
+        </div>
+        <div className="flex px-10">
+          <p className="text-medium font-semibold text-neutral-black/70 text-justify">
+            Meet passionate tech enthusiasts like you. Join us in exploring the fascinating world of electronics and technology.
+          </p>
         </div>
       </div>
     </div>

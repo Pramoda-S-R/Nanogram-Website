@@ -1,6 +1,6 @@
 import React from "react";
 import { LazyMotionComponent } from "../../components/motion/LazyMotionComponent";
-import { Hero, Initiatives } from "../frames/Home";
+import { Achievements, Gallery, Hero, Highlights, Initiatives } from "../frames/Home";
 
 const Home = () => {
   return (
@@ -8,6 +8,15 @@ const Home = () => {
       <Hero />
       <LazyMotionComponent>
         <Initiatives />
+      </LazyMotionComponent>
+      <LazyMotionComponent>
+        <Highlights />
+      </LazyMotionComponent>
+      <LazyMotionComponent>
+        <Gallery />
+      </LazyMotionComponent>
+      <LazyMotionComponent>
+        <Achievements />
       </LazyMotionComponent>
     </div>
   );
