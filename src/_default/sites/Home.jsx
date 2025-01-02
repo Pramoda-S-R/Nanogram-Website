@@ -1,6 +1,13 @@
 import React from "react";
 import { LazyMotionComponent } from "../../components/motion/LazyMotionComponent";
-import { Achievements, Gallery, Hero, Highlights, Initiatives } from "../frames/Home";
+import {
+  Achievements,
+  Gallery,
+  Hero,
+  Highlights,
+  Initiatives,
+  Testimonials,
+} from "../frames/Home";
 
 const Home = () => {
   return (
@@ -17,6 +24,9 @@ const Home = () => {
       </LazyMotionComponent>
       <LazyMotionComponent>
         <Achievements />
+      </LazyMotionComponent>
+      <LazyMotionComponent>
+        <Testimonials />
       </LazyMotionComponent>
     </div>
   );

@@ -11,7 +11,7 @@ const GridTeamList = ({ teamMembers }) => {
               alt={member.name}
               loading="lazy"
               className="w-40 h-50 aspect-[4/5] flex-none rounded-2xl object-cover"
-              src={member.image}
+              src={member.avatarUrl}
             />
           </div>
           <div className="flex-auto">
@@ -24,9 +24,9 @@ const GridTeamList = ({ teamMembers }) => {
 
             {/* Social Links */}
             <div className="mt-6 flex space-x-4">
-              {member.socials.linkedin && (
+              {member.linkedin && (
                 <a
-                  href={member.socials.linkedin}
+                  href={member.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-neutral-black hover:text-primary"
@@ -34,9 +34,9 @@ const GridTeamList = ({ teamMembers }) => {
                   <Linkedin />
                 </a>
               )}
-              {member.socials.instagram && (
+              {member.instagram && (
                 <a
-                  href={member.socials.instagram}
+                  href={member.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-neutral-black hover:text-primary"
@@ -44,9 +44,9 @@ const GridTeamList = ({ teamMembers }) => {
                   <Instagram />
                 </a>
               )}
-              {member.socials.github && (
+              {member.github && (
                 <a
-                  href={member.socials.github}
+                  href={member.github}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-neutral-black hover:text-primary"

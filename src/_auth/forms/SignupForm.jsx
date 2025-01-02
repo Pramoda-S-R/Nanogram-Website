@@ -69,13 +69,11 @@ const SignupForm = () => {
       });
     }
 
-    console.log("New User in signup", newUser);
-
     const session = await signInAccount({
       email: data.email,
       password: data.password,
     });
-    console.log("Session in signup", session);
+
     if (!session) {
       return toast({
         title: "Sign up failed.",
@@ -99,7 +97,15 @@ const SignupForm = () => {
 
   return (
     <div className={`mx-auto ${isRouting ? "slide-out-right" : ""}`}>
-      <h2 className="text-2xl font-bold text-[#0D2DA2] mb-6 text-center">
+      <img
+          src="/assets/images/nanogram_logo-bg-primary.svg"
+          alt="Logo"
+          className="w-16 rounded-full mx-auto"
+        />
+      <h1 className="text-2xl font-bold text-primary text-center nanogram mb-5">
+        NANOGRAM
+      </h1>
+      <h2 className="text-2xl font-bold text-primary mb-6 text-center">
         Sign Up
       </h2>
 

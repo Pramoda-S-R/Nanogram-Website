@@ -1,5 +1,7 @@
+import React, { Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
-import { Home, AboutUs, Events } from "./_default/sites";
+import { AnimatePresence } from "framer-motion";
+import { Home, AboutUs, Events, Gallery } from "./_default/sites";
 import {
   Community,
   Blog,
@@ -14,14 +16,15 @@ import {
   UpdateProfile,
   NewsLetter,
 } from "./_root/pages";
+import { Admin } from "./_admin/controls";
 import SigninForm from "./_auth/forms/SigninForm";
 import SignupForm from "./_auth/forms/SignupForm";
+import NotFound from "./components/shared/NotFound";
 import AuthLayout from "./_auth/AuthLayout";
 import DefaultLayout from "./_default/DefaultLayout";
 import RootLayout from "./_root/RootLayout";
-import { AnimatePresence } from "framer-motion";
+import AdminLayout from "./_admin/AdminLayout";
 import { ToastProvider } from "./components/ui/Toast";
-import React, { Suspense } from "react";
 
 const App = () => {
   return (
@@ -40,6 +43,7 @@ const App = () => {
                 <Route index element={<Home />} />
                 <Route path="/about-us" element={<AboutUs />} />
                 <Route path="/events" element={<Events />} />
+                <Route path="/gallery" element={<Gallery />} />
               </Route>
               {/* private routes */}
               <Route element={<RootLayout />}>
@@ -54,8 +58,14 @@ const App = () => {
                 <Route path="/update-post/:id" element={<EditPost />} />
                 <Route path="/posts/:id" element={<PostDetails />} />
                 <Route path="/profile/:id/*" element={<Profile />} />
-                <Route path="/update-profile/:id" element={<UpdateProfile />} />
+                <Route path="/update-profile" element={<UpdateProfile />} />
               </Route>
+              {/* admin route */}
+              <Route element={<AdminLayout />}>
+                <Route path="/admin" element={<Admin />} />
+              </Route>
+              {/* 404 */}
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
         </main>

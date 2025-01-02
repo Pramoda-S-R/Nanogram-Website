@@ -231,7 +231,7 @@ export async function deleteFile(fileId) {
 }
 // Update post
 export async function updatePost(post) {
-  const hasFileTOUpdate = post.image > 0;
+  const hasFileTOUpdate = post.image instanceof File;
   try {
     let image = {
       imageUrl: post.imageUrl,
@@ -272,6 +272,11 @@ export async function updatePost(post) {
     if (!updatedPost) {
       await deleteFile(post.imageId);
       throw Error;
+    }
+
+    // Safely delete old file after successful update
+    if (post.imageId && hasFileTOUpdate) {
+      await deleteFile(post.imageId);
     }
 
     return updatedPost;
@@ -521,6 +526,28 @@ export async function getUserPosts(userId) {
     console.log(error);
   }
 }
+// Get user top posts
+export async function getUserTopPosts(userId) {
+  if (!userId) return;
+
+  try {
+    const post = await database.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.postsCollectionId,
+      [Query.equal("creator", userId), Query.orderDesc("$createdAt")]
+    );
+
+    if (!post) throw Error;
+
+    post.documents.sort(
+      (a, b) => (b.likes?.length || 0) - (a.likes?.length || 0)
+    );
+
+    return post;
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 // ==================
 // User Functions
@@ -628,5 +655,132 @@ export async function unFollowUser(followedRecordId) {
     return { status: "ok" };
   } catch (error) {
     console.log(error);
+  }
+}
+// Update user profile
+export async function updateUser(user) {
+  const hasFileToUpdate = user.avatar instanceof File;
+  try {
+    let image = {
+      imageUrl: user.imageUrl,
+      imageId: user.imageId,
+    };
+
+    if (hasFileToUpdate) {
+      // Upload new file to appwrite storage
+      const uploadedFile = await uploadFile(user.avatar);
+      if (!uploadedFile) throw Error;
+
+      // Get new file url
+      const fileUrl = getFilePreview(uploadedFile.$id);
+      if (!fileUrl) {
+        await deleteFile(uploadedFile.$id);
+        throw Error;
+      }
+
+      image = { ...image, imageUrl: fileUrl, imageId: uploadedFile.$id };
+    }
+
+    //  Update user
+    const updatedUser = await database.updateDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.userCollectionId,
+      user.userId,
+      {
+        name: user.name,
+        email: user.email,
+        bio: user.bio,
+        imageUrl: image.imageUrl,
+        imageId: image.imageId,
+      }
+    );
+
+    // Failed to update
+    if (!updatedUser) {
+      // Delete new file that has been recently uploaded
+      if (hasFileToUpdate) {
+        await deleteFile(image.imageId);
+      }
+      // If no new file uploaded, just throw error
+      throw Error;
+    }
+
+    // Safely delete old file after successful update
+    if (user.imageId && hasFileToUpdate) {
+      await deleteFile(user.imageId);
+    }
+
+    return updatedUser;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+// ==================
+// Nanogram Functions
+// ==================
+// Get testimonial
+export async function getTestimonials() {
+  try {
+    const response = await database.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.nanogramCollectionId,
+      [Query.orderAsc("$createdAt"), Query.limit(20)]
+    );
+
+    if (!response || !response.documents || response.documents.length === 0) {
+      throw new Error("No testimonials found.");
+    }
+
+    return response.documents
+      .filter((doc) => doc.content) // Filter out documents without content
+      .map((doc) => ({
+        id: doc.$id,
+        name: doc.name || "Anonymous",
+        role: doc.role || "N/A",
+        content: doc.content,
+        avatarUrl: doc.avatarUrl || "/assets/images/placeholder.png", // Default placeholder
+      }));
+  } catch (error) {
+    console.error("Error in getTestimonials:", error);
+    return [];
+  }
+}
+// Get core team members
+export async function getCoreMembers() {
+  try {
+    const core = await database.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.nanogramCollectionId,
+      [Query.orderAsc("priority"), Query.limit(20)]
+    );
+
+    if (!core || core.total === 0) {
+      throw new Error("No member found.");
+    }
+
+    return core.documents.filter((doc) => doc.core);
+  } catch (error) {
+    console.error("Error in getCoreMembers:", error);
+    return [];
+  }
+}
+// Get alumini members
+export async function getAluminiMembers() {
+  try {
+    const alumini = await database.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.nanogramCollectionId,
+      [Query.orderAsc("priority"), Query.limit(20)]
+    );
+
+    if (!alumini || alumini.total === 0) {
+      throw new Error("No alumini found.");
+    }
+
+    return alumini.documents.filter((doc) => doc.alumini);
+  } catch (error) {
+    console.error("Error in getAluminiMembers:", error);
+    return [];
   }
 }

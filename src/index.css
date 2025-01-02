@@ -357,6 +357,36 @@ html {
   @apply p-0 flex gap-3 hover:bg-transparent hover:text-pink-500  text-orange-500 small-medium;
 }
 
+/* Waterfall */
+.my-masonry-grid {
+  display: flex;
+  margin-left: -16px; /* Adjust for gap */
+  width: auto;
+}
+
+.my-masonry-grid_column {
+  padding-left: 16px; /* Adjust for gap */
+  background-clip: padding-box;
+}
+
+.my-masonry-grid_column > .waterfall-item {
+  margin-bottom: 16px;
+}
+
+.waterfall-item img {
+  width: 100%;
+  display: block;
+  border-radius: 8px; /* Optional */
+  object-fit: cover;
+}
+
+
+/* Profile */
+.update_profile-container {
+  @apply h-screen w-full md:pt-[4.75rem] pt-[4.5rem];
+}
+
+/* Default */
 .default-container {
   @apply h-screen w-full md:pt-[4.75rem] pt-[4.5rem] overflow-y-scroll custom-scrollbar;
 }

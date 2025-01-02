@@ -7,12 +7,13 @@ import {
 } from "../../lib/react_query/queriesAndMutations";
 import GridPostList from "../../components/shared/GridPostList";
 import Loader from "../../components/shared/Loader";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { FilePenLine } from "lucide-react";
 import FollowButton from "../../components/shared/FollowButton";
 
 const Profile = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const { data: posts, isLoading, isError } = useGetUserPosts(id || "");
   const { data: user } = useGetUserById(id || "");
   const { data: currentUser } = useGetCurrentUser();
@@ -49,16 +50,16 @@ const Profile = () => {
           </div>
           {currentUser?.$id === user?.$id ? (
             <div className="flex md:w-fit w-full items-start gap-4 pt-4 ml-[5.5rem]">
-              <Button variant="ghost">
+              <Button
+                variant="ghost"
+                onClick={() => navigate("/update-profile")}
+              >
                 <FilePenLine /> Edit Profile
               </Button>
             </div>
           ) : (
             <div className="flex md:w-fit w-full items-start gap-4 pt-4 ml-[5.5rem]">
-              <FollowButton
-                follower={currentUser}
-                followed={user}
-              />
+              <FollowButton follower={currentUser} followed={user} />
               <Button
                 variant="secondary"
                 className={"border-2 border-neutral-white"}

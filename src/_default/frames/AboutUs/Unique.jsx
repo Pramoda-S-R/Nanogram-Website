@@ -29,8 +29,10 @@ const Unique = () => {
             </div>
           </div>
         </div>
-        <div className="lg:pl-4 flex justify-end items-start">
-          <div className="relative overflow-hidden rounded-3xl shadow-2xl lg:max-w-lg">
+        <div className="lg:pl-4 flex justify-end items-start mx-4">
+            {/* <div className="flex w-full h-full bg-secondary rounded-3xl shadow-2xl rotate-[-5deg]"></div>
+            <div className="flex w-full h-full bg-secondary rounded-3xl shadow-2xl rotate-[5deg]"></div> */}
+          <div className="overflow-hidden rounded-3xl shadow-2xl lg:max-w-lg z-10">
             <img
               src="/assets/images/placeholder.png"
               alt="img"

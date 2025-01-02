@@ -33,7 +33,7 @@ const KeyInitiativeItem = ({ Icon, label }) => {
 
 const Initiatives = () => {
   return (
-    <section className="flex-grow p-8 border-none outline-none pb-20">
+    <div className="flex-grow p-8 border-none outline-none pb-20">
       <div className="w-full mx-auto text-center">
         <h1 className="text-5xl font-medium mb-4">Our Key Initiatives</h1>
         <p className="text-lg font-normal text-neutral-black/70">
@@ -46,7 +46,7 @@ const Initiatives = () => {
           <KeyInitiativeItem key={index} {...initiative} />
         ))}
       </div>
-    </section>
+    </div>
   );
 };
 

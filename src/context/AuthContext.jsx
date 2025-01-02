@@ -16,6 +16,7 @@ export const INITIAL_USER = {
   email: "",
   imageUrl: "",
   bio: "",
+  joined: "",
 };
 
 const INITIAL_STATE = {
@@ -49,6 +50,7 @@ const AuthProvider = ({ children }) => {
           email: currentAccount.email,
           imageUrl: currentAccount.imageUrl,
           bio: currentAccount.bio,
+          joined: currentAccount.$createdAt,
         });
 
         setIsAuthenticated(true);

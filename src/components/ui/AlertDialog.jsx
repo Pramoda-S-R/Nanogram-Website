@@ -11,6 +11,7 @@ const AlertDialog = ({
   onConfirm,
   cancelButtonTitle,
   onCancel,
+  content,
 }) => {
   if (!isOpen) return null;
 
@@ -22,19 +23,18 @@ const AlertDialog = ({
         exit={{ opacity: 0, scale: 0.9 }}
         className="bg-neutral-white p-6 rounded-lg shadow-lg max-w-sm w-full"
       >
-        <h2 className="text-neutral-black text-xl font-semibold mb-4">{title}</h2>
-        <p className="text-neutral-black/70 mb-6">{description}</p>
+        <h2 className="text-neutral-black text-xl font-semibold mb-4">
+          {title}
+        </h2>
+        <p className="text-neutral-black/70 mb-4">{description}</p>
+
+        {content && <div className="mb-6">{content}</div>}
+
         <div className="flex justify-end gap-4">
-          <Button
-            onClick={onCancel}
-            variant="destructive"
-          >
+          <Button onClick={onCancel} variant="destructive">
             {cancelButtonTitle}
           </Button>
-          <Button
-            onClick={onConfirm}
-            variant="primary"
-          >
+          <Button onClick={onConfirm} variant="primary">
             {confirmButtonTitle}
           </Button>
         </div>

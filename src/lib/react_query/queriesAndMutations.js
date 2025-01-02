@@ -14,9 +14,11 @@ import {
   getPostById,
   getRecentPosts,
   getSavedPosts,
+  getTestimonials,
   getUserById,
   getUserPosts,
   getUsers,
+  getUserTopPosts,
   likePost,
   relatedPosts,
   savePost,
@@ -27,6 +29,7 @@ import {
   unFollowUser,
   unSavePost,
   updatePost,
+  updateUser,
 } from "../appwrite/api";
 import { QUERY_KEYS } from "./queryKeys";
 
@@ -219,6 +222,14 @@ export const useGetUserPosts = (userId) => {
   });
 };
 
+export const useGetUserTopPosts = (userId) => {
+  return useQuery({
+    queryKey: [QUERY_KEYS.GET_USER_TOP_POSTS, userId],
+    queryFn: () => getUserTopPosts(userId),
+    enabled: !!userId,
+  });
+};
+
 export const useGetUserById = (userId) => {
   return useQuery({
     queryKey: [QUERY_KEYS.GET_USER_BY_ID, userId],
@@ -279,6 +290,21 @@ export const useUnFollowUser = () => {
       });
       queryClient.invalidateQueries({
         queryKey: [QUERY_KEYS.GET_USER_BY_ID, data.followed],
+      });
+    },
+  });
+};
+
+export const useUpdateUser = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (user) => updateUser(user),
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_CURRENT_USER],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_USER_BY_ID, data?.$id],
       });
     },
   });

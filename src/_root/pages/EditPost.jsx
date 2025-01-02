@@ -27,7 +27,7 @@ const EditPost = () => {
       {isPending ? (
         <SpinLoader />
       ) : (
-        <div className="common-container">
+        <div className="update-container">
           <div className="flex-start gap-3 justify-start w-full">
             <ImagePlus size={36} />
             <h2 className="h3-bold md:h2-bold text-left w-full">Edit Post</h2>

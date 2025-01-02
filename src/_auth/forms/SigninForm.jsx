@@ -76,8 +76,15 @@ const SigninForm = () => {
 
   return (
     <div className={`mx-auto ${isRouting ? "slide-out-right" : ""}`}>
-      {/* TODO: Add the Nanogram branding here */}
-      <h2 className="text-2xl font-bold text-[#0D2DA2] mb-6 text-center">
+        <img
+          src="/assets/images/nanogram_logo-bg-primary.svg"
+          alt="Logo"
+          className="w-16 rounded-full mx-auto"
+        />
+      <h1 className="text-2xl font-bold text-primary text-center nanogram mb-5">
+        NANOGRAM
+      </h1>
+      <h2 className="text-2xl font-bold text-primary mb-6 text-center">
         Sign In
       </h2>
 
@@ -125,7 +132,7 @@ const SigninForm = () => {
         <div className="border-t border-gray-300 my-4"></div>
 
         <div className="flex justify-between items-center">
-          <a href="#" className="text-[#0D2DA2] hover:underline">
+          <a href="#" className="text-primary hover:underline">
             Forgot Password?
           </a>
           <Button

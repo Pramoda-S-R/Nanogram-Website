@@ -1,14 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { MotionConfig, motion } from "framer-motion";
 
-export const Hamburger = ({ onClick }) => {
-  const [active, setActive] = useState(false);
-
-  const handleClick = () => {
-    setActive((prev) => !prev);
-    if (onClick) onClick(!active); // Pass the current state to the onClick handler
-  };
-
+export const Hamburger = ({ isOpen, onClick }) => {
   return (
     <MotionConfig
       transition={{
@@ -18,8 +11,8 @@ export const Hamburger = ({ onClick }) => {
     >
       <motion.button
         initial={false}
-        animate={active ? "open" : "closed"}
-        onClick={handleClick}
+        animate={isOpen ? "open" : "closed"}
+        onClick={onClick} // onClick handler remains as a trigger
         className="lg:hidden relative size-14"
       >
         <motion.span

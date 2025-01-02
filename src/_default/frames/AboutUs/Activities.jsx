@@ -2,7 +2,7 @@ import React from "react";
 
 const Activities = () => {
   return (
-    <section className="w-full mx-auto max-w-7xl py-10 px-4 grid grid-cols-1 items-center gap-16 md:grid-cols-2">
+    <div className="w-full mx-auto max-w-7xl py-10 px-4 grid grid-cols-1 items-center md:grid-cols-2">
       <div className="w-full h-auto object-cover aspect-[16/9] md:aspect-[1/1]">
         <img
           alt="Img"
@@ -57,7 +57,7 @@ const Activities = () => {
           </div>
         </dl>
       </div>
-    </section>
+    </div>
   );
 };
 

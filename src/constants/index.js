@@ -54,4 +54,10 @@ export const publicRoutes = [
   "/",
   "/about-us",
   "/events",
+  "/gallery",
+  "*",
 ];
+
+export const adminId = "676ad11a00039ac69abb";
+export const noProfileImage =
+  "https://cloud.appwrite.io/v1/storage/buckets/675d64d90024c9563ca3/files/emptyuser/view?project=675d5bfa000fc9c80137&project=675d5bfa000fc9c80137&mode=admin";

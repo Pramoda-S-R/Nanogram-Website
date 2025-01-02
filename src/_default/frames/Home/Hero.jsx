@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React from "react";
 import ParticleRing from "../../../components/motion/ParticleRing";
 import Button from "../../../components/ui/Button";
 import { ArrowRight, Plus } from "lucide-react";
@@ -10,9 +10,7 @@ const Hero = () => {
   return (
     <div className="w-full h-screen-top flex flex-col">
       <div className="w-full h-5/6 relative">
-        <Suspense>
-          <ParticleRing />
-        </Suspense>
+        <ParticleRing />
         <div className="absolute top-0 left-0 max-w-full w-full h-full flex flex-col justify-end pointer-events-none md:p-20 p-4">
           <h1 className="font-extrabold md:text-7xl text-4xl text-neutral-white mb-4">
             NANOGRAM | THE TECH HUB
@@ -23,7 +21,7 @@ const Hero = () => {
             for tech enthusiasts.
           </p>
           <div className="w-full flex md:flex-row flex-col gap-5 pointer-events-auto">
-            <Button variant="secondary" className={"w-fit"}>
+            <Button variant="secondary" className={"w-fit"} onClick={() => navigate("/community")}>
               Join the Community for Free!
             </Button>
             <Button
@@ -107,7 +105,8 @@ const Hero = () => {
         </div>
         <div className="flex px-10">
           <p className="text-medium font-semibold text-neutral-black/70 text-justify">
-            Meet passionate tech enthusiasts like you. Join us in exploring the fascinating world of electronics and technology.
+            Meet passionate tech enthusiasts like you. Join us in exploring the
+            fascinating world of electronics and technology.
           </p>
         </div>
       </div>
