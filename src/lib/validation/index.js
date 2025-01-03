@@ -51,3 +51,7 @@ export const userProfileFormSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }),
   bio: z.string().max(150, "Bio is too long"),
 });
+
+export const commentFormSchema = z.object({
+  comment: z.string().min(1, "Comment is required"),
+});

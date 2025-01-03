@@ -52,12 +52,12 @@ const PDFViewer = ({ file }) => {
   };
 
   if (!file) {
-    return <p className="text-red-500 text-center my-4">No file provided.</p>;
+    return <p className="text-red-600 text-center my-4">No file provided.</p>;
   }
 
   return (
     <div className="flex min-w-0 overflow-auto">
-      {error && <p className="text-red-500 text-center my-4">{error}</p>}
+      {error && <p className="text-red-600 text-center my-4">{error}</p>}
       <Button
         variant="outline"
         className={`mx-0.5`}

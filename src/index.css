@@ -342,11 +342,11 @@ html {
 }
 
 .post_details-card {
-  @apply bg-accent-gray w-full max-w-5xl rounded-[30px] flex flex-col xl:flex-row border border-neutral-black xl:rounded-l-[24px];
+  @apply bg-accent-gray w-full max-w-5xl rounded-[30px] flex flex-col lg:flex-row border border-neutral-black lg:rounded-l-[24px];
 }
 
 .post_details-img {
-  @apply h-fit xl:w-[48%] rounded-t-[30px] xl:rounded-l-[24px] xl:rounded-tr-none object-cover p-5 bg-accent-gray;
+  @apply h-fit lg:w-[48%] rounded-t-[30px] lg:rounded-l-[24px] lg:rounded-tr-none object-cover bg-accent-gray;
 }
 
 .post_details-info {

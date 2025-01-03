@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Hash } from "lucide-react";
@@ -7,13 +8,12 @@ import Button from "../ui/Button";
 import Input from "../ui/Input";
 import { useToast } from "../ui/Toast";
 import FileUploader from "../shared/FileUploader";
-import { postFormSchema } from "../../lib/validation";
 import {
   useCreatePost,
   useUpdatePost,
 } from "../../lib/react_query/queriesAndMutations";
 import { useUserContext } from "../../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { postFormSchema } from "../../lib/validation";
 
 const PostForm = ({ post, action }) => {
   const toast = useToast();
@@ -101,7 +101,7 @@ const PostForm = ({ post, action }) => {
             {...register("caption")}
           />
           {errors.caption && (
-            <p className="text-red-500 text-sm mt-1">
+            <p className="text-red-600 text-sm mt-1">
               {errors.caption.message}
             </p>
           )}
@@ -117,7 +117,7 @@ const PostForm = ({ post, action }) => {
             mediaUrl={post?.imageUrl}
           />
           {errors.image && (
-            <p className="text-red-500 text-sm mt-1">{errors.image.message}</p>
+            <p className="text-red-600 text-sm mt-1">{errors.image.message}</p>
           )}
         </div>
 

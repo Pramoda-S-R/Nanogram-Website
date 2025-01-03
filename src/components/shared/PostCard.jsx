@@ -59,7 +59,7 @@ const PostCard = ({ post }) => {
         />
       </Link>
 
-      <PostStats post={post} userId={user.id} />
+      <PostStats post={post} userId={user.id} showComments={true} />
     </div>
   );
 };

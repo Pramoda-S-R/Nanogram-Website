@@ -23,12 +23,12 @@ const EditPost = () => {
 
   // Avoid conditional rendering of hooks
   return (
-    <div className="flex flex-col h-screen overflow-y-scroll custom-scrollbar w-full md:pt-24 py-2">
+    <div className="flex flex-col h-screen overflow-y-scroll custom-scrollbar w-full py-5">
       {isPending ? (
         <SpinLoader />
       ) : (
-        <div className="update-container">
-          <div className="flex-start gap-3 justify-start w-full">
+        <div className="update-container md:pt-[4.75rem] pt-[4.5rem]">
+          <div className="flex-start gap-3 justify-start w-full p-4">
             <ImagePlus size={36} />
             <h2 className="h3-bold md:h2-bold text-left w-full">Edit Post</h2>
           </div>

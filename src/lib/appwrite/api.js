@@ -550,6 +550,65 @@ export async function getUserTopPosts(userId) {
 }
 
 // ==================
+// Comment Functions
+// ==================
+// Create a new comment
+export async function createComment(comment) {
+  try {
+    const newComment = await database.createDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.commentsCollectionId,
+      ID.unique(),
+      {
+        post: comment.postId,
+        commentor: comment.userId,
+        content: comment.content,
+        likes: [],
+      }
+    );
+
+    if (!newComment) throw Error;
+
+    return newComment;
+  } catch (error) {
+    console.log(error);
+  }
+}
+// Like a comment
+export async function likeComment(commentId, likesArray) {
+  try {
+    const updatedComment = await database.updateDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.commentsCollectionId,
+      commentId,
+      {
+        likes: likesArray,
+      }
+    );
+    if (!updatedComment) throw Error;
+
+    return updatedComment;
+  } catch (error) {
+    console.log(error);
+  }
+}
+// Delete a comment
+export async function deleteComment(commentId) {
+  console.log("Deleting comment with ID:", commentId);
+  try {
+    await database.deleteDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.commentsCollectionId,
+      commentId
+    );
+
+    return { status: "ok" };
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+// ==================
 // User Functions
 // ==================
 // Get users

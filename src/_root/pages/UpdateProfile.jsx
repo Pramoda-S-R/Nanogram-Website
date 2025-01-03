@@ -3,8 +3,27 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FilePenLine, Mail, Type } from "lucide-react";
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogClose,
+} from "../../components/ui/Dialog";
+import {
+  AlertDialog,
+  AlertDialogTrigger,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogCancel,
+  AlertDialogAction,
+} from "../../components/ui/AlertDialog";
 import Button from "../../components/ui/Button";
-import AlertDialog from "../../components/ui/AlertDialog";
 import TextArea from "../../components/ui/TextArea";
 import { useToast } from "../../components/ui/Toast";
 import Input from "../../components/ui/Input";
@@ -31,7 +50,6 @@ const UpdateProfile = () => {
   const { mutateAsync: updateProfile, isPending: isUpdatingUser } =
     useUpdateUser();
 
-  const [isAvatarMenuOpen, setAvatarMenuOpen] = useState(false);
   const [isRemoveAlertOpen, setRemoveAlertOpen] = useState(false);
   const [updatedAvatar, setUpdatedAvatar] = useState();
   const [removeAvatar, setRemoveAvatar] = useState();
@@ -55,7 +73,6 @@ const UpdateProfile = () => {
   const handleAvatarChange = (file) => {
     setUpdatedAvatarUrl(URL.createObjectURL(file));
     setValue("avatar", file);
-    setAvatarMenuOpen(false);
   };
 
   const handleRemoveAvatar = () => {
@@ -98,15 +115,50 @@ const UpdateProfile = () => {
             className="w-24 h-24 rounded-full"
           />
           <div className="flex flex-col gap-1">
-            <Button variant="outline" onClick={() => setAvatarMenuOpen(true)}>
-              Change Profile Picture
-            </Button>
-            <Button
-              variant="destructive"
-              onClick={() => setRemoveAlertOpen(true)}
-            >
-              Remove Profile Picture
-            </Button>
+            <Dialog>
+              <DialogTrigger>
+                <div className="text-sm font-semibold py-2 px-4 rounded-md border-2 border-neutral-black text-neutral-black bg-neutral-white hover:bg-neutral-white/70">
+                  Change Profile Picture
+                </div>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>Update Profile Picture</DialogTitle>
+                  <DialogDescription>
+                    Change your profile picture by uploading a new one.
+                  </DialogDescription>
+                  <FileUploader
+                    onFileChange={(file) => setUpdatedAvatar(file)}
+                    mediaUrl={updatedAvatarUrl || currentUser?.imageUrl}
+                  />
+                </DialogHeader>
+                <div className="w-full flex justify-end gap-4 mt-4">
+                  <DialogClose
+                    className="bg-primary text-neutral-white hover:bg-primary/85 py-2 px-4 rounded-md font-semibold text-sm"
+                    onClick={() => handleAvatarChange(updatedAvatar)}
+                  >
+                    Save Changes
+                  </DialogClose>
+                </div>
+              </DialogContent>
+            </Dialog>
+            <AlertDialog>
+              <AlertDialogTrigger>
+                <div className="py-2 px-4 rounded-md font-semibold text-sm bg-red-600 text-white hover:bg-red-700">Remove Profile Picture</div>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    This action cannot be undone. This will permanently delete your profile picture.
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                  <AlertDialogAction onClick={() => handleRemoveAvatar()}>Continue</AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
           </div>
         </div>
         <form
@@ -153,7 +205,7 @@ const UpdateProfile = () => {
               {...register("bio")}
             />
             {errors.bio && (
-              <p className="text-red-500 text-sm mt-1">{errors.bio.message}</p>
+              <p className="text-red-600 text-sm mt-1">{errors.bio.message}</p>
             )}
           </div>
 
@@ -208,23 +260,7 @@ const UpdateProfile = () => {
           </ul>
         )}
       </div>
-      <AlertDialog
-        isOpen={isAvatarMenuOpen}
-        onClose={() => setAvatarMenuOpen(false)}
-        title="Update Profile Picture"
-        description="Recommended aspect ratio is 1:1"
-        content={
-          <FileUploader
-            onFileChange={(file) => setUpdatedAvatar(file)}
-            mediaUrl={updatedAvatarUrl || currentUser?.imageUrl}
-          />
-        }
-        confirmButtonTitle="Confirm"
-        onConfirm={() => handleAvatarChange(updatedAvatar)}
-        cancelButtonTitle="Cancel"
-        onCancel={() => setAvatarMenuOpen(false)}
-      />
-      <AlertDialog
+      {/* <AlertDialog
         isOpen={isRemoveAlertOpen}
         onClose={() => setRemoveAlertOpen(false)}
         title="Are you sure?"
@@ -233,7 +269,7 @@ const UpdateProfile = () => {
         onConfirm={() => handleRemoveAvatar()}
         cancelButtonTitle="No, Abort"
         onCancel={() => setRemoveAlertOpen(false)}
-      />
+      /> */}
     </div>
   );
 };

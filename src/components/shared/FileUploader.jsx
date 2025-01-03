@@ -28,17 +28,26 @@ const FileUploader = ({ onFileChange, mediaUrl }) => {
   const cropImage = () => {
     const cropper = cropperRef.current.cropper;
     const croppedCanvas = cropper.getCroppedCanvas();
-    croppedCanvas.toBlob((blob) => {
-      const croppedFileUrl = URL.createObjectURL(blob);
-      setFileUrl(croppedFileUrl);
-      setCropping(false); 
-      onFileChange(blob);
-    }, "image/jpeg", 1);
+    croppedCanvas.toBlob(
+      (blob) => {
+        if (blob) {
+          const file = new File([blob], "cropped-image.jpg", {
+            type: blob.type,
+          });
+          const croppedFileUrl = URL.createObjectURL(file);
+          setFileUrl(croppedFileUrl);
+          setCropping(false);
+          onFileChange(file);
+        }
+      },
+      "image/jpeg",
+      1
+    );
   };
 
   const cancelCrop = () => {
-    setFileUrl(""); 
-    setCropping(false); 
+    setFileUrl("");
+    setCropping(false);
     onFileChange(null);
   };
 
@@ -49,10 +58,10 @@ const FileUploader = ({ onFileChange, mediaUrl }) => {
           <Cropper
             src={fileUrl}
             style={{ height: 400, width: "100%" }}
-            aspectRatio={1} 
+            aspectRatio={1}
             guides={false}
             ref={cropperRef}
-            viewMode={1} 
+            viewMode={1}
           />
           <div className="cropper-actions flex-center gap-5 my-5">
             <Button onClick={cropImage}>Crop and Save</Button>
@@ -60,7 +69,7 @@ const FileUploader = ({ onFileChange, mediaUrl }) => {
               Cancel
             </Button>
           </div>
-          <hr className="w-full "/>
+          <hr className="w-full " />
         </div>
       ) : (
         <div

@@ -1,9 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { FilePenLine, Trash } from "lucide-react";
 import Button from "../../components/ui/Button";
 import PostStats from "../../components/shared/PostStats";
 import SpinLoader from "../../components/shared/SpinLoader";
+import {
+  AlertDialog,
+  AlertDialogTrigger,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogCancel,
+  AlertDialogAction,
+} from "../../components/ui/AlertDialog";
+import { useToast } from "../../components/ui/Toast";
+import Loader from "../../components/shared/Loader";
+import { FilePenLine, Trash } from "lucide-react";
 import { timeAgo } from "../../lib/utils";
 import { useUserContext } from "../../context/AuthContext";
 import {
@@ -11,9 +24,6 @@ import {
   useGetPostById,
   useRelatedPosts,
 } from "../../lib/react_query/queriesAndMutations";
-import AlertDialog from "../../components/ui/AlertDialog";
-import { useToast } from "../../components/ui/Toast";
-import Loader from "../../components/shared/Loader";
 import GridPostList from "../../components/shared/GridPostList";
 
 const PostDetails = () => {
@@ -28,8 +38,6 @@ const PostDetails = () => {
       document.body.style.overflow = "";
     };
   }, []);
-
-  const [isAlertOpen, setAlertOpen] = useState(false);
 
   const toast = useToast();
 
@@ -52,28 +60,17 @@ const PostDetails = () => {
     };
   }, []);
 
-  const handleDeletePost = (e) => {
-    e.stopPropagation();
-    setAlertOpen(true);
-  };
-
   const handleConfirmDelete = async () => {
     try {
       await deletePost({ postId: post?.$id, imageId: post?.imageId });
-      setAlertOpen(false);
       navigate("/community");
     } catch (error) {
-      setAlertOpen(false);
       toast({
         title: "Delete Failed!",
         description:
           "There was an error in deleting your post. Please try again.",
       });
     }
-  };
-
-  const handleCancelDelete = () => {
-    setAlertOpen(false);
   };
 
   return (
@@ -122,15 +119,34 @@ const PostDetails = () => {
                   >
                     <FilePenLine />
                   </Button>
-                  <Button
-                    onClick={handleDeletePost}
-                    variant="ghost"
-                    className={`${
-                      user.id !== post?.creator.$id && "hidden"
-                    } text-red-500`}
-                  >
-                    <Trash />
-                  </Button>
+                  <AlertDialog>
+                    <AlertDialogTrigger>
+                      <div
+                        className={`py-2 px-4 rounded-md font-semibold text-sm text-red-600 hover:bg-primary/10 ${
+                          user.id !== post?.creator.$id && "hidden"
+                        }`}
+                      >
+                        <Trash />
+                      </div>
+                    </AlertDialogTrigger>
+                    <AlertDialogContent>
+                      <AlertDialogHeader>
+                        <AlertDialogTitle>
+                          Are you absolutely sure?
+                        </AlertDialogTitle>
+                        <AlertDialogDescription>
+                          This action cannot be undone. This will permanently
+                          delete your post.
+                        </AlertDialogDescription>
+                      </AlertDialogHeader>
+                      <AlertDialogFooter>
+                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                        <AlertDialogAction onClick={handleConfirmDelete}>
+                          Continue
+                        </AlertDialogAction>
+                      </AlertDialogFooter>
+                    </AlertDialogContent>
+                  </AlertDialog>
                 </div>
               </div>
               <hr className="border w-full border-neutral-black/50" />
@@ -145,7 +161,7 @@ const PostDetails = () => {
                 </ul>
               </div>
               <div className="w-full">
-                <PostStats post={post} userId={user.id} />
+                <PostStats post={post} userId={user.id} showComments={true} />
               </div>
             </div>
           </div>
@@ -163,18 +179,6 @@ const PostDetails = () => {
           </div>
         </div>
       )}
-
-      {/* AlertDialog Component */}
-      <AlertDialog
-        isOpen={isAlertOpen}
-        onClose={() => setAlertOpen(false)}
-        title="Are you sure?"
-        description="This action cannot be undone."
-        confirmButtonTitle="Yes, Confirm"
-        onConfirm={handleConfirmDelete}
-        cancelButtonTitle="Cancel"
-        onCancel={handleCancelDelete}
-      />
     </div>
   );
 };

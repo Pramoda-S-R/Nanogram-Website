@@ -98,10 +98,10 @@ const SignupForm = () => {
   return (
     <div className={`mx-auto ${isRouting ? "slide-out-right" : ""}`}>
       <img
-          src="/assets/images/nanogram_logo-bg-primary.svg"
-          alt="Logo"
-          className="w-16 rounded-full mx-auto"
-        />
+        src="/assets/images/nanogram_logo-bg-primary.svg"
+        alt="Logo"
+        className="w-16 rounded-full mx-auto"
+      />
       <h1 className="text-2xl font-bold text-primary text-center nanogram mb-5">
         NANOGRAM
       </h1>
@@ -116,10 +116,10 @@ const SignupForm = () => {
             placeholder="Username"
             onChange={(e) => setSearchValue(e.target.value)}
             {...register("username")}
-            className={errors.username ? "border-red-500" : ""}
+            className={errors.username ? "border-red-600" : ""}
           />
           {errors.username && (
-            <p className="text-red-500 text-sm mt-1">
+            <p className="text-red-600 text-sm mt-1">
               {errors.username.message}
             </p>
           )}
@@ -130,10 +130,10 @@ const SignupForm = () => {
             icon={<Type size={20} />}
             placeholder="Display Name"
             {...register("name")}
-            className={errors.name ? "border-red-500" : ""}
+            className={errors.name ? "border-red-600" : ""}
           />
           {errors.name && (
-            <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
+            <p className="text-red-600 text-sm mt-1">{errors.name.message}</p>
           )}
         </div>
 
@@ -143,10 +143,10 @@ const SignupForm = () => {
             type="email"
             placeholder="Email"
             {...register("email")}
-            className={errors.email ? "border-red-500" : ""}
+            className={errors.email ? "border-red-600" : ""}
           />
           {errors.email && (
-            <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
+            <p className="text-red-600 text-sm mt-1">{errors.email.message}</p>
           )}
         </div>
 
@@ -156,10 +156,10 @@ const SignupForm = () => {
             icon={<Lock size={20} />}
             placeholder="Password"
             {...register("password")}
-            className={errors.password ? "border-red-500" : ""}
+            className={errors.password ? "border-red-600" : ""}
           />
           {errors.password && (
-            <p className="text-red-500 text-sm mt-1">
+            <p className="text-red-600 text-sm mt-1">
               {errors.password.message}
             </p>
           )}

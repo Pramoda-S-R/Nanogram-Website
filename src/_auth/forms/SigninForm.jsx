@@ -76,11 +76,11 @@ const SigninForm = () => {
 
   return (
     <div className={`mx-auto ${isRouting ? "slide-out-right" : ""}`}>
-        <img
-          src="/assets/images/nanogram_logo-bg-primary.svg"
-          alt="Logo"
-          className="w-16 rounded-full mx-auto"
-        />
+      <img
+        src="/assets/images/nanogram_logo-bg-primary.svg"
+        alt="Logo"
+        className="w-16 rounded-full mx-auto"
+      />
       <h1 className="text-2xl font-bold text-primary text-center nanogram mb-5">
         NANOGRAM
       </h1>
@@ -94,10 +94,10 @@ const SigninForm = () => {
             icon={<User size={20} />}
             placeholder="Username"
             {...register("username")}
-            className={errors.username ? "border-red-500" : ""}
+            className={errors.username ? "border-red-800" : ""}
           />
           {errors.username && (
-            <p className="text-red-500 text-sm mt-1">
+            <p className="text-red-800 text-sm mt-1">
               {errors.username.message}
             </p>
           )}
@@ -109,10 +109,10 @@ const SigninForm = () => {
             icon={<Lock size={20} />}
             placeholder="Password"
             {...register("password")}
-            className={errors.password ? "border-red-500" : ""}
+            className={errors.password ? "border-red-800" : ""}
           />
           {errors.password && (
-            <p className="text-red-500 text-sm mt-1">
+            <p className="text-red-800 text-sm mt-1">
               {errors.password.message}
             </p>
           )}

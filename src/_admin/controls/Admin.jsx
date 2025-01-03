@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Drawer,
   DrawerClose,
@@ -10,22 +10,29 @@ import {
   DrawerTrigger,
 } from "../../components/ui/Drawer";
 import Button from "../../components/ui/Button";
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "../../components/ui/Sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "../../components/ui/Sheet";
+import { MessageCircle } from "lucide-react";
 
 const Admin = () => {
+  const [open, setOpen] = useState(false);
   return (
     <div className="default-container">
       <Drawer>
-        <DrawerTrigger>Open</DrawerTrigger>
+        <DrawerTrigger>
+          <MessageCircle />
+        </DrawerTrigger>
         <DrawerContent>
           <DrawerHeader>
-            <DrawerTitle>Are you absolutely sure?</DrawerTitle>
-            <DrawerDescription>This action cannot be undone.</DrawerDescription>
+            <DrawerTitle>Comments</DrawerTitle>
           </DrawerHeader>
-          <DrawerFooter>
-            <Button>Submit</Button>
-            <DrawerClose>Cancel</DrawerClose>
-          </DrawerFooter>
+          <DrawerDescription>hi</DrawerDescription>
         </DrawerContent>
       </Drawer>
       <Sheet>
