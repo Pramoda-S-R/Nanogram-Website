@@ -9,7 +9,10 @@ const Followers = ({ user, currentUser, onClick }) => {
     <div>
       <ul>
         {user?.followers.map((follows) => (
-          <li key={follows.$id} className="flex justify-between items-center">
+          <li
+            key={follows.$id}
+            className="flex justify-between items-center pb-2"
+          >
             <div className="flex gap-2">
               <DialogClose>
                 <Link
@@ -31,7 +34,14 @@ const Followers = ({ user, currentUser, onClick }) => {
                 </p>
               </div>
             </div>
-            <FollowButton follower={currentUser} followed={follows.follower} />
+            {currentUser.$id === follows.follower.$id ? (
+              <></>
+            ) : (
+              <FollowButton
+                follower={currentUser}
+                followed={follows.follower}
+              />
+            )}
           </li>
         ))}
       </ul>
@@ -40,7 +50,7 @@ const Followers = ({ user, currentUser, onClick }) => {
 };
 
 const Following = ({ user, currentUser }) => {
-    console.log(user)
+  console.log(user);
   return (
     <div>
       <ul>
