@@ -31,23 +31,57 @@ export function userAge(dateString) {
   const date = new Date(dateString);
   const now = new Date();
   const diffInSeconds = Math.floor((now - date) / 1000);
+  const defaultText = "You have been a indispensable part of Nanogram since";
 
   if (diffInSeconds < 60) {
-    return "You have been a indispensable part of Nanogram since just now";
+    return `${defaultText} just now`;
   } else if (diffInSeconds < 3600) {
     const minutes = Math.floor(diffInSeconds / 60);
-    return `You have been a indispensable part of Nanogram since ${minutes} min${minutes > 1 ? "s" : ""}`;
+    return `${defaultText} ${minutes} min${minutes > 1 ? "s" : ""}`;
   } else if (diffInSeconds < 86400) {
     const hours = Math.floor(diffInSeconds / 3600);
-    return `You have been a indispensable part of Nanogram since ${hours} hour${hours > 1 ? "s" : ""}`;
+    return `${defaultText} ${hours} hour${hours > 1 ? "s" : ""}`;
   } else if (diffInSeconds < 2592000) {
     const days = Math.floor(diffInSeconds / 86400);
-    return `You have been a indispensable part of Nanogram since ${days} day${days > 1 ? "s" : ""}`;
+    return `${defaultText} ${days} day${days > 1 ? "s" : ""}`;
   } else if (diffInSeconds < 31536000) {
     const months = Math.floor(diffInSeconds / 2592000);
-    return `You have been a indispensable part of Nanogram since ${months} month${months > 1 ? "s" : ""}`;
+    return `${defaultText} ${months} month${months > 1 ? "s" : ""}`;
   } else {
     const years = Math.floor(diffInSeconds / 31536000);
-    return `You have been a indispensable part of Nanogram since ${years} year${years > 1 ? "s" : ""}`;
+    return `${defaultText} ${years} year${years > 1 ? "s" : ""}`;
   }
+}
+
+export function getUserKarma(user) {
+  let karma = 0;
+  let postlikes = 0;
+  let commentlikes = 0;
+  let post = 0;
+  let comment = 0;
+  let follower = 0;
+  let following = 0;
+
+  if (user) {
+    post = user.posts.length;
+    comment = user.comments.length;
+    follower = user.followers.length;
+    following = user.following.length;
+    for (const post of user.posts) {
+      postlikes += post.likes.length;
+    }
+    for (const comment of user.comments) {
+      commentlikes += comment.likes.length;
+    }
+  }
+
+  karma =
+    postlikes * 5 +
+    commentlikes * 2 +
+    post * 3 +
+    comment +
+    follower * 10 +
+    following * 10;
+
+  return karma;
 }

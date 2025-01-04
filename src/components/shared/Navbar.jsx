@@ -15,17 +15,18 @@ import { Hamburger } from "../ui/Hamburger";
 import PulseLoader from "./PulseLoader";
 import Button from "../ui/Button";
 import { FilePen, LogOut, UserPlus } from "lucide-react";
-import { useSignOutAccount } from "../../lib/react_query/queriesAndMutations";
+import { useGetCurrentUser, useSignOutAccount } from "../../lib/react_query/queriesAndMutations";
 import { useUserContext, INITIAL_USER } from "../../context/AuthContext";
 import { communityPaths } from "../../constants";
 import { NAV_ITEMS } from "../../constants";
-import { userAge } from "../../lib/utils";
+import { getUserKarma, userAge } from "../../lib/utils";
 
 const Navbar = () => {
   const isSmallScreen = useMediaQuery({ query: "(max-width: 400px)" });
 
   const { user, setUser, setIsAuthenticated, isLoading } = useUserContext();
   const { mutate: signOut, isSuccess } = useSignOutAccount();
+  const { data: currentUser } = useGetCurrentUser();
 
   const handleSignOut = async () => {
     signOut();
@@ -123,14 +124,19 @@ const Navbar = () => {
                     </div>
                     <SheetTitle>Hello, {user.name}!</SheetTitle>
                     <SheetDescription>{userAge(user.joined)}</SheetDescription>
-                    <div>
-                      <SheetClose asChild>
-                        <Button variant="ghost" className={"flex gap-2"} onClick={handleSignOut}>
-                          <LogOut /> Logout
-                        </Button>
-                      </SheetClose>
-                    </div>
                   </SheetHeader>
+                  <div>{getUserKarma(currentUser)}</div>
+                  <div className="flex w-full justify-end gap-2">
+                    <SheetClose asChild>
+                      <Button
+                        variant="ghost"
+                        className={"flex gap-2"}
+                        onClick={handleSignOut}
+                      >
+                        <LogOut /> Logout
+                      </Button>
+                    </SheetClose>
+                  </div>
                 </SheetContent>
               </Sheet>
             </div>

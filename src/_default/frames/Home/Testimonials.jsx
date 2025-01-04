@@ -2,11 +2,23 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence, useAnimation } from "framer-motion";
 import { getTestimonials } from "../../../lib/appwrite/api";
 
-const testimonials = await getTestimonials();
-
 export default function Testimonials() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [testimonials, setTestimonials] = useState([]);
   const controls = useAnimation();
+
+  useEffect(() => {
+    const fetchTestimonials = async () => {
+      try {
+        const data = await getTestimonials();
+        setTestimonials(data);
+      } catch (error) {
+        console.error("Error fetching testimonials:", error);
+      }
+    };
+
+    fetchTestimonials();
+  }, []);
 
   const nextTestimonial = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
@@ -15,7 +27,7 @@ export default function Testimonials() {
   useEffect(() => {
     const timer = setInterval(nextTestimonial, 5000); // Auto-play every 5 seconds
     return () => clearInterval(timer);
-  }, []);
+  }, [testimonials]);
 
   const handleDragEnd = (event, info) => {
     if (info.offset.x > 100) {
@@ -29,9 +41,11 @@ export default function Testimonials() {
     controls.start({ x: 0 });
   };
 
+  if (testimonials.length === 0) return <p>Loading testimonials...</p>;
+
   return (
     <div className="relative w-full px-4 lg:pt-20 md:pt-32 pt-52 py-16 overflow-hidden">
-      <div className="max-w-4xl mx-auto ">
+      <div className="max-w-4xl mx-auto">
         <AnimatePresence initial={false} mode="wait">
           <motion.div
             key={currentIndex}

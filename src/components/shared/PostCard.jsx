@@ -44,11 +44,13 @@ const PostCard = ({ post }) => {
         <div className="small-medium lg:base-medium py-5">
           <p>{post.caption}</p>
           <ul className="flex gap-1 mt-2">
-            {post.tags.map((tag) => (
-              <li key={tag} className="text-primary font-light">
-                #{tag}
-              </li>
-            ))}
+            {post.tags.length === 0
+              ? null
+              : post.tags.map((tag) => (
+                  <li key={tag} className="text-primary font-light">
+                    #{tag}
+                  </li>
+                ))}
           </ul>
         </div>
         <img
