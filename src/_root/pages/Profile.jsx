@@ -82,7 +82,11 @@ const Profile = () => {
                       <DialogDescription></DialogDescription>
                     </DialogHeader>
                     <hr className="w-full" />
-                    <Following user={user} currentUser={currentUser} />
+                    <Following
+                      user={user}
+                      currentUser={currentUser}
+                      onClick={() => {}}
+                    />
                   </DialogContent>
                 </Dialog>
               </div>

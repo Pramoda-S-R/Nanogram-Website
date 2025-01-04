@@ -34,7 +34,7 @@ const Followers = ({ user, currentUser, onClick }) => {
                 </p>
               </div>
             </div>
-            {currentUser.$id === follows.follower.$id ? (
+            {currentUser?.$id === follows.follower.$id ? (
               <></>
             ) : (
               <FollowButton
@@ -49,28 +49,39 @@ const Followers = ({ user, currentUser, onClick }) => {
   );
 };
 
-const Following = ({ user, currentUser }) => {
-  console.log(user);
+const Following = ({ user, currentUser, onClick }) => {
   return (
     <div>
       <ul>
         {user?.following.map((follows) => (
-          <li key={follows.$id} className="flex justify-between items-center">
+          <li
+            key={follows.$id}
+            className="flex justify-between items-center pb-2"
+          >
             <div className="flex gap-2">
-              <img
-                src={follows.follower.imageUrl || "/assets/icons/user.svg"}
-                alt="user"
-                className="rounded-full md:size-14 size-10"
-                loading="lazy"
-              />
+              <Link to={`/profile/${follows.followed.$id}`} onClick={onClick(follows.followed)}>
+                <img
+                  src={follows.followed.imageUrl || "/assets/icons/user.svg"}
+                  alt="user"
+                  className="rounded-full md:size-14 size-10"
+                  loading="lazy"
+                />
+              </Link>
               <div className="flex flex-col">
-                <p className="text-md font-semibold">{follows.follower.name}</p>
+                <p className="text-md font-semibold">{follows.followed.name}</p>
                 <p className="text-xs font-light">
-                  @{follows.follower.username}
+                  @{follows.followed.username}
                 </p>
               </div>
             </div>
-            <FollowButton follower={currentUser} followed={follows.follower} />
+            {currentUser?.$id === follows.followed.$id ? (
+              <></>
+            ) : (
+              <FollowButton
+                follower={currentUser}
+                followed={follows.followed}
+              />
+            )}
           </li>
         ))}
       </ul>
