@@ -15,6 +15,7 @@ import {
   Profile,
   UpdateProfile,
   NewsLetter,
+  Messages,
 } from "./_root/pages";
 import { Admin } from "./_admin/controls";
 import SigninForm from "./_auth/forms/SigninForm";
@@ -61,6 +62,7 @@ const App = () => {
                   <Route path="/posts/:id" element={<PostDetails />} />
                   <Route path="/profile/:id/*" element={<Profile />} />
                   <Route path="/update-profile" element={<UpdateProfile />} />
+                  <Route path="/messages" element={<Messages />} />
                 </Route>
                 {/* admin route */}
                 <Route element={<AdminLayout />}>

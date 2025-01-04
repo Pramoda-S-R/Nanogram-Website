@@ -87,7 +87,7 @@ const PostForm = ({ post, action }) => {
     <div>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col gap-4 w-full px-3"
+        className="flex flex-col gap-4 w-full px-3 pb-10"
       >
         {/* Caption Field */}
         <div className="px-3">

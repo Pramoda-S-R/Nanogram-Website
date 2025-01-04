@@ -594,7 +594,6 @@ export async function likeComment(commentId, likesArray) {
 }
 // Delete a comment
 export async function deleteComment(commentId) {
-  console.log("Deleting comment with ID:", commentId);
   try {
     await database.deleteDocument(
       appwriteConfig.databaseId,
@@ -711,7 +710,7 @@ export async function unFollowUser(followedRecordId) {
 
     if (!statusCode) throw Error;
 
-    return { status: "ok" };
+    return { status: "ok", followedId: followedRecordId };
   } catch (error) {
     console.log(error);
   }

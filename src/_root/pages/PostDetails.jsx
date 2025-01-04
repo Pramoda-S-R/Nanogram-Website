@@ -25,6 +25,9 @@ import {
   useRelatedPosts,
 } from "../../lib/react_query/queriesAndMutations";
 import GridPostList from "../../components/shared/GridPostList";
+import { ParseText } from "../../components/shared/ParseText";
+import CommentList from "../../components/shared/CommentList";
+import { getCurrentUser } from "../../lib/appwrite/api";
 
 const PostDetails = () => {
   useEffect(() => {
@@ -47,6 +50,22 @@ const PostDetails = () => {
   const { mutateAsync: deletePost, isPending: isDeleting } = useDeletePost();
   const { user } = useUserContext();
   const { data: relatedPosts, isFetching } = useRelatedPosts(post);
+  const { data: currentUser } = getCurrentUser();
+
+  const [commentList, setCommentList] = useState([]);
+  useEffect(() => {
+    if (post?.comments) {
+      const sortedComments = [...post.comments].sort(
+        (a, b) => (b.likes?.length || 0) - (a.likes?.length || 0)
+      );
+      setCommentList(sortedComments);
+    }
+  }, [post?.comments]);
+  const handleDeleteComment = (commentId) => {
+    setCommentList((prev) =>
+      prev.filter((comment) => comment.$id !== commentId)
+    );
+  };
 
   useEffect(() => {
     // Add overflow hidden to html and body when component mounts
@@ -87,7 +106,7 @@ const PostDetails = () => {
               loading="lazy"
             />
             <div className="post_details-info">
-              <div className="flex-between w-full">
+              <div className="flex-between flex-wrap w-full">
                 <Link
                   to={`/profile/${post?.creator.$id}`}
                   className="flex items-center gap-3"
@@ -149,9 +168,8 @@ const PostDetails = () => {
                   </AlertDialog>
                 </div>
               </div>
-              <hr className="border w-full border-neutral-black/50" />
-              <div className="flex flex-col flex-1 w-full small-medium lg:base-medium">
-                <p>{post?.caption}</p>
+              <div className="flex max-h-56 flex-col w-full small-medium lg:base-medium overflow-y-scroll custom-scrollbar">
+                <p>{ParseText(post?.caption)}</p>
                 <ul className="flex gap-1 mt-2">
                   {post.tags.length === 0
                     ? null
@@ -162,6 +180,8 @@ const PostDetails = () => {
                       ))}
                 </ul>
               </div>
+              <hr className="border w-full border-neutral-black/50" />
+              <div className="w-full flex flex-1"></div>
               <div className="w-full">
                 <PostStats post={post} userId={user.id} showComments={true} />
               </div>

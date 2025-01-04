@@ -14,8 +14,11 @@ import {
 import { Hamburger } from "../ui/Hamburger";
 import PulseLoader from "./PulseLoader";
 import Button from "../ui/Button";
-import { FilePen, LogOut, UserPlus } from "lucide-react";
-import { useGetCurrentUser, useSignOutAccount } from "../../lib/react_query/queriesAndMutations";
+import { FilePen, LogOut, UserPlus, Users } from "lucide-react";
+import {
+  useGetCurrentUser,
+  useSignOutAccount,
+} from "../../lib/react_query/queriesAndMutations";
 import { useUserContext, INITIAL_USER } from "../../context/AuthContext";
 import { communityPaths } from "../../constants";
 import { NAV_ITEMS } from "../../constants";
@@ -126,6 +129,17 @@ const Navbar = () => {
                     <SheetDescription>{userAge(user.joined)}</SheetDescription>
                   </SheetHeader>
                   <div>{getUserKarma(currentUser)}</div>
+                  <SheetClose asChild>
+                    <div className="flex-center flex-wrap w-full gap-2">
+                      <Button
+                        variant="ghost"
+                        className={"flex gap-2"}
+                        onClick={() => navigate("/all-users")}
+                      >
+                        <Users /> All Users
+                      </Button>
+                    </div>
+                  </SheetClose>
                   <div className="flex w-full justify-end gap-2">
                     <SheetClose asChild>
                       <Button

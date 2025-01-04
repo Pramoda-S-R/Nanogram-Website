@@ -16,9 +16,9 @@ import {
 import { useDeleteComment, useLikeComment } from "../../lib/react_query/queriesAndMutations";
 import { useToast } from "../ui/Toast";
 
-const CommentList = ({ comments, currentUser, onDeleteComment }) => {
+const CommentList = ({ comments, currentUser, onDeleteComment, postDetail=false, showLikes=true }) => {
   return (
-    <ul className="flex w-full flex-col gap-2 h-[65vh] overflow-y-auto p-2">
+    <ul className={`flex w-full flex-col gap-2 ${postDetail ? "min-h-0" :"h-[65vh]"} overflow-y-auto p-2 custom-scrollbar`}>
       {comments?.map((comment) => {
         return (
           <Comment
@@ -26,6 +26,7 @@ const CommentList = ({ comments, currentUser, onDeleteComment }) => {
             comment={comment}
             currentUser={currentUser}
             onDeleteComment={onDeleteComment}
+            showLikes={showLikes}
           />
         );
       })}
@@ -33,7 +34,7 @@ const CommentList = ({ comments, currentUser, onDeleteComment }) => {
   );
 };
 
-function Comment({ comment, currentUser, onDeleteComment }) {
+function Comment({ comment, currentUser, onDeleteComment, showLikes }) {
   const likesList = comment.likes.map((user) => user.$id);
   const [likes, setLikes] = useState(likesList);
 
@@ -108,7 +109,7 @@ function Comment({ comment, currentUser, onDeleteComment }) {
             </AlertDialog>
           </div>
         ) : null}
-        <div className="flex gap-2 mr-3 items-center">
+        { showLikes && <div className="flex gap-2 mr-3 items-center">
           <img
             src={
               checkIsLiked(likes, currentUser?.$id)
@@ -122,7 +123,7 @@ function Comment({ comment, currentUser, onDeleteComment }) {
             className="cursor-pointer ml-2"
           />
           <p className="small-medium">{likes.length}</p>
-        </div>
+        </div>}
       </div>
     </li>
   );

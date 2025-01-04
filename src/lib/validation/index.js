@@ -4,7 +4,11 @@ import { checkUsernameAvailability } from "../appwrite/api";
 export const signInSchema = z.object({
   username: z
     .string()
-    .min(3, { message: "Username must be at least 3 characters" }),
+    .min(3, { message: "Username must be at least 3 characters" })
+    .regex(/^[a-z0-9_]+$/, {
+      message:
+        "Username can only contain lowercase letters, numbers, and underscores.",
+    }),
   password: z
     .string()
     .min(6, { message: "Password must be at least 6 characters" }),
@@ -14,6 +18,10 @@ export const signUpSchema = z.object({
   username: z
     .string()
     .min(3, { message: "Username must be at least 3 characters" })
+    .regex(/^[a-z0-9_]+$/, {
+      message:
+        "Username can only contain lowercase letters, numbers, and underscores.",
+    })
     .refine(
       async (username) => {
         const isAvailable = await checkUsernameAvailability(username);
@@ -23,6 +31,7 @@ export const signUpSchema = z.object({
         message: "Username is already taken.",
       }
     ),
+
   name: z
     .string()
     .min(2, { message: "Display name must be at least 2 characters" }),

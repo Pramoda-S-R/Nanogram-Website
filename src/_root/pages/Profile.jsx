@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "../../components/ui/Button";
 import {
   useGetCurrentUser,
@@ -10,6 +10,16 @@ import Loader from "../../components/shared/Loader";
 import { useNavigate, useParams } from "react-router-dom";
 import { FilePenLine } from "lucide-react";
 import FollowButton from "../../components/shared/FollowButton";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "../../components/ui/Dialog";
+import { Followers, Following } from "../../components/shared/Follows";
 
 const Profile = () => {
   const { id } = useParams();
@@ -17,6 +27,8 @@ const Profile = () => {
   const { data: posts, isLoading, isError } = useGetUserPosts(id || "");
   const { data: user } = useGetUserById(id || "");
   const { data: currentUser } = useGetCurrentUser();
+
+  // const [dialogOpen, setDialogOpen] = useState(false);
 
   return (
     <div className="common-container w-full h-screen md:px-8 lg:px-20 px-0 md:pt-28 py-2 lg:overflow-y-hidden overflow-y-scroll custom-scrollbar">
@@ -37,14 +49,42 @@ const Profile = () => {
                   <p>{user?.posts.length || 0}</p>
                   <p>Posts</p>
                 </div>
-                <div className="flex flex-col items-center">
-                  <p>{user?.followers.length || 0}</p>
-                  <p>Followers</p>
-                </div>
-                <div className="flex flex-col items-center">
-                  <p>{user?.following.length || 0}</p>
-                  <p>Following</p>
-                </div>
+                <Dialog>
+                  <DialogTrigger>
+                    <div className="flex flex-col items-center">
+                      <p>{user?.followers.length || 0}</p>
+                      <p>Followers</p>
+                    </div>
+                  </DialogTrigger>
+                  <DialogContent className="sm:max-w-[425px]">
+                    <DialogHeader>
+                      <DialogTitle>Followers</DialogTitle>
+                      <DialogDescription></DialogDescription>
+                    </DialogHeader>
+                    <hr className="w-full" />
+                    <Followers
+                      user={user}
+                      currentUser={currentUser}
+                      onClick={() => {}}
+                    />
+                  </DialogContent>
+                </Dialog>
+                <Dialog>
+                  <DialogTrigger>
+                    <div className="flex flex-col items-center">
+                      <p>{user?.following.length || 0}</p>
+                      <p>Following</p>
+                    </div>
+                  </DialogTrigger>
+                  <DialogContent className="sm:max-w-[425px]">
+                    <DialogHeader>
+                      <DialogTitle>Following</DialogTitle>
+                      <DialogDescription></DialogDescription>
+                    </DialogHeader>
+                    <hr className="w-full" />
+                    <Following user={user} currentUser={currentUser} />
+                  </DialogContent>
+                </Dialog>
               </div>
             </div>
           </div>

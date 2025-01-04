@@ -8,6 +8,7 @@ import {
   Album,
   SquarePlus,
   Play,
+  MessageCircleMore,
 } from "lucide-react";
 
 export const NAV_ITEMS = [
@@ -24,13 +25,14 @@ export const SIDEBAR_ITEMS = [
   { to: "/all-users", icon: Users, label: "People" },
   { to: "/saved", icon: Album, label: "Saved" },
   { to: "/create-post", icon: SquarePlus, label: "Create Post" },
+  { to: "/messages", icon: MessageCircleMore, label: "Messages" },
 ];
 
 export const BOTTOMBAR_ITEMS = [
   { to: "/community", icon: Play, label: "FYP" },
   { to: "/explore", icon: Compass, label: "Explore" },
   { to: "/create-post", icon: SquarePlus, label: "Create Post" },
-  { to: "/all-users", icon: Users, label: "People" },
+  { to: "/messages", icon: MessageCircleMore, label: "Messages" },
   { to: "/saved", icon: Album, label: "Saved" },
 ];
 

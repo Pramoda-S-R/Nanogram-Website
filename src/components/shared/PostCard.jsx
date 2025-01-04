@@ -4,6 +4,7 @@ import { timeAgo } from "../../lib/utils";
 import { FilePenLine } from "lucide-react";
 import { useUserContext } from "../../context/AuthContext";
 import PostStats from "./PostStats";
+import { ParseText } from "./ParseText";
 
 const PostCard = ({ post }) => {
   const { user } = useUserContext();
@@ -40,19 +41,19 @@ const PostCard = ({ post }) => {
           <FilePenLine size={20} />
         </Link>
       </div>
+      <div className="small-medium lg:base-medium py-5">
+        <p>{ParseText(post.caption)}</p>
+        <ul className="flex gap-1 mt-2">
+          {post.tags.length === 0
+            ? null
+            : post.tags.map((tag) => (
+                <li key={tag} className="text-primary font-light">
+                  #{tag}
+                </li>
+              ))}
+        </ul>
+      </div>
       <Link to={`/posts/${post.$id}`}>
-        <div className="small-medium lg:base-medium py-5">
-          <p>{post.caption}</p>
-          <ul className="flex gap-1 mt-2">
-            {post.tags.length === 0
-              ? null
-              : post.tags.map((tag) => (
-                  <li key={tag} className="text-primary font-light">
-                    #{tag}
-                  </li>
-                ))}
-          </ul>
-        </div>
         <img
           src={post.imageUrl || "/assets/icons/user.svg"}
           alt={post.caption || "post image"}

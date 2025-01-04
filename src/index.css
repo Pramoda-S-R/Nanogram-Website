@@ -350,7 +350,7 @@ html {
 }
 
 .post_details-info {
-  @apply bg-accent-gray flex flex-col gap-5 lg:gap-7 flex-1 items-start p-8 rounded-[30px];
+  @apply bg-accent-gray flex flex-col gap-2 flex-1 items-start p-8 rounded-[30px];
 }
 
 .post_details-delete_btn {
