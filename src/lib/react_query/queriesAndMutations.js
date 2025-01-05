@@ -333,7 +333,7 @@ export const useDeleteMessage = () => {
     mutationFn: (messageId) => deleteMessage(messageId),
     onSuccess: (data) => {
       queryClient.invalidateQueries({
-        queryKey: [QUERY_KEYS.GET_MESSAGES, data.sender.$id, data.receiver.$id],
+        queryKey: [QUERY_KEYS.GET_MESSAGES],
       });
     },
   });

@@ -160,7 +160,9 @@ const Chats = () => {
   const message = watch("message");
 
   const handleDelete = async (messageId) => {
-
+    setMessageList((prev) =>
+        prev.filter((message) => message.$id !== messageId)
+      );
     const status = await deleteMessage(messageId);
     if (!status) {
       toast({
