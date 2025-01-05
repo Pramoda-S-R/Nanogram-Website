@@ -85,7 +85,8 @@ const Contacts = ({ className }) => {
           <MessageCircleMore className="w-9 h-9" />
           <h2 className="h3-bold md:h2-bold text-left">All Chats</h2>
         </div>
-        <div className="flex-center">
+        <div className="flex-center gap-4 px-6">
+          <Search size={24} onClick={() => navigate("/all-users")} className="md:hidden block" />
           <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
             <DialogTrigger>
               <SquarePen

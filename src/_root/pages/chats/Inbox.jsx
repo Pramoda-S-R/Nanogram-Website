@@ -4,7 +4,7 @@ import { useMediaQuery } from "react-responsive";
 import Contacts from "../../../components/shared/Contacts";
 
 const Inbox = () => {
-  const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
+  const isMobile = useMediaQuery({ query: "(max-width: 767.5px)" });
   if (isMobile) return <Contacts />;
   return (
     <div className="w-full h-full flex justify-center items-start">
