@@ -56,7 +56,10 @@ const Profile = () => {
                   <p>{user?.posts.length || 0}</p>
                   <p>Posts</p>
                 </div>
-                <Dialog open={isFollowerDialogOpen} onOpenChange={setIsFollowerDialogOpen}>
+                <Dialog
+                  open={isFollowerDialogOpen}
+                  onOpenChange={setIsFollowerDialogOpen}
+                >
                   <DialogTrigger>
                     <div
                       className="flex flex-col items-center"
@@ -75,7 +78,10 @@ const Profile = () => {
                     <Followers user={user} currentUser={currentUser} />
                   </DialogContent>
                 </Dialog>
-                <Dialog open={isFollowingDialogOpen} onOpenChange={setIsFollowingDialogOpen}>
+                <Dialog
+                  open={isFollowingDialogOpen}
+                  onOpenChange={setIsFollowingDialogOpen}
+                >
                   <DialogTrigger>
                     <div
                       className="flex flex-col items-center"
@@ -102,6 +108,7 @@ const Profile = () => {
               <Button
                 variant="ghost"
                 onClick={() => navigate("/update-profile")}
+                className={`${!currentUser ? "hidden" : ""}`}
               >
                 <FilePenLine /> Edit Profile
               </Button>
@@ -112,6 +119,8 @@ const Profile = () => {
               <Button
                 variant="secondary"
                 className={"border-2 border-neutral-white"}
+                onClick={() => navigate(`/messages/${user?.$id}`)}
+                disabled={!user}
               >
                 Message
               </Button>

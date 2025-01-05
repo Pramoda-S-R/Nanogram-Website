@@ -40,6 +40,7 @@ const FollowButton = ({ follower, followed }) => {
     <Button
       variant={isFollowing ? "outline" : "primary"}
       onClick={handleFollow}
+      disabled={!followed}
     >
       {isPendingFollow || isPendingUnFollow ? (
         <SpinLoader />

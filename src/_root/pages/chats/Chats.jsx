@@ -110,7 +110,7 @@ function ChatBody({ messages, currentUser, onDelete, hasNextPage, inViewRef }) {
           </div>
         );
       })}
-      {hasNextPage && (
+      {hasNextPage && messages.length > 20 && (
         <div ref={inViewRef} className="flex-center w-full py-5">
           <SpinLoader />
         </div>
@@ -149,6 +149,10 @@ const Chats = () => {
   const toast = useToast();
 
   const [messageList, setMessageList] = useState([]);
+
+  useEffect(() => {
+    setMessageList([]);
+  }, [id]);
 
   useEffect(() => {
     if (inView) fetchNextPage();
