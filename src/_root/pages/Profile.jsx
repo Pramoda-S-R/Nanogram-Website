@@ -7,7 +7,7 @@ import {
 } from "../../lib/react_query/queriesAndMutations";
 import GridPostList from "../../components/shared/GridPostList";
 import Loader from "../../components/shared/Loader";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { FilePenLine } from "lucide-react";
 import FollowButton from "../../components/shared/FollowButton";
 import {
@@ -28,10 +28,17 @@ const Profile = () => {
   const { data: user } = useGetUserById(id || "");
   const { data: currentUser } = useGetCurrentUser();
 
-  // const [dialogOpen, setDialogOpen] = useState(false);
+  const location = useLocation();
+  const [isFollowerDialogOpen, setIsFollowerDialogOpen] = useState(false);
+  const [isFollowingDialogOpen, setIsFollowingDialogOpen] = useState(false);
+
+  useEffect(() => {
+    setIsFollowerDialogOpen(false);
+    setIsFollowingDialogOpen(false);
+  }, [location]);
 
   return (
-    <div className="common-container w-full h-screen md:px-8 lg:px-20 px-0 md:pt-28 py-2 lg:overflow-y-hidden overflow-y-scroll custom-scrollbar">
+    <div className="common-container w-full h-screen md:px-8 lg:px-20 px-0 md:pt-28 py-2 overflow-y-scroll custom-scrollbar">
       <div className="max-w-5xl flex flex-col w-full gap-6 md:gap-3">
         <div className="flex justify- flex-wrap w-full">
           <div className="flex gap-6 items-start">
@@ -49,44 +56,42 @@ const Profile = () => {
                   <p>{user?.posts.length || 0}</p>
                   <p>Posts</p>
                 </div>
-                <Dialog>
+                <Dialog open={isFollowerDialogOpen} onOpenChange={setIsFollowerDialogOpen}>
                   <DialogTrigger>
-                    <div className="flex flex-col items-center">
+                    <div
+                      className="flex flex-col items-center"
+                      onClick={() => setIsFollowerDialogOpen(true)}
+                    >
                       <p>{user?.followers.length || 0}</p>
                       <p>Followers</p>
                     </div>
                   </DialogTrigger>
-                  <DialogContent className="sm:max-w-[425px]">
+                  <DialogContent className="max-w-[425px]">
                     <DialogHeader>
                       <DialogTitle>Followers</DialogTitle>
                       <DialogDescription></DialogDescription>
                     </DialogHeader>
                     <hr className="w-full" />
-                    <Followers
-                      user={user}
-                      currentUser={currentUser}
-                      onClick={() => {}}
-                    />
+                    <Followers user={user} currentUser={currentUser} />
                   </DialogContent>
                 </Dialog>
-                <Dialog>
+                <Dialog open={isFollowingDialogOpen} onOpenChange={setIsFollowingDialogOpen}>
                   <DialogTrigger>
-                    <div className="flex flex-col items-center">
+                    <div
+                      className="flex flex-col items-center"
+                      onClick={() => setIsFollowingDialogOpen(true)}
+                    >
                       <p>{user?.following.length || 0}</p>
                       <p>Following</p>
                     </div>
                   </DialogTrigger>
-                  <DialogContent className="sm:max-w-[425px]">
+                  <DialogContent className="max-w-[425px]">
                     <DialogHeader>
                       <DialogTitle>Following</DialogTitle>
                       <DialogDescription></DialogDescription>
                     </DialogHeader>
                     <hr className="w-full" />
-                    <Following
-                      user={user}
-                      currentUser={currentUser}
-                      onClick={() => {}}
-                    />
+                    <Following user={user} currentUser={currentUser} />
                   </DialogContent>
                 </Dialog>
               </div>

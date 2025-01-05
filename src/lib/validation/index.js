@@ -64,3 +64,7 @@ export const userProfileFormSchema = z.object({
 export const commentFormSchema = z.object({
   comment: z.string().min(1, "Comment is required"),
 });
+
+export const messageFormSchema = z.object({
+  message: z.string().min(1, "Message is required"),
+});

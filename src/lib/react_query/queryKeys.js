@@ -7,6 +7,9 @@ export const QUERY_KEYS = {
   GET_USERS: "getUsers",
   GET_USER_BY_ID: "getUserById",
 
+  // MESSAGE KEYS
+  GET_MESSAGES: "getMessages",
+
   // POST KEYS
   GET_POSTS: "getPosts",
   GET_INFINITE_POSTS: "getInfinitePosts",

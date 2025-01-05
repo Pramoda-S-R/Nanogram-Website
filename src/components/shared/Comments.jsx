@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useMediaQuery } from "react-responsive";
-import { useInView } from "react-intersection-observer";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -23,11 +22,9 @@ import Input from "../ui/Input";
 import Button from "../ui/Button";
 import { MessageCircle, SendHorizontal } from "lucide-react";
 import { commentFormSchema } from "../../lib/validation";
-import { checkIsLiked } from "../../lib/utils";
 import { useCreateComment } from "../../lib/react_query/queriesAndMutations";
 import { useToast } from "../ui/Toast";
 import CommentList from "./CommentList";
-import { comment } from "postcss";
 
 function CommentForm({ post, currentUser, onAddComment }) {
   const toast = useToast();
@@ -68,9 +65,9 @@ function CommentForm({ post, currentUser, onAddComment }) {
     });
     if (!newComment) {
       toast({
-        title: "Upload Failed!",
+        title: "Comment Failed!",
         description:
-          "There was an error in Uploading your post. Please try again.",
+          "There was an error in posting your comment. Please try again.",
       });
     }
   };

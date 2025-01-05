@@ -13,23 +13,48 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "../ui/AlertDialog";
-import { useDeleteComment, useLikeComment } from "../../lib/react_query/queriesAndMutations";
+import {
+  useDeleteComment,
+  useLikeComment,
+} from "../../lib/react_query/queriesAndMutations";
 import { useToast } from "../ui/Toast";
+import { Link } from "react-router-dom";
 
-const CommentList = ({ comments, currentUser, onDeleteComment, postDetail=false, showLikes=true }) => {
+const CommentList = ({
+  comments,
+  currentUser,
+  onDeleteComment,
+  postDetail = false,
+  showLikes = true,
+}) => {
   return (
-    <ul className={`flex w-full flex-col gap-2 ${postDetail ? "min-h-0" :"h-[65vh]"} overflow-y-auto p-2 custom-scrollbar`}>
-      {comments?.map((comment) => {
-        return (
-          <Comment
-            key={comment?.$id}
-            comment={comment}
-            currentUser={currentUser}
-            onDeleteComment={onDeleteComment}
-            showLikes={showLikes}
+    <ul
+      className={`flex w-full flex-col gap-2 ${
+        postDetail ? "min-h-0" : "h-[65vh]"
+      } overflow-y-auto p-2 custom-scrollbar`}
+    >
+      {comments.length === 0 ? (
+        <div className="w-full flex flex-col items-center gap-2 text-accent-gray">
+          <img
+            src="/assets/icons/emoji-surprise.svg"
+            alt="Amazing"
+            className="size-20 opacity-5"
           />
-        );
-      })}
+          <p className="w-full text-center">Wow such empty</p>
+        </div>
+      ) : (
+        comments?.map((comment) => {
+          return (
+            <Comment
+              key={comment?.$id}
+              comment={comment}
+              currentUser={currentUser}
+              onDeleteComment={onDeleteComment}
+              showLikes={showLikes}
+            />
+          );
+        })
+      )}
     </ul>
   );
 };
@@ -75,11 +100,13 @@ function Comment({ comment, currentUser, onDeleteComment, showLikes }) {
     <li key={comment.$id} className="flex flex-col w-full gap-2">
       <div className="w-full flex">
         <div className="flex w-full gap-2">
-          <img
-            src={comment.commentor.imageUrl || "/assets/icons/user.svg"}
-            alt={comment.commentor.name || "commentor"}
-            className="w-10 h-10 rounded-full"
-          />
+          <Link to={`/profile/${comment.commentor.$id}`}>
+            <img
+              src={comment.commentor.imageUrl || "/assets/icons/user.svg"}
+              alt={comment.commentor.name || "commentor"}
+              className="w-10 h-10 rounded-full"
+            />
+          </Link>
           <div className="flex flex-col">
             <p className="text-sm font-semibold">{comment.commentor.name}</p>
             <p className="flex text-xs">{comment.content}</p>
@@ -109,21 +136,23 @@ function Comment({ comment, currentUser, onDeleteComment, showLikes }) {
             </AlertDialog>
           </div>
         ) : null}
-        { showLikes && <div className="flex gap-2 mr-3 items-center">
-          <img
-            src={
-              checkIsLiked(likes, currentUser?.$id)
-                ? "/assets/icons/liked.svg"
-                : "/assets/icons/like.svg"
-            }
-            alt="like"
-            width={16}
-            height={16}
-            onClick={handleLikeComment}
-            className="cursor-pointer ml-2"
-          />
-          <p className="small-medium">{likes.length}</p>
-        </div>}
+        {showLikes && (
+          <div className="flex gap-2 mr-3 items-center">
+            <img
+              src={
+                checkIsLiked(likes, currentUser?.$id)
+                  ? "/assets/icons/liked.svg"
+                  : "/assets/icons/like.svg"
+              }
+              alt="like"
+              width={16}
+              height={16}
+              onClick={handleLikeComment}
+              className="cursor-pointer ml-2"
+            />
+            <p className="small-medium">{likes.length}</p>
+          </div>
+        )}
       </div>
     </li>
   );

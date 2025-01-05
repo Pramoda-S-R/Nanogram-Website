@@ -6,13 +6,16 @@ import {
 } from "@tanstack/react-query";
 import {
   createComment,
+  createMessage,
   createPost,
   createUserAccount,
   deleteComment,
+  deleteMessage,
   deletePost,
   followUser,
   getCurrentUser,
   getInfinitePosts,
+  getMessages,
   getPostById,
   getRecentPosts,
   getSavedPosts,
@@ -263,7 +266,8 @@ export const useCreateComment = () => {
 export const useLikeComment = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ({ commentId, likesArray }) => likeComment(commentId, likesArray),
+    mutationFn: ({ commentId, likesArray }) =>
+      likeComment(commentId, likesArray),
     onSuccess: (data) => {
       queryClient.invalidateQueries({
         queryKey: [QUERY_KEYS.GET_POST_BY_ID, data?.post],
@@ -294,6 +298,42 @@ export const useDeleteComment = () => {
       });
       queryClient.invalidateQueries({
         queryKey: [QUERY_KEYS.GET_POST_BY_ID, data.post],
+      });
+    },
+  });
+};
+
+// ==================
+// Message Queries
+// ==================
+
+export const useGetMessages = ({ senderId, receiverId }) => {
+  return useQuery({
+    queryKey: [QUERY_KEYS.GET_MESSAGES, senderId, receiverId],
+    queryFn: () => getMessages(senderId, receiverId),
+    enabled: !!senderId && !!receiverId,
+  });
+};
+
+export const useCreateMessage = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (message) => createMessage(message),
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_MESSAGES, data.sender.$id, data.receiver.$id],
+      });
+    },
+  });
+};
+
+export const useDeleteMessage = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (messageId) => deleteMessage(messageId),
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_MESSAGES, data.sender.$id, data.receiver.$id],
       });
     },
   });

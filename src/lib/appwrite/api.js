@@ -160,7 +160,9 @@ export async function createPost(post) {
     }
 
     // Convert tags into array
-    const tags = post.tags ? post.tags.replace(/ /g, "").split(",") : null || [];
+    const tags = post.tags
+      ? post.tags.replace(/ /g, "").split(",")
+      : null || [];
 
     // Create post in database
     const newPost = await database.createDocument(
@@ -599,6 +601,75 @@ export async function deleteComment(commentId) {
       appwriteConfig.databaseId,
       appwriteConfig.commentsCollectionId,
       commentId
+    );
+
+    return { status: "ok" };
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+// ==================
+// Message Functions
+// ==================
+// Create a new message
+export async function createMessage(message) {
+  try {
+    const newMessage = await database.createDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.messagesCollectionId,
+      ID.unique(),
+      {
+        sender: message.senderId,
+        receiver: message.receiverId,
+        content: message.content,
+      }
+    );
+
+    if (!newMessage) throw Error;
+
+    return newMessage;
+  } catch (error) {
+    console.log(error);
+  }
+}
+// Get messages
+export async function getMessages(senderId, receiverId) {
+  const queries = [
+    Query.or([
+      Query.and([
+        Query.equal("sender", senderId),
+        Query.equal("receiver", receiverId),
+      ]),
+      Query.and([
+        Query.equal("sender", receiverId),
+        Query.equal("receiver", senderId),
+      ]),
+    ]),
+    Query.orderDesc("$createdAt"),
+    Query.limit(20),
+  ];
+
+  try {
+    const messages = await database.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.messagesCollectionId,
+      queries
+    );
+
+    if (!messages) throw Error;
+
+    return messages;
+  } catch (error) {
+    console.log(error);
+  }
+}
+export async function deleteMessage(messageId) {
+  try {
+    await database.deleteDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.messagesCollectionId,
+      messageId
     );
 
     return { status: "ok" };

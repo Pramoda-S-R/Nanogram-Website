@@ -16,7 +16,7 @@ import {
 } from "../../components/ui/AlertDialog";
 import { useToast } from "../../components/ui/Toast";
 import Loader from "../../components/shared/Loader";
-import { FilePenLine, Trash } from "lucide-react";
+import { Ellipsis, FilePenLine, Trash } from "lucide-react";
 import { timeAgo } from "../../lib/utils";
 import { useUserContext } from "../../context/AuthContext";
 import {
@@ -28,6 +28,11 @@ import GridPostList from "../../components/shared/GridPostList";
 import { ParseText } from "../../components/shared/ParseText";
 import CommentList from "../../components/shared/CommentList";
 import { getCurrentUser } from "../../lib/appwrite/api";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "../../components/ui/Popover";
 
 const PostDetails = () => {
   useEffect(() => {
@@ -129,43 +134,51 @@ const PostDetails = () => {
                   </div>
                 </Link>
                 <div className="flex-center">
-                  <Button
-                    variant="ghost"
-                    className={`${
-                      user.id !== post?.creator.$id && "hidden"
-                    } text-primary`}
-                    onClick={() => navigate(`/update-post/${post?.$id}`)}
-                  >
-                    <FilePenLine />
-                  </Button>
-                  <AlertDialog>
-                    <AlertDialogTrigger>
-                      <div
-                        className={`py-2 px-4 rounded-md font-semibold text-sm text-red-600 hover:bg-primary/10 ${
+                  <Popover>
+                    <PopoverTrigger>
+                      <Ellipsis />
+                    </PopoverTrigger>
+                    <PopoverContent className="flex flex-col">
+                      <Button
+                        variant="ghost"
+                        className={`w-full ${
                           user.id !== post?.creator.$id && "hidden"
-                        }`}
+                        } text-primary`}
+                        onClick={() => navigate(`/update-post/${post?.$id}`)}
                       >
-                        <Trash />
-                      </div>
-                    </AlertDialogTrigger>
-                    <AlertDialogContent>
-                      <AlertDialogHeader>
-                        <AlertDialogTitle>
-                          Are you absolutely sure?
-                        </AlertDialogTitle>
-                        <AlertDialogDescription>
-                          This action cannot be undone. This will permanently
-                          delete your post.
-                        </AlertDialogDescription>
-                      </AlertDialogHeader>
-                      <AlertDialogFooter>
-                        <AlertDialogCancel>Cancel</AlertDialogCancel>
-                        <AlertDialogAction onClick={handleConfirmDelete}>
-                          Continue
-                        </AlertDialogAction>
-                      </AlertDialogFooter>
-                    </AlertDialogContent>
-                  </AlertDialog>
+                        <FilePenLine />
+                        <p>Edit Post</p>
+                      </Button>
+                      <AlertDialog>
+                        <AlertDialogTrigger>
+                          <div
+                            className={`py-2 px-4 w-full rounded-md font-semibold gap-3 text-sm flex-center text-red-600 hover:bg-primary/10 ${
+                              user.id !== post?.creator.$id && "hidden"
+                            }`}
+                          >
+                            <Trash /> <p>Delete Post</p>
+                          </div>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent>
+                          <AlertDialogHeader>
+                            <AlertDialogTitle>
+                              Are you absolutely sure?
+                            </AlertDialogTitle>
+                            <AlertDialogDescription>
+                              This action cannot be undone. This will
+                              permanently delete your post.
+                            </AlertDialogDescription>
+                          </AlertDialogHeader>
+                          <AlertDialogFooter>
+                            <AlertDialogCancel>Cancel</AlertDialogCancel>
+                            <AlertDialogAction onClick={handleConfirmDelete}>
+                              Continue
+                            </AlertDialogAction>
+                          </AlertDialogFooter>
+                        </AlertDialogContent>
+                      </AlertDialog>
+                    </PopoverContent>
+                  </Popover>
                 </div>
               </div>
               <div className="flex max-h-56 flex-col w-full small-medium lg:base-medium overflow-y-scroll custom-scrollbar">

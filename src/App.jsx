@@ -27,6 +27,8 @@ import RootLayout from "./_root/RootLayout";
 import AdminLayout from "./_admin/AdminLayout";
 import { ToastProvider } from "./components/ui/Toast";
 import ErrorBoundary from "./errors/ErrorBoundary";
+import { Chats } from "./_root/pages/chats";
+import Inbox from "./_root/pages/chats/Inbox";
 
 const App = () => {
   return (
@@ -62,7 +64,10 @@ const App = () => {
                   <Route path="/posts/:id" element={<PostDetails />} />
                   <Route path="/profile/:id/*" element={<Profile />} />
                   <Route path="/update-profile" element={<UpdateProfile />} />
-                  <Route path="/messages" element={<Messages />} />
+                  <Route element={<Messages />}>
+                    <Route path="/messages" element={<Inbox />} />
+                    <Route path="/messages/:id/*" element={<Chats />} />
+                  </Route>
                 </Route>
                 {/* admin route */}
                 <Route element={<AdminLayout />}>
