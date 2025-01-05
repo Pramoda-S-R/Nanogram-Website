@@ -634,7 +634,7 @@ export async function createMessage(message) {
   }
 }
 // Get messages
-export async function getMessages(senderId, receiverId) {
+export async function getMessages(pageParam, senderId, receiverId) {
   const queries = [
     Query.or([
       Query.and([
@@ -650,6 +650,10 @@ export async function getMessages(senderId, receiverId) {
     Query.limit(20),
   ];
 
+  if (pageParam && typeof pageParam === "string") {
+    queries.push(Query.cursorAfter(pageParam));
+  }
+
   try {
     const messages = await database.listDocuments(
       appwriteConfig.databaseId,
@@ -664,6 +668,7 @@ export async function getMessages(senderId, receiverId) {
     console.log(error);
   }
 }
+// Delete a message
 export async function deleteMessage(messageId) {
   try {
     await database.deleteDocument(

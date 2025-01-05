@@ -20,6 +20,8 @@ import {
 import { ParseText } from "../../../components/shared/ParseText";
 import { messageFormSchema } from "../../../lib/validation";
 import { useToast } from "../../../components/ui/Toast";
+import { useInView } from "react-intersection-observer";
+import SpinLoader from "../../../components/shared/SpinLoader";
 
 function ChatHeader({ contact }) {
   return (
@@ -47,7 +49,7 @@ function ChatHeader({ contact }) {
   );
 }
 
-function ChatBody({ messages, currentUser, onDelete }) {
+function ChatBody({ messages, currentUser, onDelete, hasNextPage, inViewRef }) {
   let lastMesssageSender = null;
   return (
     <div className="flex h-[50vh] flex-col-reverse justify-start flex-1 pt-5 overflow-y-scroll custom-scrollbar">
@@ -101,7 +103,6 @@ function ChatBody({ messages, currentUser, onDelete }) {
                     >
                       Delete
                     </Button>
-                    <Button variant="ghost">Edit</Button>
                   </PopoverContent>
                 </Popover>
               )}
@@ -109,6 +110,11 @@ function ChatBody({ messages, currentUser, onDelete }) {
           </div>
         );
       })}
+      {hasNextPage && (
+        <div ref={inViewRef} className="flex-center w-full py-5">
+          <SpinLoader />
+        </div>
+      )}
     </div>
   );
 }
@@ -126,9 +132,14 @@ function EmojiPicker() {
 
 const Chats = () => {
   const { id } = useParams();
+  const { ref, inView } = useInView();
   const { data: contact } = useGetUserById(id || "");
   const { data: currentUser } = useGetCurrentUser();
-  const { data: messages } = useGetMessages({
+  const {
+    data: messages,
+    fetchNextPage,
+    hasNextPage,
+  } = useGetMessages({
     senderId: currentUser?.$id,
     receiverId: contact?.$id,
   });
@@ -140,7 +151,14 @@ const Chats = () => {
   const [messageList, setMessageList] = useState([]);
 
   useEffect(() => {
-    setMessageList(messages?.documents || []);
+    if (inView) fetchNextPage();
+  }, [inView]);
+
+  useEffect(() => {
+    if (messages?.pages) {
+      const allMessages = messages.pages.flatMap((page) => page.documents);
+      setMessageList(allMessages);
+    }
   }, [messages]);
 
   // Form State
@@ -161,8 +179,8 @@ const Chats = () => {
 
   const handleDelete = async (messageId) => {
     setMessageList((prev) =>
-        prev.filter((message) => message.$id !== messageId)
-      );
+      prev.filter((message) => message.$id !== messageId)
+    );
     const status = await deleteMessage(messageId);
     if (!status) {
       toast({
@@ -194,7 +212,6 @@ const Chats = () => {
           "There was an error in sending your message. Please try again.",
       });
     }
-    console.log(data);
   };
 
   return (
@@ -205,6 +222,8 @@ const Chats = () => {
         messages={messageList}
         currentUser={currentUser}
         onDelete={handleDelete}
+        hasNextPage={hasNextPage}
+        inViewRef={ref}
       />
       <form className="relative" onSubmit={handleSubmit(onSubmit)}>
         <Input
@@ -213,6 +232,7 @@ const Chats = () => {
           id="message"
           placeholder="Write a message..."
           className="pr-14"
+          autoComplete="off"
           {...register("message")}
         />
         <Button

@@ -19,7 +19,6 @@ import {
   getPostById,
   getRecentPosts,
   getSavedPosts,
-  getTestimonials,
   getUserById,
   getUserPosts,
   getUsers,
@@ -308,9 +307,18 @@ export const useDeleteComment = () => {
 // ==================
 
 export const useGetMessages = ({ senderId, receiverId }) => {
-  return useQuery({
+  return useInfiniteQuery({
     queryKey: [QUERY_KEYS.GET_MESSAGES, senderId, receiverId],
-    queryFn: () => getMessages(senderId, receiverId),
+    queryFn: ({ pageParam = null }) =>
+      getMessages(pageParam, senderId, receiverId),
+    getNextPageParam: (lastPage) => {
+      if (!lastPage || lastPage.documents.length === 0) {
+        return null;
+      }
+
+      const lastDocument = lastPage.documents[lastPage.documents.length - 1];
+      return lastDocument && lastDocument.$id ? lastDocument.$id : null;
+    },
     enabled: !!senderId && !!receiverId,
   });
 };
