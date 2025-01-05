@@ -50,7 +50,7 @@ function ChatHeader({ contact }) {
 function ChatBody({ messages, currentUser, onDelete }) {
   let lastMesssageSender = null;
   return (
-    <div className="flex flex-col-reverse justify-start flex-1">
+    <div className="flex h-[50vh] flex-col-reverse justify-start flex-1 pt-5 overflow-y-scroll custom-scrollbar">
       {messages?.map((message) => {
         const receivedByCurrentUser =
           message?.receiver.$id === currentUser?.$id;
@@ -160,7 +160,7 @@ const Chats = () => {
   const message = watch("message");
 
   const handleDelete = async (messageId) => {
-    
+
     const status = await deleteMessage(messageId);
     if (!status) {
       toast({
