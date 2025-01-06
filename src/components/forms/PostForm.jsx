@@ -10,16 +10,16 @@ import { useToast } from "../ui/Toast";
 import FileUploader from "../shared/FileUploader";
 import {
   useCreatePost,
+  useGetCurrentUser,
   useUpdatePost,
 } from "../../lib/react_query/queriesAndMutations";
-import { useUserContext } from "../../context/AuthContext";
 import { postFormSchema } from "../../lib/validation";
 
 const PostForm = ({ post, action }) => {
   const toast = useToast();
   const navigate = useNavigate();
 
-  const { user } = useUserContext();
+  const { data: currentUser } = useGetCurrentUser();
   const { mutateAsync: createPost, isPending: isLoadingCreate } =
     useCreatePost();
   const { mutateAsync: updatePost, isPending: isLoadingUpdate } =
@@ -65,7 +65,7 @@ const PostForm = ({ post, action }) => {
     }
     const newPost = await createPost({
       ...data,
-      userId: user.id,
+      userId: currentUser?.$id,
     });
 
     if (!newPost) {

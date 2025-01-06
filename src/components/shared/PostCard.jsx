@@ -2,12 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { timeAgo } from "../../lib/utils";
 import { FilePenLine } from "lucide-react";
-import { useUserContext } from "../../context/AuthContext";
 import PostStats from "./PostStats";
 import { ParseText } from "./ParseText";
+import { useGetCurrentUser } from "../../lib/react_query/queriesAndMutations";
 
 const PostCard = ({ post }) => {
-  const { user } = useUserContext();
+  const { data: currentUser } = useGetCurrentUser();
 
   if (!post.creator) return;
 
@@ -36,7 +36,7 @@ const PostCard = ({ post }) => {
         </div>
         <Link
           to={`/update-post/${post.$id}`}
-          className={`${user.id !== post.creator.$id && "hidden"}`}
+          className={`${currentUser?.$id !== post.creator.$id && "hidden"}`}
         >
           <FilePenLine size={20} />
         </Link>
@@ -62,7 +62,7 @@ const PostCard = ({ post }) => {
         />
       </Link>
 
-      <PostStats post={post} userId={user.id} showComments={true} />
+      <PostStats post={post} userId={currentUser?.$id} showComments={true} />
     </div>
   );
 };

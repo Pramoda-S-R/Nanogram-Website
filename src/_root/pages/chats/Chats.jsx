@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import EmojiPicker from "emoji-picker-react";
+import clsx from "clsx";
 import Input from "../../../components/ui/Input";
 import {
   Popover,
@@ -16,12 +18,14 @@ import {
   useGetCurrentUser,
   useGetMessages,
   useGetUserById,
+  useUpdateMessage,
 } from "../../../lib/react_query/queriesAndMutations";
 import { ParseText } from "../../../components/shared/ParseText";
 import { messageFormSchema } from "../../../lib/validation";
 import { useToast } from "../../../components/ui/Toast";
 import { useInView } from "react-intersection-observer";
 import SpinLoader from "../../../components/shared/SpinLoader";
+import { messageRealtime } from "../../../lib/appwrite/realtime";
 
 function ChatHeader({ contact }) {
   return (
@@ -49,8 +53,16 @@ function ChatHeader({ contact }) {
   );
 }
 
-function ChatBody({ messages, currentUser, onDelete, hasNextPage, inViewRef }) {
+function ChatBody({
+  messages,
+  currentUser,
+  onDelete,
+  onUpdate,
+  hasNextPage,
+  inViewRef,
+}) {
   let lastMesssageSender = null;
+
   return (
     <div className="flex h-[50vh] flex-col-reverse justify-start flex-1 pt-5 overflow-y-scroll custom-scrollbar">
       {messages?.map((message) => {
@@ -83,13 +95,34 @@ function ChatBody({ messages, currentUser, onDelete, hasNextPage, inViewRef }) {
                   : "justify-end items-end"
               }`}
             >
-              <div className="flex flex-col gap-1">
+              <div className="relative flex flex-col gap-1">
                 <p className="w-fit bg-primary text-neutral-white px-5 py-2 rounded-3xl">
                   {ParseText(message?.content)}
                 </p>
+                {message?.reactions?.length > 0 && (
+                  <div className={`absolute -bottom-3 ${receivedByCurrentUser ? "left-0" : "right-0"} flex gap-1`}>
+                    {message?.reactions.map((reaction, index) => (
+                      <img
+                        key={Math.random() + index}
+                        src={reaction}
+                        alt="emoji"
+                        className="w-5"
+                        onClick={() =>
+                          onUpdate({
+                            id: message.$id,
+                            content: message.content,
+                            reactions: message.reactions.filter(
+                              (reactionElement) => reactionElement !== reaction
+                            ),
+                          })
+                        }
+                      />
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
-            <div className="h-full flex-center">
+            <div className="h-full flex-center gap-2">
               {currentUser?.$id === message?.sender.$id && (
                 <Popover>
                   <PopoverTrigger>
@@ -106,6 +139,16 @@ function ChatBody({ messages, currentUser, onDelete, hasNextPage, inViewRef }) {
                   </PopoverContent>
                 </Popover>
               )}
+              <EmojiPickerPopover
+                onSelectEmoji={(emoji) =>
+                  onUpdate({
+                    id: message.$id,
+                    content: message.content,
+                    reactions: [emoji.imageUrl, ...message.reactions],
+                  })
+                }
+                className="group-hover:block hidden"
+              />
             </div>
           </div>
         );
@@ -119,13 +162,28 @@ function ChatBody({ messages, currentUser, onDelete, hasNextPage, inViewRef }) {
   );
 }
 
-function EmojiPicker() {
+function EmojiPickerPopover({ onSelectEmoji, className }) {
+  const [selectedEmoji, setSelectedEmoji] = useState(null);
+
+  const handleEmojiClick = (emojiObject) => {
+    setSelectedEmoji(emojiObject);
+    if (onSelectEmoji) {
+      onSelectEmoji(emojiObject);
+    }
+  };
+
   return (
     <Popover>
       <PopoverTrigger>
-        <Laugh />
+        <Laugh className={clsx(className)} />
       </PopoverTrigger>
-      <PopoverContent>Place content for the popover here.</PopoverContent>
+      <PopoverContent className="p-2 shadow-lg rounded-md">
+        <EmojiPicker
+          onEmojiClick={handleEmojiClick}
+          lazyLoadEmojis
+          theme="light" // You can set it to "dark" for a dark theme
+        />
+      </PopoverContent>
     </Popover>
   );
 }
@@ -144,11 +202,33 @@ const Chats = () => {
     receiverId: contact?.$id,
   });
   const { mutateAsync: sendMessage } = useCreateMessage();
+  const { mutateAsync: updateMessage } = useUpdateMessage();
   const { mutateAsync: deleteMessage } = useDeleteMessage();
 
   const toast = useToast();
 
   const [messageList, setMessageList] = useState([]);
+
+  useEffect(() => {
+    const unsubscribe = messageRealtime(currentUser?.$id, (response) => {
+      if (response.event === "create") {
+        setMessageList((prevMessages) => [response.payload, ...prevMessages]);
+      } else if (response.event === "delete") {
+        setMessageList((prevMessages) =>
+          prevMessages.filter((message) => message.$id !== response.payload.$id)
+        );
+      } else if (response.event === "update") {
+        setMessageList((prevMessages) =>
+          prevMessages.map((message) =>
+            message.$id === response.payload.$id ? response.payload : message
+          )
+        );
+      }
+    });
+    return () => {
+      unsubscribe();
+    };
+  }, [currentUser?.$id]);
 
   useEffect(() => {
     setMessageList([]);
@@ -175,16 +255,13 @@ const Chats = () => {
   } = useForm({
     resolver: zodResolver(messageFormSchema),
     defaultValues: {
-      comment: "",
+      message: "",
     },
   });
 
   const message = watch("message");
 
   const handleDelete = async (messageId) => {
-    setMessageList((prev) =>
-      prev.filter((message) => message.$id !== messageId)
-    );
     const status = await deleteMessage(messageId);
     if (!status) {
       toast({
@@ -195,15 +272,23 @@ const Chats = () => {
     }
   };
 
+  const handleUpdate = async (message) => {
+    const updatedMessage = await updateMessage({
+      id: message.id,
+      content: message.content,
+      reactions: message.reactions,
+    });
+    if (!updatedMessage) {
+      toast({
+        title: "Update Failed!",
+        description:
+          "There was an error in updating your message. Please try again.",
+      });
+    }
+  };
+
   const onSubmit = async (data) => {
     setValue("message", "");
-    const optimisticMessage = {
-      $id: Math.random().toString(36),
-      content: data.message,
-      sender: currentUser,
-      receiver: contact,
-    };
-    setMessageList((prev) => [optimisticMessage, ...prev]);
     const newMessage = await sendMessage({
       senderId: currentUser?.$id,
       receiverId: contact?.$id,
@@ -226,12 +311,19 @@ const Chats = () => {
         messages={messageList}
         currentUser={currentUser}
         onDelete={handleDelete}
+        onUpdate={handleUpdate}
         hasNextPage={hasNextPage}
         inViewRef={ref}
       />
       <form className="relative" onSubmit={handleSubmit(onSubmit)}>
         <Input
-          icon={<EmojiPicker />}
+          icon={
+            <EmojiPickerPopover
+              onSelectEmoji={(emoji) =>
+                setValue("message", watch("message") + emoji.emoji)
+              }
+            />
+          }
           type="text"
           id="message"
           placeholder="Write a message..."
@@ -243,7 +335,7 @@ const Chats = () => {
           variant="link"
           type="submit"
           className="absolute right-0 top-1"
-          disabled={!message?.trim()}
+          disabled={!message}
         >
           <SendHorizontal />
         </Button>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import clsx from "clsx";
 import { MessageCircleMore, Search, SquarePen } from "lucide-react";
 import {
@@ -16,12 +16,13 @@ import {
 import Input from "../ui/Input";
 import useDebounce from "../../hooks/useDebounce";
 import Loader from "./Loader";
+import { getContactsRealtime } from "../../lib/appwrite/realtime";
 
 function Contact({ contact }) {
   return (
     <li className="pb-5" key={contact.$id}>
       <Link to={`/messages/${contact.$id}`}>
-        <div className="flex gap-3 cursor-pointer">
+        <div className="flex gap-3 md:justify-center justify-start lg:justify-start cursor-pointer">
           <img
             src={contact?.imageUrl || "/assets/icons/user.svg"}
             alt="user"
@@ -42,13 +43,46 @@ function Contact({ contact }) {
 const Contacts = ({ className }) => {
   const { data: currentUser } = useGetCurrentUser();
   const navigate = useNavigate();
+  const location = useLocation();
 
+  const [latestChat, setLatestChat] = useState(null);
   const [contacts, setContacts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const debouncedValue = useDebounce(searchValue, 500);
   const { data: searchedUsers, isFetching } = useSearchUsers(debouncedValue);
+
+  useEffect(() => {
+    setIsDialogOpen(false);
+  }, [location]);
+
+  useEffect(() => {
+    const unsubscribe = getContactsRealtime(currentUser?.$id, (response) => {
+      setContacts((prevContacts) => {
+        const contactId = response.$id;
+
+        const existingContactIndex = prevContacts.findIndex(
+          (contact) => contact.$id === contactId
+        );
+
+        if (existingContactIndex !== -1) {
+          const updatedContacts = [...prevContacts];
+          const [existingContact] = updatedContacts.splice(
+            existingContactIndex,
+            1
+          );
+          return [existingContact, ...updatedContacts];
+        }
+
+        return [response, ...prevContacts];
+      });
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, [currentUser?.$id]);
 
   useEffect(() => {
     if (currentUser) {
@@ -86,7 +120,11 @@ const Contacts = ({ className }) => {
           <h2 className="h3-bold md:h2-bold text-left">All Chats</h2>
         </div>
         <div className="flex-center gap-4 px-6">
-          <Search size={24} onClick={() => navigate("/all-users")} className="md:hidden block" />
+          <Search
+            size={24}
+            onClick={() => navigate("/all-users")}
+            className="md:hidden block"
+          />
           <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
             <DialogTrigger>
               <SquarePen

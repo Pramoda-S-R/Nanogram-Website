@@ -42,7 +42,6 @@ const Navbar = () => {
   const { pathname } = useLocation();
 
   const [isHamActive, setIsHamActive] = useState(false);
-  const [isSheetActive, setIsSheetActive] = useState(false);
 
   useEffect(() => {
     if (isSuccess) navigate(0);

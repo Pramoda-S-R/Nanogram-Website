@@ -33,6 +33,7 @@ import {
   signOutAccount,
   unFollowUser,
   unSavePost,
+  updateMessage,
   updatePost,
   updateUser,
 } from "../appwrite/api";
@@ -306,6 +307,18 @@ export const useDeleteComment = () => {
 // Message Queries
 // ==================
 
+export const useCreateMessage = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (message) => createMessage(message),
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_MESSAGES, data.sender.$id, data.receiver.$id],
+      });
+    },
+  });
+};
+
 export const useGetMessages = ({ senderId, receiverId }) => {
   return useInfiniteQuery({
     queryKey: [QUERY_KEYS.GET_MESSAGES, senderId, receiverId],
@@ -323,15 +336,15 @@ export const useGetMessages = ({ senderId, receiverId }) => {
   });
 };
 
-export const useCreateMessage = () => {
+export const useUpdateMessage = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (message) => createMessage(message),
+    mutationFn: (message) => updateMessage(message),
     onSuccess: (data) => {
       queryClient.invalidateQueries({
         queryKey: [QUERY_KEYS.GET_MESSAGES, data.sender.$id, data.receiver.$id],
       });
-    },
+    }
   });
 };
 

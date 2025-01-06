@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import PostStats from "./PostStats";
-import { useUserContext } from "../../context/AuthContext";
+import { useGetCurrentUser } from "../../lib/react_query/queriesAndMutations";
 
 const GridPostList = ({ posts, showUser = true, showStats = true }) => {
-  const { user } = useUserContext();
+  const { data: currentUser } = useGetCurrentUser();
   return (
     <ul className="grid-container">
       {posts.map((post) => (
@@ -30,7 +30,7 @@ const GridPostList = ({ posts, showUser = true, showStats = true }) => {
                 <p className="line-clamp-1">{post.creator.name}</p>
               </div>
             )}
-            {showStats && <PostStats post={post} userId={user.id} />}
+            {showStats && <PostStats post={post} userId={currentUser?.$id} />}
           </div>
         </li>
       ))}

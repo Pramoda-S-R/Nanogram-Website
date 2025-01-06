@@ -16,18 +16,16 @@ import {
 } from "../../components/ui/AlertDialog";
 import { useToast } from "../../components/ui/Toast";
 import Loader from "../../components/shared/Loader";
-import { Ellipsis, FilePenLine, Trash } from "lucide-react";
+import { Ellipsis, FilePenLine, Info, Trash } from "lucide-react";
 import { timeAgo } from "../../lib/utils";
-import { useUserContext } from "../../context/AuthContext";
 import {
   useDeletePost,
+  useGetCurrentUser,
   useGetPostById,
   useRelatedPosts,
 } from "../../lib/react_query/queriesAndMutations";
 import GridPostList from "../../components/shared/GridPostList";
 import { ParseText } from "../../components/shared/ParseText";
-import CommentList from "../../components/shared/CommentList";
-import { getCurrentUser } from "../../lib/appwrite/api";
 import {
   Popover,
   PopoverContent,
@@ -53,9 +51,8 @@ const PostDetails = () => {
   const { id } = useParams();
   const { data: post, isPending } = useGetPostById(id || "");
   const { mutateAsync: deletePost, isPending: isDeleting } = useDeletePost();
-  const { user } = useUserContext();
   const { data: relatedPosts, isFetching } = useRelatedPosts(post);
-  const { data: currentUser } = getCurrentUser();
+  const { data: currentUser } = useGetCurrentUser();
 
   const [commentList, setCommentList] = useState([]);
   useEffect(() => {
@@ -139,10 +136,14 @@ const PostDetails = () => {
                       <Ellipsis />
                     </PopoverTrigger>
                     <PopoverContent className="flex flex-col">
+                      <Button variant="ghost" className={"w-full text-primary"}>
+                        <Info />
+                        <p>Info</p>
+                      </Button>
                       <Button
                         variant="ghost"
                         className={`w-full ${
-                          user.id !== post?.creator.$id && "hidden"
+                          currentUser?.$id !== post?.creator.$id && "hidden"
                         } text-primary`}
                         onClick={() => navigate(`/update-post/${post?.$id}`)}
                       >
@@ -152,8 +153,8 @@ const PostDetails = () => {
                       <AlertDialog>
                         <AlertDialogTrigger>
                           <div
-                            className={`py-2 px-4 w-full rounded-md font-semibold gap-3 text-sm flex-center text-red-600 hover:bg-primary/10 ${
-                              user.id !== post?.creator.$id && "hidden"
+                            className={`py-2 px-4 w-full rounded-md font-semibold gap-3 text-sm flex justify-center items-center text-red-600 hover:bg-primary/10 ${
+                              currentUser?.$id !== post?.creator.$id && "hidden"
                             }`}
                           >
                             <Trash /> <p>Delete Post</p>
@@ -196,7 +197,11 @@ const PostDetails = () => {
               <hr className="border w-full border-neutral-black/50" />
               <div className="w-full flex flex-1"></div>
               <div className="w-full">
-                <PostStats post={post} userId={user.id} showComments={true} />
+                <PostStats
+                  post={post}
+                  userId={currentUser?.$id}
+                  showComments={true}
+                />
               </div>
             </div>
           </div>

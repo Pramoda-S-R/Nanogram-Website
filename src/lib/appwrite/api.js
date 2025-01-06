@@ -668,6 +668,29 @@ export async function getMessages(pageParam, senderId, receiverId) {
     console.log(error);
   }
 }
+// Update a message
+export async function updateMessage(message) {
+  try {
+    const updatedMessage = await database.updateDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.messagesCollectionId,
+      message.id,
+      {
+        content: message.content,
+        reactions: message.reactions.slice(
+          0,
+          Math.min(2, message.reactions.length)
+        ),
+      }
+    );
+
+    if (!updatedMessage) throw Error;
+
+    return updatedMessage;
+  } catch (error) {
+    console.log(error);
+  }
+}
 // Delete a message
 export async function deleteMessage(messageId) {
   try {
