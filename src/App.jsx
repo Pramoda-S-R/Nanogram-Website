@@ -29,6 +29,8 @@ import { ToastProvider } from "./components/ui/Toast";
 import ErrorBoundary from "./errors/ErrorBoundary";
 import { Chats } from "./_root/pages/chats";
 import Inbox from "./_root/pages/chats/Inbox";
+import PDFViewer from "./components/shared/PDFViewer";
+import ControlNewsletters from "./_admin/controls/ControlNewsletters";
 
 const App = () => {
   return (
@@ -55,6 +57,7 @@ const App = () => {
                   <Route path="/community" element={<Community />} />
                   <Route path="/blog" element={<Blog />} />
                   <Route path="/newsletter" element={<NewsLetter />} />
+                  <Route path="/newsletter/:id" element={<PDFViewer />} />
                   <Route path="/explore" element={<Explore />} />
                   <Route path="/saved" element={<Saved />} />
                   <Route path="/all-users" element={<AllUsers />} />
@@ -64,6 +67,7 @@ const App = () => {
                   <Route path="/posts/:id" element={<PostDetails />} />
                   <Route path="/profile/:id/*" element={<Profile />} />
                   <Route path="/update-profile" element={<UpdateProfile />} />
+                  {/* messages */}
                   <Route element={<Messages />}>
                     <Route path="/messages" element={<Inbox />} />
                     <Route path="/messages/:id/*" element={<Chats />} />
@@ -72,6 +76,7 @@ const App = () => {
                 {/* admin route */}
                 <Route element={<AdminLayout />}>
                   <Route path="/admin" element={<Admin />} />
+                  <Route path="/admin/newsletter" element={<ControlNewsletters />} />
                 </Route>
                 {/* 404 */}
                 <Route path="*" element={<NotFound />} />

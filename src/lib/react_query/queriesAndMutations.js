@@ -7,15 +7,19 @@ import {
 import {
   createComment,
   createMessage,
+  createNews,
   createPost,
   createUserAccount,
   deleteComment,
   deleteMessage,
+  deleteNews,
   deletePost,
   followUser,
   getCurrentUser,
   getInfinitePosts,
   getMessages,
+  getNews,
+  getNewsById,
   getPostById,
   getRecentPosts,
   getSavedPosts,
@@ -34,6 +38,7 @@ import {
   unFollowUser,
   unSavePost,
   updateMessage,
+  updateNews,
   updatePost,
   updateUser,
 } from "../appwrite/api";
@@ -245,6 +250,74 @@ export const useGetUserById = (userId) => {
 };
 
 // ==================
+// News Queries
+// ==================
+
+export const useGetNews = () => {
+  return useQuery({
+    queryKey: [QUERY_KEYS.GET_NEWS],
+    queryFn: getNews,
+    initialData: [],
+    onError: (error) => {
+      console.error("Error in useGetNews:", error);
+    },
+  });
+};
+
+export const useGetNewsById = (newsId) => {
+  return useQuery({
+    queryKey: [QUERY_KEYS.GET_NEWS_BY_ID, newsId],
+    queryFn: () => getNewsById(newsId),
+    enabled: !!newsId,
+  });
+};
+
+export const useCreateNews = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (news) => createNews(news),
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_NEWS_BY_ID, data.$id],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_NEWS],
+      });
+    },
+  });
+};
+
+export const useUpdateNews = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (news) => updateNews(news),
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_NEWS_BY_ID, data.$id],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_NEWS],
+      });
+    },
+  });
+};
+
+export const useDeleteNews = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({ newsId, fileId }) => deleteNews(newsId, fileId),
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_NEWS_BY_ID, data.newsId],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_NEWS],
+      });
+    },
+  });
+};
+
+// ==================
 // Comment Queries
 // ==================
 
@@ -344,7 +417,7 @@ export const useUpdateMessage = () => {
       queryClient.invalidateQueries({
         queryKey: [QUERY_KEYS.GET_MESSAGES, data.sender.$id, data.receiver.$id],
       });
-    }
+    },
   });
 };
 

@@ -231,6 +231,26 @@ export async function deleteFile(fileId) {
     console.log(error);
   }
 }
+// Download File
+export async function downloadFile(fileId, fileName) {
+  try {
+    const fileURL = storage.getFileDownload(appwriteConfig.storageId, fileId);
+
+    const response = await fetch(fileURL);
+    const blob = await response.blob();
+
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = fileName;
+
+    link.click();
+
+    URL.revokeObjectURL(link.href);
+  } catch (error) {
+    console.error("Error downloading file:", error);
+  }
+}
+
 // Update post
 export async function updatePost(post) {
   const hasFileTOUpdate = post.image instanceof File;
@@ -546,6 +566,148 @@ export async function getUserTopPosts(userId) {
     );
 
     return post;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+// ==================
+// News Functions
+// ==================
+// Create a new news
+export async function createNews(news) {
+  if (!news) return;
+
+  try {
+    const uploadedFile = await uploadFile(news.file);
+
+    if (!uploadedFile) throw Error;
+
+    const fileUrl = storage.getFileDownload(
+      appwriteConfig.storageId,
+      uploadedFile.$id
+    );
+    if (!fileUrl) {
+      await deleteFile(uploadedFile.$id);
+      throw Error;
+    }
+
+    const newNews = await database.createDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.newsCollectionId,
+      ID.unique(),
+      {
+        title: news.title,
+        fileId: uploadedFile.$id,
+        fileUrl: fileUrl,
+      }
+    );
+
+    if (!newNews) {
+      await deleteFile(uploadedFile.$id);
+    }
+
+    return newNews;
+  } catch (error) {
+    console.log(error);
+  }
+}
+// Get news
+export async function getNews() {
+  try {
+    const news = await database.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.newsCollectionId,
+      [Query.orderDesc("$createdAt"), Query.limit(20)]
+    );
+
+    if (!news) throw Error;
+
+    return news;
+  } catch (error) {
+    console.log(error);
+  }
+}
+// Get news by id
+export async function getNewsById(newsId) {
+  if (!newsId) return;
+  try {
+    const news = await database.getDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.newsCollectionId,
+      newsId
+    );
+
+    if (!news) throw Error;
+
+    return news;
+  } catch (error) {
+    console.log(error);
+  }
+}
+// Update news
+export async function updateNews(news) {
+  try {
+    const hasFileToUpdate = news.file instanceof File;
+    let file = {
+      fileUrl: news.fileUrl,
+      fileId: news.fileId,
+    };
+
+    if (hasFileToUpdate) {
+      const uploadedFile = await uploadFile(news.file);
+      if (!uploadedFile) throw Error;
+
+      const fileUrl = storage.getFileDownload(
+        appwriteConfig.storageId,
+        uploadedFile.$id
+      );
+      if (!fileUrl) {
+        await deleteFile(uploadedFile.$id);
+        throw Error;
+      }
+
+      file = { ...file, fileUrl: fileUrl, fileId: uploadedFile.$id };
+    }
+
+    const updatedNews = await database.updateDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.newsCollectionId,
+      news.id,
+      {
+        title: news.title,
+        fileUrl: file.fileUrl,
+        fileId: file.fileId,
+      }
+    );
+
+    if (!updatedNews) {
+      await deleteFile(file.fileId);
+      throw Error;
+    }
+
+    if (news.fileId && hasFileToUpdate) {
+      await deleteFile(news.fileId);
+    }
+
+    return updatedNews;
+  } catch (error) {
+    console.log(error);
+  }
+}
+// Delete news
+export async function deleteNews(newsId, fileId) {
+  if (!newsId) return;
+  try {
+    await database.deleteDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.newsCollectionId,
+      newsId
+    );
+
+    await deleteFile(fileId);
+
+    return { status: "ok", newsId: newsId };
   } catch (error) {
     console.log(error);
   }

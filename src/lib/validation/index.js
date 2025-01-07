@@ -68,3 +68,8 @@ export const commentFormSchema = z.object({
 export const messageFormSchema = z.object({
   message: z.string().min(1, "Message is required"),
 });
+
+export const newsLetterFormSchema = z.object({
+  title: z.string().min(1, "Title is required"),
+  file: z.any().nullable(),
+});

@@ -1,121 +1,47 @@
 import React, { useState, useEffect } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
-import Button from "../ui/Button";
-import { StepBack, StepForward } from "lucide-react";
+import { useMediaQuery } from "react-responsive";
+import { useParams } from "react-router-dom";
+import { useGetNewsById } from "../../lib/react_query/queriesAndMutations";
 
 pdfjs.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
 
-const PDFViewer = ({ file }) => {
-  const getPageWidth = () => {
-    return window.innerWidth;
-  };
-  const getPageHeight = () => {
-    return window.innerHeight;
-  };
-  const [numPages, setNumPages] = useState(null);
-  const [pageNumber, setPageNumber] = useState(1);
-  const [error, setError] = useState(null);
-  const [pageWidth, setPageWidth] = useState(getPageWidth());
-  const [pageHeight, setPageHeight] = useState(getPageHeight());
+const PDFViewer = () => {
+  const { id } = useParams();
+  const { data: newsLetter } = useGetNewsById(id || "");
 
-  console.log(
-    (window.innerHeight - 246) /
-      (window.innerWidth >= 768
-        ? window.innerWidth - 400
-        : window.innerWidth - 50) >
-      1.141
-      ? "set width"
-      : "set height"
-  );
+  const [numPages, setNumPages] = useState(0);
 
-  useEffect(() => {
-    const handleResize = () => {
-      setPageWidth(getPageWidth());
-      setPageHeight(getPageHeight());
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
-  const onDocumentLoadSuccess = ({ numPages }) => {
+  const isDesktop = useMediaQuery({ query: "(min-width: 768px)" });
+  
+  function onDocumentLoadSuccess({ numPages }) {
     setNumPages(numPages);
-    setError(null);
-  };
+  }
 
-  const onDocumentLoadError = (err) => {
-    console.error("Failed to load PDF:", err.message);
-    setError("Failed to load the PDF. Please check the file.");
-  };
-
-  if (!file) {
+  if (!newsLetter?.fileUrl) {
     return <p className="text-red-600 text-center my-4">No file provided.</p>;
   }
 
   return (
-    <div className="flex min-w-0 overflow-auto">
-      {error && <p className="text-red-600 text-center my-4">{error}</p>}
-      <Button
-        variant="outline"
-        className={`mx-0.5`}
-        onClick={() => setPageNumber((prev) => Math.max(prev - 1, 1))}
-        disabled={pageNumber <= 1}
-        padding=""
-      >
-        <StepBack />
-      </Button>
+    <div className="default-container flex justify-center">
       <div>
-        <hr className="border border-neutral-black/70 mb-1" />
         <Document
-          file={file}
+          file={newsLetter.fileUrl}
           onLoadSuccess={onDocumentLoadSuccess}
-          onLoadError={onDocumentLoadError}
         >
-          <Page
-            pageNumber={pageNumber}
-            width={
-              (window.innerHeight - 246) /
-                (window.innerWidth >= 768
-                  ? window.innerWidth - 400
-                  : window.innerWidth - 50) >
-              1.141
-                ? window.innerWidth >= 768
-                  ? window.innerWidth - 520
-                  : window.innerWidth - 140
-                : null
-            }
-            height={
-              (window.innerHeight - 246) /
-                (window.innerWidth > 768
-                  ? window.innerWidth - 400
-                  : window.innerWidth - 50) >
-              1.141
-                ? null
-                : window.innerHeight - 300
-            }
-            renderAnnotationLayer={false}
-            renderTextLayer={false}
-          />
+          {Array.from(new Array(numPages), (el, index) => (
+            <Page
+              key={`page_${index + 1}`}
+              width={
+                isDesktop ? window.innerWidth - 500 : window.innerWidth - 40
+              }
+              pageNumber={index + 1}
+              renderAnnotationLayer={false}
+              renderTextLayer={false}
+            />
+          ))}
         </Document>
-        {numPages && (
-          <p className="text-center mt-1">
-            Page {pageNumber} of {numPages}
-          </p>
-        )}
-        <hr className="border border-neutral-black/70 mt-1" />
       </div>
-      <Button
-        variant="outline"
-        className={"mx-0.5"}
-        onClick={() => setPageNumber((prev) => Math.min(prev + 1, numPages))}
-        disabled={pageNumber >= numPages}
-        padding=""
-      >
-        <StepForward />
-      </Button>
     </div>
   );
 };

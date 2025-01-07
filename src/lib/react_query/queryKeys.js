@@ -7,6 +7,10 @@ export const QUERY_KEYS = {
   GET_USERS: "getUsers",
   GET_USER_BY_ID: "getUserById",
 
+  // NEWSLETTER KEYS
+  GET_NEWS: "getNews",
+  GET_NEWS_BY_ID: "getNewsById",
+
   // MESSAGE KEYS
   GET_MESSAGES: "getMessages",
 

@@ -85,3 +85,22 @@ export function getUserKarma(user) {
 
   return karma;
 }
+
+export function formatReadableTime(isoTimestamp) {
+  const date = new Date(isoTimestamp);
+
+  // Options for formatting the date and time
+  const options = {
+    weekday: "long", // e.g., "Monday"
+    year: "numeric", // e.g., "2025"
+    month: "long", // e.g., "January"
+    day: "numeric", // e.g., "6"
+    hour: "numeric", // e.g., "5 PM"
+    minute: "2-digit", // e.g., "22"
+    second: "2-digit", // e.g., "45"
+    timeZoneName: "short", // e.g., "GMT"
+  };
+
+
+  return date.toLocaleString("en-US", options);
+}
