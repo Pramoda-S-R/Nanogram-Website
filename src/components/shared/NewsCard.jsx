@@ -36,7 +36,7 @@ const NewsCard = ({ newsLetter, showActions = true }) => {
           />
         </Document>
         {showActions && (
-          <div className="max-w-md min-w-96 flex flex-col items-center gap-2">
+          <div className="max-w-md lg:min-w-96 min-w-0 flex flex-col items-center gap-2">
             <h3 className="text-lg font-semibold px-5 pt-5">
               {newsLetter.title}
             </h3>

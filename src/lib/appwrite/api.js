@@ -1065,6 +1065,22 @@ export async function getTestimonials() {
     return [];
   }
 }
+// Get all nanogram
+export async function getAllNanograms() {
+  try {
+    const response = await database.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.nanogramCollectionId,
+      [Query.orderAsc("priority")]
+    );
+    if (!response) {
+      throw new Error("No nanograms found.");
+    }
+    return response;
+  } catch (error) {
+    console.error("Error in getAllNanograms:", error);
+  }
+}
 // Get core team members
 export async function getCoreMembers() {
   try {
@@ -1101,5 +1117,115 @@ export async function getAluminiMembers() {
   } catch (error) {
     console.error("Error in getAluminiMembers:", error);
     return [];
+  }
+}
+// Create a new nanogram
+export async function createNanogram(data) {
+  try {
+    const uploadedFile = await uploadFile(data.file);
+
+    if (!uploadedFile) throw Error;
+
+    const fileUrl = storage.getFileDownload(
+      appwriteConfig.storageId,
+      uploadedFile.$id
+    );
+    if (!fileUrl) {
+      await deleteFile(uploadedFile.$id);
+      throw Error;
+    }
+    const nanogram = await database.createDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.nanogramCollectionId,
+      ID.unique(),
+      {
+        name: data.name,
+        role: data.role,
+        content: data.content,
+        avatarUrl: fileUrl,
+        avatarId: uploadedFile.$id,
+        linkedIn: data.linkedIn ? data.linkedIn : null,
+        instagram: data.instagram ? data.instagram : null,
+        github: data.github ? data.github : null,
+        alumini: data.alumini ? data.alumini : null,
+        core: data.core ? data.core : null,
+        priority: data.priority,
+      }
+    );
+    if (!nanogram) {
+      await deleteFile(uploadedFile.$id);
+      throw Error;
+    }
+    return nanogram;
+  } catch (error) {
+    console.error("Error in createNanogram:", error);
+  }
+}
+// Update a nanogram
+export async function updateNanogram(data) {
+  try {
+    const hasFileToUpdate = data.file instanceof File;
+    let file = {
+      avatarUrl: data.avatarUrl,
+      avatarId: data.avatarId,
+    };
+
+    if (hasFileToUpdate) {
+      const uploadedFile = await uploadFile(data.file);
+      if (!uploadedFile) throw Error;
+
+      const fileUrl = storage.getFileDownload(
+        appwriteConfig.storageId,
+        uploadedFile.$id
+      );
+      if (!fileUrl) {
+        await deleteFile(uploadedFile.$id);
+        throw Error;
+      }
+
+      file = { ...file, avatarUrl: fileUrl, avatarId: uploadedFile.$id };
+    }
+    const nanogram = await database.updateDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.nanogramCollectionId,
+      data.id,
+      {
+        name: data.name,
+        role: data.role,
+        content: data.content,
+        avatarUrl: file.avatarUrl,
+        avatarId: file.avatarId,
+        linkedIn: data.linkedIn ? data.linkedIn : null,
+        instagram: data.instagram ? data.instagram : null,
+        github: data.github ? data.github : null,
+        alumini: data.alumini ? data.alumini : null,
+        core: data.core ? data.core : null,
+        priority: data.priority,
+      }
+    );
+    if (!nanogram) {
+      await deleteFile(file.avatarId);
+      throw Error;
+    }
+    if (data.avatarId && hasFileToUpdate) {
+      await deleteFile(data.avatarId);
+    }
+    return nanogram;
+  } catch (error) {
+    console.error("Error in updateNanogram:", error);
+  }
+}
+// Delete a nanogram
+export async function deleteNanogram(nanogramId, avatarId) {
+  try {
+    await database.deleteDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.nanogramCollectionId,
+      nanogramId
+    );
+    await deleteFile(avatarId);
+    return { status: "ok", nanogramId: nanogramId };
+  } catch (error) {
+    console.error("Error in deleteNanogram:", error);
   }
 }

@@ -17,8 +17,6 @@ const NewsLetter = () => {
   const hasPastNewsLetters =
     newsLetters?.documents && newsLetters.documents.lenght > 1;
 
-  console.log(newsLetters?.documents);
-
   return (
     <div className="h-screen flex flex-col flex-1 md:pt-32 py-24 px-5 md:p-14 overflow-y-scroll custom-scrollbar">
       <div className="max-w-5xl flex items-center w-full gap-2 justify-start">

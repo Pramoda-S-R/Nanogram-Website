@@ -100,14 +100,16 @@ function Comment({ comment, currentUser, onDeleteComment, showLikes }) {
     <li key={comment.$id} className="flex flex-col w-full gap-2">
       <div className="w-full flex">
         <div className="flex w-full gap-2">
-          <Link to={`/profile/${comment.commentor.$id}`}>
-            <img
-              src={comment.commentor.imageUrl || "/assets/icons/user.svg"}
-              alt={comment.commentor.name || "commentor"}
-              className="w-10 h-10 rounded-full"
-            />
-          </Link>
-          <div className="flex flex-col">
+          <div className="w-12 items-center">
+            <Link to={`/profile/${comment.commentor.$id}`}>
+              <img
+                src={comment.commentor.imageUrl || "/assets/icons/user.svg"}
+                alt={comment.commentor.name || "commentor"}
+                className="w-10 h-10 rounded-full"
+              />
+            </Link>
+          </div>
+          <div className="w-full flex flex-col">
             <p className="text-sm font-semibold">{comment.commentor.name}</p>
             <p className="flex text-xs">{comment.content}</p>
           </div>
