@@ -41,7 +41,7 @@ export default function Testimonials() {
     controls.start({ x: 0 });
   };
 
-  if (testimonials.length === 0) return <p>Loading testimonials...</p>;
+  if (testimonials.length === 0) return <p className="flex-center">Loading testimonials...</p>;
 
   return (
     <div className="relative w-full px-4 lg:pt-20 md:pt-32 pt-52 py-16 overflow-hidden">
