@@ -73,3 +73,44 @@ export const newsLetterFormSchema = z.object({
   title: z.string().min(1, "Title is required"),
   file: z.any().nullable(),
 });
+
+export const nanogramFormSchema = z.object({
+  name: z.string().min(1, "Name is required"),
+  role: z.string().min(1, "Role is required"),
+  content: z.string().optional(),
+  file: z.any().nullable(),
+  linkedin: z
+    .string()
+    .url({ message: "Invalid LinkedIn URL" })
+    .or(z.string().min(0))
+    .optional(),
+  instagram: z
+    .string()
+    .url({ message: "Invalid Instagram URL" })
+    .or(z.string().min(0))
+    .optional(),
+  github: z
+    .string()
+    .url({ message: "Invalid GitHub URL" })
+    .or(z.string().min(0))
+    .optional(),
+  alumini: z.boolean(),
+  core: z.boolean(),
+  priority: z.number().int().min(0, "Priority must be at least 0"),
+});
+
+export const eventFormSchema = z.object({
+  title: z.string().min(1, "Title is required"),
+  subtitle: z.string().min(1, "Subtitle is required"),
+  description: z.string().min(1, "Description is required"),
+  content: z.string().min(1, "Content is required"),
+  completed: z.boolean(),
+  registration: z
+    .string()
+    .url({ message: "Invalid Registration URL" })
+    .or(z.string().min(0))
+    .optional(),
+  date: z.string().min(1, "Date is required"),
+  location: z.string().min(1, "Location is required"),
+  image: z.any().nullable(),
+});

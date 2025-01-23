@@ -1,5 +1,5 @@
-import GridTeamList from "../../../components/shared/GridTeamList";
 import React, { useEffect, useState } from "react";
+import GridTeamList from "../../../components/shared/GridTeamList";
 import { getAluminiMembers } from "../../../lib/appwrite/api";
 
 const Alumini = () => {

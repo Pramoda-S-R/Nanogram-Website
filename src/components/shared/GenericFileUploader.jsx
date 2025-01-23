@@ -89,7 +89,7 @@ const GenericFileUploader = ({
           {fileUrl ? (
             <>
               <div className="flex flex-1 justify-center w-full p-2 lg:p-4">
-                {fileUrl.endsWith(".jpg") || fileUrl.endsWith(".jpeg") || fileUrl.endsWith(".png") ? (
+                {enableImageCropping ? (
                   <img
                     src={fileUrl}
                     alt="Uploaded file"
@@ -97,7 +97,7 @@ const GenericFileUploader = ({
                     loading="lazy"
                   />
                 ) : (
-                  <p className="file_uploader-label">File uploaded successfully</p>
+                  <p className="file_uploader-label">File uploaded successfully {fileUrl}</p>
                 )}
               </div>
               <p className="file_uploader-label">

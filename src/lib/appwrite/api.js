@@ -1141,14 +1141,14 @@ export async function createNanogram(data) {
       {
         name: data.name,
         role: data.role,
-        content: data.content,
+        content: data.content.length !== 0 ? data.content : null,
         avatarUrl: fileUrl,
         avatarId: uploadedFile.$id,
-        linkedIn: data.linkedIn ? data.linkedIn : null,
-        instagram: data.instagram ? data.instagram : null,
-        github: data.github ? data.github : null,
-        alumini: data.alumini ? data.alumini : null,
-        core: data.core ? data.core : null,
+        linkedin: data.linkedin.length !== 0 ? data.linkedin : null,
+        instagram: data.instagram.length !== 0 ? data.instagram : null,
+        github: data.github.length !== 0 ? data.github : null,
+        alumini: data.alumini,
+        core: data.core,
         priority: data.priority,
       }
     );
@@ -1195,7 +1195,7 @@ export async function updateNanogram(data) {
         content: data.content,
         avatarUrl: file.avatarUrl,
         avatarId: file.avatarId,
-        linkedIn: data.linkedIn ? data.linkedIn : null,
+        linkedin: data.linkedin ? data.linkedin : null,
         instagram: data.instagram ? data.instagram : null,
         github: data.github ? data.github : null,
         alumini: data.alumini ? data.alumini : null,
@@ -1227,5 +1227,206 @@ export async function deleteNanogram(nanogramId, avatarId) {
     return { status: "ok", nanogramId: nanogramId };
   } catch (error) {
     console.error("Error in deleteNanogram:", error);
+  }
+}
+
+// ==================
+// Event Functions
+// ==================
+// Get events
+export async function getEvents() {
+  try {
+    const events = await database.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.eventsCollectionId,
+      [Query.orderDesc("date"), Query.limit(20), Query.equal("completed", true)]
+    );
+
+    if (!events) throw Error;
+
+    return events;
+  } catch (error) {
+    console.log(error);
+  }
+}
+// Get Next Event
+export async function getNextEvent() {
+  try {
+    const events = await database.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.eventsCollectionId,
+      [Query.orderAsc("date"), Query.limit(1), Query.equal("completed", false)]
+    );
+
+    if (!events) throw Error;
+
+    return events.documents[0];
+  } catch (error) {
+    console.log(error);
+  }
+}
+// Get Last Event
+export async function getLastEvent() {
+  try {
+    const events = await database.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.eventsCollectionId,
+      [Query.orderDesc("date"), Query.limit(1), Query.equal("completed", true)]
+    );
+
+    if (!events) throw Error;
+
+    return events.documents[0];
+  } catch (error) {
+    console.log(error);
+  }
+}
+// Get Scheduled Events
+export async function getUpcomingEvents() {
+  try {
+    const events = await database.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.eventsCollectionId,
+      [Query.orderAsc("date"), Query.limit(20), Query.equal("completed", false)]
+    );
+
+    if (!events) throw Error;
+
+    return events;
+  } catch (error) {
+    console.log(error);
+  }
+}
+// Create a new event
+export async function createEvent(event) {
+  try {
+    const uploadedFile = await uploadFile(event.image);
+
+    if (!uploadedFile) throw Error;
+
+    const fileUrl = storage.getFileDownload(
+      appwriteConfig.storageId,
+      uploadedFile.$id
+    );
+    if (!fileUrl) {
+      await deleteFile(uploadedFile.$id);
+      throw Error;
+    }
+
+    const newEvent = await database.createDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.eventsCollectionId,
+      ID.unique(),
+      {
+        title: event.title,
+        subtitle: event.subtitle,
+        description: event.description,
+        content: event.content,
+        completed: event.completed,
+        registration: event.registration.length !== 0 ? event.registration : null,
+        date: event.date,
+        location: event.location,
+        imageUrl: fileUrl,
+        imageId: uploadedFile.$id,
+      }
+    );
+
+    if (!newEvent) {
+      await deleteFile(uploadedFile.$id);
+      throw Error;
+    }
+
+    return newEvent;
+  } catch (error) {
+    console.log(error);
+  }
+}
+// Get All Events
+export async function getAllEvents() {
+  try {
+    const events = await database.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.eventsCollectionId,
+      [Query.orderDesc("date")]
+    );
+
+    if (!events) throw Error;
+
+    return events;
+  } catch (error) {
+    console.log(error);
+  }
+}
+// Update Event
+export async function updateEvent(event) {
+  const hasFileToUpdate = event.image instanceof File;
+  try {
+    let image = {
+      imageUrl: event.imageUrl,
+      imageId: event.imageId,
+    };
+
+    if (hasFileToUpdate) {
+      const uploadedFile = await uploadFile(event.image);
+      if (!uploadedFile) throw Error;
+
+      const fileUrl = storage.getFileDownload(
+        appwriteConfig.storageId,
+        uploadedFile.$id
+      );
+      if (!fileUrl) {
+        await deleteFile(uploadedFile.$id);
+        throw Error;
+      }
+
+      image = { ...image, imageUrl: fileUrl, imageId: uploadedFile.$id };
+    }
+
+    const updatedEvent = await database.updateDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.eventsCollectionId,
+      event.id,
+      {
+        title: event.title,
+        subtitle: event.subtitle,
+        description: event.description,
+        content: event.content,
+        completed: event.completed,
+        registration: event.registration.length !== 0 ? event.registration : null,
+        date: event.date,
+        location: event.location,
+        imageUrl: image.imageUrl,
+        imageId: image.imageId,
+      }
+    );
+
+    if (!updatedEvent) {
+      await deleteFile(image.imageId);
+      throw Error;
+    }
+
+    if (event.imageId && hasFileToUpdate) {
+      await deleteFile(event.imageId);
+    }
+
+    return updatedEvent;
+  } catch (error) {
+    console.log(error);
+  }
+}
+// Delete Event
+export async function deleteEvent(eventId, imageId) {
+  try {
+    await database.deleteDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.eventsCollectionId,
+      eventId
+    );
+
+    await deleteFile(imageId);
+
+    return { status: "ok", eventId: eventId };
+  } catch (error) {
+    console.log(error);
   }
 }

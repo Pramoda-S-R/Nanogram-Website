@@ -28,6 +28,9 @@ export const QUERY_KEYS = {
   SEARCH_POSTS: "getSearchPosts",
   SEARCH_USERS: "getSearchUsers",
 
-  // TESTIMONIAL KEYS
-  GET_TESTIMONIALS: "getTestimonials",
+  // NANOGRAM KEYS
+  GET_NANOGRAM: "getNanogram",
+
+  // EVENT KEYS
+  GET_EVENTS: "getEvents",
 };

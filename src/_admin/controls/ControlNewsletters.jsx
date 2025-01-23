@@ -61,11 +61,12 @@ function NewsLetterForm({ news, action, newsSubmit }) {
           title: "Update Failed!",
           description: "There was an error in updating. Please try again.",
         });
+      } else {
+        toast({
+          title: "Update Successful!",
+          description: "Your newsletter has been updated successfully. 🎉",
+        });
       }
-      toast({
-        title: "Update Successful!",
-        description: "Your newsletter has been updated successfully. 🎉",
-      });
       return navigate(`/admin/newsletter`);
     }
     const newNews = await createNewsLetter(data);
@@ -109,7 +110,7 @@ function NewsLetterForm({ news, action, newsSubmit }) {
         <GenericFileUploader
           onFileChange={(file) => setValue("file", file)}
           initialFileUrl={news?.imageUrl}
-          acceptedFileTypes={{ "applicatipn/pdf": [".pdf"] }}
+          acceptedFileTypes={{ "application/pdf": [".pdf"] }}
           enableImageCropping={false}
           cropAspectRatio={null}
           cropperStyle={{}}

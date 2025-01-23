@@ -6,15 +6,21 @@ import {
 } from "@tanstack/react-query";
 import {
   createComment,
+  createEvent,
   createMessage,
+  createNanogram,
   createNews,
   createPost,
   createUserAccount,
   deleteComment,
+  deleteEvent,
   deleteMessage,
+  deleteNanogram,
   deleteNews,
   deletePost,
   followUser,
+  getAllEvents,
+  getAllNanograms,
   getCurrentUser,
   getInfinitePosts,
   getMessages,
@@ -37,7 +43,9 @@ import {
   signOutAccount,
   unFollowUser,
   unSavePost,
+  updateEvent,
   updateMessage,
+  updateNanogram,
   updateNews,
   updatePost,
   updateUser,
@@ -500,6 +508,107 @@ export const useUpdateUser = () => {
       });
       queryClient.invalidateQueries({
         queryKey: [QUERY_KEYS.GET_USER_BY_ID, data?.$id],
+      });
+    },
+  });
+};
+
+// ==================
+// Nanogram Queries
+// ==================
+export const useCreateNanogram = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (nanogram) => createNanogram(nanogram),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_NANOGRAM],
+      });
+    },
+  });
+};
+
+export const useUpdateNanogram = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (nanogram) => updateNanogram(nanogram),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_NANOGRAM],
+      });
+    },
+  });
+};
+
+export const useGetNanogram = () => {
+  return useQuery({
+    queryKey: [QUERY_KEYS.GET_NANOGRAM],
+    queryFn: getAllNanograms,
+    initialData: [],
+    onError: (error) => {
+      console.error("Error in useGetNanogram:", error);
+    },
+  });
+};
+
+export const useDeleteNanogram = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({ nanogramId, avatarId }) =>
+      deleteNanogram(nanogramId, avatarId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_NANOGRAM],
+      });
+    },
+  });
+};
+
+// ==================
+// Event Queries
+// ==================
+export const useCreateEvent = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (event) => createEvent(event),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_EVENTS],
+      });
+    },
+  });
+};
+
+export const useGetEvents = () => {
+  return useQuery({
+    queryKey: [QUERY_KEYS.GET_EVENTS],
+    queryFn: getAllEvents,
+    initialData: [],
+    onError: (error) => {
+      console.error("Error in useGetEvents:", error);
+    },
+  });
+};
+
+export const useUpdateEvent = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (event) => updateEvent(event),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_EVENTS],
+      });
+    },
+  });
+};
+
+export const useDeleteEvent = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({ eventId, imageId }) => deleteEvent(eventId, imageId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_EVENTS],
       });
     },
   });

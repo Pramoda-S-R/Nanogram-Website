@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Carousel,
   CarouselContent,
@@ -6,47 +6,23 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "../../../components/ui/Carousel";
+import { getEvents } from "../../../lib/appwrite/api";
 
 
 const EventGallery = () => {
-  // Data for the highlights
-  const highlightData = [
-    {
-      title: "Microcoded",
-      subtitle: "Workshop",
-      imgSrc: "/assets/images/placeholder.png",
-    },
-    {
-      title: "Colossus Hackathon",
-      subtitle: "Hackathon",
-      imgSrc: "/assets/images/placeholder.png",
-    },
-    {
-      title: "Debug This!!",
-      subtitle: "Workshop",
-      imgSrc: "/assets/images/placeholder.png",
-    },
-    {
-      title: "Talk on EV",
-      subtitle: "Seminar",
-      imgSrc: "/assets/images/placeholder.png",
-    },
-    {
-      title: "Techno Exhibition",
-      subtitle: "Representation",
-      imgSrc: "/assets/images/placeholder.png",
-    },
-    {
-      title: "Industrial Visit",
-      subtitle: "Exposure",
-      imgSrc: "/assets/images/placeholder.png",
-    },
-    {
-      title: "Inauguration",
-      subtitle: "The Start",
-      imgSrc: "/assets/images/placeholder.png",
-    },
-  ];
+  const [events, setEvents] = useState(null);
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const data = await getEvents();
+        setEvents(data);
+      } catch (error) {
+        console.error("Error fetching events:", error);
+      }
+    };
+    fetchEvents();
+  }, []);
 
   return (
     <div className=" px-6 py-10 md:px-8 md:py-10">
@@ -63,7 +39,7 @@ const EventGallery = () => {
             <CarouselPrevious />
             <CarouselNext />
             <CarouselContent>
-              {highlightData.map((highlight, index) => (
+              {events?.documents.map((highlight, index) => (
                 <CarouselItem
                   className="md:basis-1/2 lg:basis-1/3 xl:basis-1/5 "
                   key={index}
@@ -74,7 +50,7 @@ const EventGallery = () => {
                         <img
                           alt={highlight.title}
                           className="object-cover w-full h-full transition-all duration-300 origin-bottom group-hover:scale-110 aspect-[3/4]"
-                          src={highlight.imgSrc}
+                          src={highlight.imageUrl}
                           loading="lazy"
                         />
                       </div>
@@ -82,7 +58,7 @@ const EventGallery = () => {
                         <h3 className="text-base font-bold text-neutral-white">
                           {highlight.title}
                         </h3>
-                        <p className="text-sm font-medium text-neutral-black/50">
+                        <p className="text-sm font-medium text-neutral-white/75">
                           {highlight.subtitle}
                         </p>
                       </div>
