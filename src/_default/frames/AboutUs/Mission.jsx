@@ -10,7 +10,7 @@ const Mission = () => {
           <div className="relative overflow-hidden rounded-3xl bg-neutral-black px-6 pb-9 pt-64 shadow-2xl sm:px-12 lg:max-w-lg lg:px-8 lg:pb-8 xl:px-10 xl:pb-10">
             <div className="absolute inset-0 h-full w-full object-cover">
               <img
-                src="/assets/images/placeholder.png"
+                src="/assets/images/aboutus_1.jpg"
                 alt="img"
                 className="absolute inset-0 h-full w-full object-cover"
               />
@@ -43,17 +43,15 @@ const Mission = () => {
             </h1>
             <div className="max-w-xl">
               <p className=" mt-6">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste,
-                possimus cupiditate dolores nam fuga et?
+                Nanogram aims to empower students with a passion for
+                cutting-edge technology by providing a collaborative platform to
+                explore and research.
               </p>
               <p className="mt-6">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                Perspiciatis cumque accusantium omnis amet reprehenderit aut!
-              </p>
-              <p className="mt-6">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Repellendus, veniam! Nobis consequuntur consequatur dolorem
-                harum?
+                The club fosters interdisciplinary learning, industry
+                engagement, and hands-on experience through workshops, projects,
+                and competitions, enabling members to contribute meaningfully to
+                scientific and technological advancements .
               </p>
             </div>
           </div>
@@ -87,7 +85,7 @@ const Mission = () => {
                 <div>Students Reached</div>
               </dt>
               <dd className="mt-2 text-3xl font-bold leading-10 tracking-tight text-neutral-black">
-                <div>300+</div>
+                <div>350+</div>
               </dd>
             </div>
           </dl>
@@ -95,7 +93,12 @@ const Mission = () => {
             <Button
               variant="link"
               className="text-lg group flex items-center gap-1 font-semibold leading-6"
-              onClick={() => window.open("https://www.linkedin.com/company/nanogramhub/", "_blank")}
+              onClick={() =>
+                window.open(
+                  "https://www.linkedin.com/company/nanogramhub/",
+                  "_blank"
+                )
+              }
             >
               Learn more about us
               <span className="ml-2 pt-1 flex items-center h-4 w-4 transition-transform duration-200 transform group-hover:translate-x-1">

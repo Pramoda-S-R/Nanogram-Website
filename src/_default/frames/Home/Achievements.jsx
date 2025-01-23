@@ -1,35 +1,35 @@
 import React from "react";
 import { motion, useAnimation } from "framer-motion";
-import { FileText, Users, Globe, Gift } from "lucide-react";
+import { Users, Cake, Cog, GraduationCap } from "lucide-react";
 import { useInView } from "react-intersection-observer";
 
 const Achievements = () => {
   const stats = [
     {
-      icon: <FileText size={24} />,
-      title: "Percent chance of loosing my sanity",
-      value: 100,
+      icon: <Cake size={24} />,
+      title: "Founded",
+      value: 2024,
       color: "bg-primary",
       textcolor: "text-neutral-white",
     },
     {
       icon: <Users size={24} />,
-      title: "Number of times I've wanted to quit",
-      value: 80,
+      title: "Active Members",
+      value: "50+",
       color: "bg-neutral-white",
       textcolor: "text-neutral-black",
     },
     {
-      icon: <Globe size={24} />,
-      title: "Hours wasted on making this stupid website",
-      value: 6000,
+      icon: <Cog size={24} />,
+      title: "Workshops and Events",
+      value: "10+",
       color: "bg-primary",
       textcolor: "text-neutral-white",
     },
     {
-      icon: <Gift size={24} />,
-      title: "Brain Aneurysms",
-      value: 76,
+      icon: <GraduationCap size={24} />,
+      title: "Students Reached",
+      value: "350+",
       color: "bg-neutral-white",
       textcolor: "text-neutral-black",
     },
@@ -104,7 +104,7 @@ const Achievements = () => {
       <div className="mb-16">
         <div className="relative">
           <img
-            src="/assets/images/placeholder.png"
+            src="/assets/images/gallery_16.jpg"
             alt="Team collaboration"
             className="w-full h-[400px] object-cover grayscale"
           />

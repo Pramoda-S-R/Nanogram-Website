@@ -9,30 +9,30 @@ const Highlights = () => {
       <div className="w-full h-full flex -space-x-[12%] justify-center">
         <div className="size-1/3 bg-accent-gray rounded-xl shadow-lg -rotate-[30deg]">
           <img
-            src="/assets/images/placeholder.png"
+            src="/assets/images/home_1.jpg"
             alt="event-img"
-            className="rounded-xl"
+            className="rounded-xl aspect-square object-cover"
           />
         </div>
         <div className="size-1/3 bg-accent-gray rounded-xl shadow-lg -rotate-[20deg]">
           <img
-            src="/assets/images/placeholder.png"
+            src="/assets/images/home_2.jpg"
             alt="event-img"
-            className="rounded-xl"
+            className="rounded-xl aspect-square object-cover"
           />
         </div>
         <div className="size-1/3 bg-accent-gray rounded-xl shadow-lg -rotate-[10deg]">
           <img
-            src="/assets/images/placeholder.png"
+            src="/assets/images/home_3.jpg"
             alt="event-img"
-            className="rounded-xl"
+            className="rounded-xl aspect-square object-cover"
           />
         </div>
         <div className="size-1/3 bg-accent-gray rounded-xl shadow-lg -rotate-[0deg]">
           <img
-            src="/assets/images/placeholder.png"
+            src="/assets/images/home_4.jpg"
             alt="event-img"
-            className="rounded-xl"
+            className="rounded-xl aspect-square object-cover"
           />
         </div>
       </div>

@@ -5,6 +5,7 @@ import { FilePenLine } from "lucide-react";
 import PostStats from "./PostStats";
 import { ParseText } from "./ParseText";
 import { useGetCurrentUser } from "../../lib/react_query/queriesAndMutations";
+import ProfileIcon from "./ProfileIcon";
 
 const PostCard = ({ post }) => {
   const { data: currentUser } = useGetCurrentUser();
@@ -14,26 +15,16 @@ const PostCard = ({ post }) => {
   return (
     <div className="post-card shadow-2xl">
       <div className="flex-between">
-        <div className="flex items-center gap-3">
-          <Link to={`/profile/${post.creator.$id}`}>
-            <img
-              src={post?.creator?.imageUrl || "/assets/icons/user.svg"}
-              alt={post?.creator.name || "creator"}
-              className="rounded-full size-12"
-              loading="lazy"
-            />
-          </Link>
-          <div className="flex flex-col">
-            <p className="base-medium lg:body-bold text-neutral-black">
-              {post.creator.name}
-            </p>
-            <div className="flex-center gap-2 text-neutral-black font-light">
-              <p className="subtle-semibold lg:small-regular">
-                {timeAgo(post.$createdAt)}
-              </p>
-            </div>
-          </div>
-        </div>
+        <ProfileIcon
+          src={post?.creator?.imageUrl || "/assets/icons/user.svg"}
+          alt={post?.creator.name || "creator"}
+          className="rounded-full size-12"
+          id={post.creator.$id}
+          name={post.creator.name}
+          time={timeAgo(post.$createdAt)}
+          details={true}
+        />
+
         <Link
           to={`/update-post/${post.$id}`}
           className={`${currentUser?.$id !== post.creator.$id && "hidden"}`}

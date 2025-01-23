@@ -1,11 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ParticleRing from "../../../components/motion/ParticleRing";
 import Button from "../../../components/ui/Button";
 import { ArrowRight, Plus } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { getCoreMembers } from "../../../lib/appwrite/api";
 
 const Hero = () => {
   const navigate = useNavigate();
+  const [teamMembers, setTeamMembers] = useState([]);
+
+  useEffect(() => {
+    const fetchTeam = async () => {
+      try {
+        const data = await getCoreMembers();
+        setTeamMembers(data.slice(0, 8));
+      } catch (error) {
+        console.error("Error fetching team members:", error);
+      }
+    };
+    fetchTeam();
+  }, []);
 
   return (
     <div className="w-full h-screen-top flex flex-col">
@@ -21,7 +35,11 @@ const Hero = () => {
             for tech enthusiasts.
           </p>
           <div className="w-full flex md:flex-row flex-col gap-5 pointer-events-auto">
-            <Button variant="secondary" className={"w-fit"} onClick={() => navigate("/community")}>
+            <Button
+              variant="secondary"
+              className={"w-fit"}
+              onClick={() => navigate("/community")}
+            >
               Join the Community for Free!
             </Button>
             <Button
@@ -43,62 +61,20 @@ const Hero = () => {
       </div>
       <div className="w-full h-fit flex md:flex-row flex-col gap-5 md:justify-start justify-center items-center overflow-hidden py-6 md:px-20 px-0">
         <div className="flex -space-x-6">
-          <div className="size-16 shadow-lg rounded-full bg-accent-gray z-10">
-            <img
-              src="/assets/images/placeholder.png"
-              alt="img"
-              className="rounded-full"
-            />
-          </div>
-          <div className="size-16 shadow-lg rounded-full bg-accent-gray z-[9]">
-            <img
-              src="/assets/images/placeholder.png"
-              alt="img"
-              className="rounded-full"
-            />
-          </div>
-          <div className="size-16 shadow-lg rounded-full bg-accent-gray z-[8]">
-            <img
-              src="/assets/images/placeholder.png"
-              alt="img"
-              className="rounded-full"
-            />
-          </div>
-          <div className="size-16 shadow-lg rounded-full bg-accent-gray z-[7]">
-            <img
-              src="/assets/images/placeholder.png"
-              alt="img"
-              className="rounded-full"
-            />
-          </div>
-          <div className="size-16 shadow-lg rounded-full bg-accent-gray z-[6]">
-            <img
-              src="/assets/images/placeholder.png"
-              alt="img"
-              className="rounded-full"
-            />
-          </div>
-          <div className="size-16 shadow-lg rounded-full bg-accent-gray z-[5]">
-            <img
-              src="/assets/images/placeholder.png"
-              alt="img"
-              className="rounded-full"
-            />
-          </div>
-          <div className="size-16 shadow-lg rounded-full bg-accent-gray z-[4]">
-            <img
-              src="/assets/images/placeholder.png"
-              alt="img"
-              className="rounded-full"
-            />
-          </div>
-          <div className="size-16 shadow-lg rounded-full bg-accent-gray z-[3]">
-            <img
-              src="/assets/images/placeholder.png"
-              alt="img"
-              className="rounded-full"
-            />
-          </div>
+          {teamMembers.map((member, index) => (
+            <div
+              key={index}
+              className={`size-16 shadow-lg rounded-full bg-accent-gray z-{${
+                10 - index
+              }}`}
+            >
+              <img
+                src={member.avatarUrl || "/assets/images/placeholder.png"}
+                alt="img"
+                className="size-16 rounded-full border border-neutral-black/10 object-cover mx-auto"
+              />
+            </div>
+          ))}
           <div className="flex-center size-16 shadow-lg rounded-full bg-accent-gray z-[2]">
             <Plus />
           </div>

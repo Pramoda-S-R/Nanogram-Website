@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import PostStats from "./PostStats";
 import { useGetCurrentUser } from "../../lib/react_query/queriesAndMutations";
+import ProfileIcon from "./ProfileIcon";
 
 const GridPostList = ({ posts, showUser = true, showStats = true }) => {
   const { data: currentUser } = useGetCurrentUser();
@@ -20,15 +21,14 @@ const GridPostList = ({ posts, showUser = true, showStats = true }) => {
 
           <div className="grid-post_user">
             {showUser && (
-              <div className="flex-start gap-2 flex-1">
-                <img
-                  src={post.creator.imageUrl}
-                  alt="creator"
-                  className="size-8 rounded-full bg-neutral-white p-0.5"
-                  loading="lazy"
-                />
-                <p className="line-clamp-1">{post.creator.name}</p>
-              </div>
+              <ProfileIcon
+                src={post.creator.imageUrl}
+                alt="creator"
+                className="size-8 rounded-full bg-neutral-white p-0.5"
+                id={post.creator.$id}
+                name={post.creator.name}
+                details={false}
+              />
             )}
             {showStats && <PostStats post={post} userId={currentUser?.$id} />}
           </div>

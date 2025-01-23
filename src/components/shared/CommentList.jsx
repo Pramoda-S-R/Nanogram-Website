@@ -19,6 +19,7 @@ import {
 } from "../../lib/react_query/queriesAndMutations";
 import { useToast } from "../ui/Toast";
 import { Link } from "react-router-dom";
+import ProfileIcon from "./ProfileIcon";
 
 const CommentList = ({
   comments,
@@ -101,13 +102,17 @@ function Comment({ comment, currentUser, onDeleteComment, showLikes }) {
       <div className="w-full flex">
         <div className="flex w-full gap-2">
           <div className="w-12 items-center">
-            <Link to={`/profile/${comment.commentor.$id}`}>
-              <img
+            {/* <Link to={`/profile/${comment.commentor.$id}`}> */}
+              <ProfileIcon
                 src={comment.commentor.imageUrl || "/assets/icons/user.svg"}
                 alt={comment.commentor.name || "commentor"}
+                id={comment.commentor.$id}
+                name={comment.commentor.name}
+                details={false}
+                showName={false}
                 className="w-10 h-10 rounded-full"
               />
-            </Link>
+            {/* </Link> */}
           </div>
           <div className="w-full flex flex-col">
             <p className="text-sm font-semibold">{comment.commentor.name}</p>

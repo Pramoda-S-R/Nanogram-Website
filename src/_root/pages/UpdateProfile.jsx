@@ -260,16 +260,6 @@ const UpdateProfile = () => {
           </ul>
         )}
       </div>
-      {/* <AlertDialog
-        isOpen={isRemoveAlertOpen}
-        onClose={() => setRemoveAlertOpen(false)}
-        title="Are you sure?"
-        description="This process will remove your profile picture."
-        confirmButtonTitle="Yes, Remove"
-        onConfirm={() => handleRemoveAvatar()}
-        cancelButtonTitle="No, Abort"
-        onCancel={() => setRemoveAlertOpen(false)}
-      /> */}
     </div>
   );
 };

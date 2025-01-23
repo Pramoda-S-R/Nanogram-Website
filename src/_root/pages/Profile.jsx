@@ -8,7 +8,7 @@ import {
 import GridPostList from "../../components/shared/GridPostList";
 import Loader from "../../components/shared/Loader";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { FilePenLine } from "lucide-react";
+import { CakeSlice, Coins, FilePenLine } from "lucide-react";
 import FollowButton from "../../components/shared/FollowButton";
 import {
   Dialog,
@@ -20,6 +20,7 @@ import {
   DialogTrigger,
 } from "../../components/ui/Dialog";
 import { Followers, Following } from "../../components/shared/Follows";
+import { formatDate, getUserKarma } from "../../lib/utils";
 
 const Profile = () => {
   const { id } = useParams();
@@ -40,7 +41,7 @@ const Profile = () => {
   return (
     <div className="common-container w-full h-screen md:px-8 lg:px-20 px-0 md:pt-28 py-2 overflow-y-scroll custom-scrollbar">
       <div className="max-w-5xl flex flex-col w-full gap-6 md:gap-3">
-        <div className="flex justify- flex-wrap w-full">
+        <div className="flex flex-wrap w-full">
           <div className="flex gap-6 items-start">
             <img
               src={user?.imageUrl || "/assets/icons/user.svg"}
@@ -127,8 +128,28 @@ const Profile = () => {
             </div>
           )}
         </div>
-        <div className="max-w-md">
-          <p>{user?.bio}</p>
+        <div className="flex md:flex-row flex-col gap-3 p-4">
+          <div className="flex flex-col gap-3">
+            <div className="flex-start gap-2">
+              <CakeSlice />
+              <p className="base-medium text-[10px] lg:body-bold text-neutral-black">
+                {formatDate(user?.$createdAt, "MMMM DD, YYYY")}
+              </p>
+            </div>
+            <div className="flex-start gap-2">
+              <Coins />
+              <p className="base-medium text-[10px] lg:body-bold text-neutral-black">
+                {getUserKarma(user)}
+              </p>
+              <p className="base-medium text-[10px] lg:body-bold text-neutral-black">
+                Nanobytes
+              </p>
+            </div>
+          </div>
+          <div className="h-full border" />
+          <div className="max-w-md">
+            <p>{user?.bio}</p>
+          </div>
         </div>
       </div>
       <hr className="w-full border-neutral-black my-6" />

@@ -31,6 +31,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "../../components/ui/Popover";
+import ProfileIcon from "../../components/shared/ProfileIcon";
 
 const PostDetails = () => {
   useEffect(() => {
@@ -109,27 +110,15 @@ const PostDetails = () => {
             />
             <div className="post_details-info">
               <div className="flex-between flex-wrap w-full">
-                <Link
-                  to={`/profile/${post?.creator.$id}`}
-                  className="flex items-center gap-3"
-                >
-                  <img
-                    src={post?.creator?.imageUrl || "/assets/icons/user.svg"}
-                    alt={post?.creator.name || "creator"}
-                    className="rounded-full size-8 lg:size-12"
-                    loading="lazy"
-                  />
-                  <div className="flex flex-col">
-                    <p className="base-medium lg:body-bold text-neutral-black">
-                      {post?.creator.name}
-                    </p>
-                    <div className="flex-center gap-2 text-neutral-black font-light">
-                      <p className="subtle-semibold lg:small-regular">
-                        {timeAgo(post?.$createdAt)}
-                      </p>
-                    </div>
-                  </div>
-                </Link>
+                <ProfileIcon
+                  src={post?.creator?.imageUrl || "/assets/icons/user.svg"}
+                  alt={post?.creator.name || "creator"}
+                  className="rounded-full size-8 lg:size-12"
+                  id={post?.creator.$id}
+                  name={post?.creator.name}
+                  time={timeAgo(post?.$createdAt)}
+                  details={true}
+                />
                 <div className="flex-center">
                   <Popover>
                     <PopoverTrigger>

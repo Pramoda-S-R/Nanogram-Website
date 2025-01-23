@@ -63,3 +63,48 @@ export const publicRoutes = [
 export const adminId = "676ad11a00039ac69abb";
 export const noProfileImage =
   "https://cloud.appwrite.io/v1/storage/buckets/675d64d90024c9563ca3/files/emptyuser/view?project=675d5bfa000fc9c80137&project=675d5bfa000fc9c80137&mode=admin";
+
+export const images = [
+  "/assets/images/gallery_1.jpg",
+  "/assets/images/gallery_2.jpg",
+  "/assets/images/gallery_3.jpg",
+  "/assets/images/gallery_4.jpg",
+  "/assets/images/gallery_5.jpg",
+  "/assets/images/gallery_6.jpg",
+  "/assets/images/gallery_7.jpg",
+  "/assets/images/gallery_8.jpg",
+  "/assets/images/gallery_9.jpg",
+  "/assets/images/gallery_10.jpg",
+  "/assets/images/gallery_11.jpg",
+  "/assets/images/gallery_12.jpg",
+  "/assets/images/gallery_13.jpg",
+  "/assets/images/gallery_14.jpg",
+  "/assets/images/gallery_15.jpg",
+  "/assets/images/gallery_16.jpg",
+];
+
+export const allimages = [
+  "/assets/images/gallery_1.jpg",
+  "/assets/images/gallery_2.jpg",
+  "/assets/images/gallery_3.jpg",
+  "/assets/images/gallery_4.jpg",
+  "/assets/images/gallery_5.jpg",
+  "/assets/images/gallery_6.jpg",
+  "/assets/images/gallery_7.jpg",
+  "/assets/images/gallery_8.jpg",
+  "/assets/images/gallery_9.jpg",
+  "/assets/images/gallery_10.jpg",
+  "/assets/images/gallery_11.jpg",
+  "/assets/images/gallery_12.jpg",
+  "/assets/images/gallery_13.jpg",
+  "/assets/images/gallery_14.jpg",
+  "/assets/images/gallery_15.jpg",
+  "/assets/images/gallery_16.jpg",
+  "/assets/images/home_1.jpg",
+  "/assets/images/home_2.jpg",
+  "/assets/images/home_3.jpg",
+  "/assets/images/home_4.jpg",
+  "/assets/images/nano9124.png",
+  "/assets/images/nano13924.png",
+  "/assets/images/nano51224.png",
+];

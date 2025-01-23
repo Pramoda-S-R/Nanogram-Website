@@ -14,29 +14,32 @@ const Unique = () => {
             </h1>
             <div className="max-w-xl">
               <p className=" mt-6">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste,
-                possimus cupiditate dolores nam fuga et?
+                We are a team of researchers, creators, and problem solvers
+                focused on bridging the gap between theoretical knowledge and
+                practical innovation. Our mission is to transform ideas into
+                impactful solutions through collaboration and curiosity.
               </p>
               <p className="mt-6">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                Perspiciatis cumque accusantium omnis amet reprehenderit aut!
+                Through projects, workshops, and industry partnerships, we
+                create opportunities for skill development and hands-on
+                engagement. These initiatives empower individuals to approach
+                real-world challenges with creativity and resilience.
               </p>
               <p className="mt-6">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Repellendus, veniam! Nobis consequuntur consequatur dolorem
-                harum?
+                We are committed to sparking curiosity and inspiring
+                groundbreaking solutions to global issues. By combining
+                expertise and collaboration, we aim to turn knowledge into
+                meaningful change.
               </p>
             </div>
           </div>
         </div>
-        <div className="lg:pl-4 flex justify-end items-start mx-4">
-            {/* <div className="flex w-full h-full bg-secondary rounded-3xl shadow-2xl rotate-[-5deg]"></div>
-            <div className="flex w-full h-full bg-secondary rounded-3xl shadow-2xl rotate-[5deg]"></div> */}
-          <div className="overflow-hidden rounded-3xl shadow-2xl lg:max-w-lg z-10">
+        <div className="lg:pl-4 flex-center w-full md:mx-4 mx-0">
+          <div className="w-full flex overflow-hidden rounded-3xl shadow-2xl lg:max-w-lg z-10">
             <img
-              src="/assets/images/placeholder.png"
+              src="/assets/images/gallery_5.jpg"
               alt="img"
-              className=" h-full w-full object-cover"
+              className="h-full w-full object-cover"
             />
           </div>
         </div>

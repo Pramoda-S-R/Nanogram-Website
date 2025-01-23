@@ -30,6 +30,7 @@ import ErrorBoundary from "./errors/ErrorBoundary";
 import { Chats } from "./_root/pages/chats";
 import Inbox from "./_root/pages/chats/Inbox";
 import PDFViewer from "./components/shared/PDFViewer";
+import Game from "./components/game/Game";
 
 const App = () => {
   return (
@@ -79,6 +80,8 @@ const App = () => {
                   <Route path="/admin/events" element={<ControlEvents />} />
                   <Route path="/admin/newsletter" element={<ControlNewsletters />} />
                 </Route>
+                {/* Game */}
+                <Route path="/game" element={<Game />} />
                 {/* 404 */}
                 <Route path="*" element={<NotFound />} />
               </Routes>
