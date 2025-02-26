@@ -13,10 +13,10 @@ import {
 
 export const NAV_ITEMS = [
   { to: "/", icon: House, label: "Home" },
-  { to: "/about-us", icon: Info, label: "About Us" },
+  { to: "/about-us", icon: Info, label: "Aboutus" },
   { to: "/events", icon: Calendar, label: "Events" },
   { to: "/community", icon: Users, label: "Community" },
-  { to: "/blog", icon: FileText, label: "Blog" },
+  { to: "/newsletter", icon: FileText, label: "News" },
 ];
 
 export const SIDEBAR_ITEMS = [

@@ -270,7 +270,7 @@ function AboutUsForm({ action, member, memberSubmit }) {
       {/* Submit Button */}
       <div className="flex gap-4 items-center justify-end mb-14 md:mb-0">
         <Button type="submit" disabled={false}>
-          {/*isCreating || (isUpdating && "Validating...  ")*/} {action}
+          {isCreating || (isUpdating && "Validating...  ")} {action}
         </Button>
       </div>
     </form>

@@ -14,7 +14,7 @@ import {
 import { Hamburger } from "../ui/Hamburger";
 import PulseLoader from "./PulseLoader";
 import Button from "../ui/Button";
-import { FilePen, LogOut, UserPlus, Users } from "lucide-react";
+import { CakeSlice, Coins, FilePen, LogOut, UserPlus, Users } from "lucide-react";
 import {
   useGetCurrentUser,
   useSignOutAccount,
@@ -22,7 +22,7 @@ import {
 import { useUserContext, INITIAL_USER } from "../../context/AuthContext";
 import { communityPaths } from "../../constants";
 import { NAV_ITEMS } from "../../constants";
-import { getUserKarma, userAge } from "../../lib/utils";
+import { formatDate, getUserKarma, userAge } from "../../lib/utils";
 
 const Navbar = () => {
   const isSmallScreen = useMediaQuery({ query: "(max-width: 400px)" });
@@ -92,7 +92,7 @@ const Navbar = () => {
                     loading="lazy"
                   />
                 </SheetTrigger>
-                <SheetContent>
+                <SheetContent className="flex flex-col flex-1">
                   <SheetHeader>
                     <div className="flex justify-between items-center">
                       <div className="flex items-center gap-3">
@@ -127,7 +127,24 @@ const Navbar = () => {
                     <SheetTitle>Hello, {user.name}!</SheetTitle>
                     <SheetDescription>{userAge(user.joined)}</SheetDescription>
                   </SheetHeader>
-                  <div>{getUserKarma(currentUser)}</div>
+                  <div className="my-3 flex w-full border" />
+                  <div className="flex-start gap-2">
+                    <Coins />
+                    <p className="base-medium text-[10px] lg:body-bold text-neutral-black">
+                      {getUserKarma(currentUser)}
+                    </p>
+                    <p className="base-medium text-[10px] lg:body-bold text-neutral-black">
+                      Nanobytes
+                    </p>
+                  </div>
+                  <div className="my-3 flex w-full border" />
+                  <div className="flex-start gap-2">
+                    <CakeSlice />
+                    <p className="base-medium text-[10px] lg:body-bold text-neutral-black">
+                      {formatDate(currentUser?.$createdAt, "MMMM DD, YYYY")}
+                    </p>
+                  </div>
+                  <div className="my-3 flex w-full border" />
                   <SheetClose asChild>
                     <div className="flex-center flex-wrap w-full gap-2">
                       <Button
@@ -139,7 +156,8 @@ const Navbar = () => {
                       </Button>
                     </div>
                   </SheetClose>
-                  <div className="flex w-full justify-end gap-2">
+                  <div className="my-3 flex w-full border" />
+                  <div className="flex w-full justify-center gap-2">
                     <SheetClose asChild>
                       <Button
                         variant="ghost"

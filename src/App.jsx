@@ -4,7 +4,6 @@ import { AnimatePresence } from "framer-motion";
 import { Home, AboutUs, Events, Gallery } from "./_default/sites";
 import {
   Community,
-  Blog,
   Explore,
   Saved,
   AllUsers,
@@ -54,7 +53,6 @@ const App = () => {
                 {/* private routes */}
                 <Route element={<RootLayout />}>
                   <Route path="/community" element={<Community />} />
-                  <Route path="/blog" element={<Blog />} />
                   <Route path="/newsletter" element={<NewsLetter />} />
                   <Route path="/newsletter/:id" element={<PDFViewer />} />
                   <Route path="/explore" element={<Explore />} />
