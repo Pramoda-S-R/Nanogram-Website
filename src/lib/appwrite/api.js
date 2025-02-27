@@ -1,6 +1,7 @@
 import { ID, Query } from "appwrite";
 import { account, appwriteConfig, avatars, database, storage } from "./config";
 import { getUserKarma } from "../utils";
+import { get } from "react-hook-form";
 
 // ==================
 // Auth Functions

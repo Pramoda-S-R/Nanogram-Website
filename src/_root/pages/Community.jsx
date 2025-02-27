@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Loader from "../../components/shared/Loader";
 import {
+  useGetCurrentUser,
   useGetRecentPosts,
   useGetTopUsers,
+  useUpdateUserKarma,
 } from "../../lib/react_query/queriesAndMutations";
 import PostCard from "../../components/shared/PostCard";
-import ProfileIcon from "../../components/shared/ProfileIcon";
 import SpinLoader from "../../components/shared/SpinLoader";
 import { Link } from "react-router-dom";
 import { Coins } from "lucide-react";
+import { getUserKarma } from "../../lib/utils";
 
 const Home = () => {
   const {
@@ -22,7 +24,20 @@ const Home = () => {
     isPending: isTopUsersLoading,
     isError: isErrorTopUsers,
   } = useGetTopUsers(10);
-  console.log(topUsers);
+
+  const { data: currentUser, isLoading } = useGetCurrentUser();
+  const { mutateAsync: updateUserKarma, isPending: isLoadingUpdate } =
+    useUpdateUserKarma();
+
+  useEffect(() => {
+    if (currentUser?.$id) {
+      console.log("looping");
+      if (getUserKarma(currentUser) !== currentUser?.karma) {
+        console.log("yes");
+        updateUserKarma(currentUser);
+      }
+    }
+  }, [currentUser]);
 
   const hasPosts = posts?.documents && posts.documents.length > 0;
 

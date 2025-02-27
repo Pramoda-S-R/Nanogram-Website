@@ -50,6 +50,7 @@ import {
   updateNews,
   updatePost,
   updateUser,
+  updateUserKarma,
 } from "../appwrite/api";
 import { QUERY_KEYS } from "./queryKeys";
 
@@ -509,6 +510,21 @@ export const useUpdateUser = () => {
       });
       queryClient.invalidateQueries({
         queryKey: [QUERY_KEYS.GET_USER_BY_ID, data?.$id],
+      });
+    },
+  });
+};
+
+export const useUpdateUserKarma = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (user) => updateUserKarma(user),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_CURRENT_USER],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_TOP_USERS],
       });
     },
   });
