@@ -2,7 +2,7 @@
 
 A modern, sleek, and responsive React web application designed with cutting-edge features to ensure a seamless user experience.
 
-<iframe src="https://yourdomain.com" width="800" height="600"></iframe>
+    
 
 ## Features
 
@@ -14,7 +14,7 @@ A modern, sleek, and responsive React web application designed with cutting-edge
 
 ## Demo
 
-Check out the live demo of the app here: [Nanogram](https://nanogram-topaz.vercel.app)
+Check out the live demo of the app here: [Nanogram](https://nanogram.studio)
 
 ## Technologies
 

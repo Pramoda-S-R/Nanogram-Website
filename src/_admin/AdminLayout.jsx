@@ -4,7 +4,6 @@ import SpinLoader from "../components/shared/SpinLoader";
 import Navbar from "../components/shared/Navbar";
 import Footer from "../components/shared/Footer";
 import { useGetCurrentUser } from "../lib/react_query/queriesAndMutations";
-import { adminId } from "../constants";
 import Button from "../components/ui/Button";
 
 const AdminLayout = () => {
@@ -12,7 +11,6 @@ const AdminLayout = () => {
   const navigate = useNavigate();
 
   const { data: currentUser, isLoading } = useGetCurrentUser();
-  const isAdmin = currentUser?.$id === adminId;
 
   const scrollToSection = () => {
     if (location.hash) {
@@ -34,7 +32,7 @@ const AdminLayout = () => {
         <div className="flex-center h-screen">
           <SpinLoader />
         </div>
-      ) : isAdmin ? (
+      ) : currentUser?.admin ? (
         <>
           <Navbar />
           <section className="flex flex-1 bg-neutral-white">
