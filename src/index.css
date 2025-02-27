@@ -338,7 +338,7 @@ html {
 
 /* Post Details */
 .post_details-container {
-  @apply h-screen flex flex-col flex-1 gap-10 overflow-scroll px-5 md:p-14 md:pt-32 py-28 custom-scrollbar items-center;
+  @apply h-screen  flex flex-col flex-1 gap-10 overflow-scroll px-5 md:p-14 md:pt-32 py-28 custom-scrollbar items-center;
 }
 
 .post_details-card {

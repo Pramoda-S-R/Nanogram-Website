@@ -108,7 +108,7 @@ const PostDetails = () => {
               className="post_details-img"
               loading="lazy"
             />
-            <div className="post_details-info">
+            <div className="post_details-info max-w-[50%]">
               <div className="flex-between flex-wrap w-full">
                 <ProfileIcon
                   src={post?.creator?.imageUrl || "/assets/icons/user.svg"}
@@ -173,7 +173,7 @@ const PostDetails = () => {
               </div>
               <div className="flex max-h-56 flex-col w-full small-medium lg:base-medium overflow-y-scroll custom-scrollbar">
                 <p>{ParseText(post?.caption)}</p>
-                <ul className="flex gap-1 mt-2">
+                <ul className="flex flex-wrap gap-1 mt-2">
                   {post.tags.length === 0
                     ? null
                     : post.tags.map((tag) => (
