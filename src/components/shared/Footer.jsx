@@ -60,6 +60,8 @@ const Footer = () => {
               © Nanogram - The Tech Hub 2024, All Rights Reserved
               <br />
               Made with ❤️ by Pramoda S R - Viceroy, Nanogram
+              <vr />
+              Security tested by Fardeen S Khadri - Legacy Sentinal, Nanogram
             </p>
           </div>
         </div>

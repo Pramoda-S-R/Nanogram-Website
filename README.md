@@ -2,7 +2,7 @@
 
 A modern, sleek, and responsive React web application designed with cutting-edge features to ensure a seamless user experience.
 
-![Nanogram App Screenshot](./public/screenshot.png)
+<iframe src="https://yourdomain.com" width="800" height="600"></iframe>
 
 ## Features
 
