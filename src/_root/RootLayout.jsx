@@ -4,10 +4,12 @@ import Sidebar from "../components/shared/Sidebar";
 import Bottombar from "../components/shared/Bottombar";
 import React, { useEffect } from "react";
 import { updateUserKarma } from "../lib/appwrite/api";
+import { useGetCurrentUser } from "../lib/react_query/queriesAndMutations";
 
 const RootLayout = () => {
+  const { data: currentUser } = useGetCurrentUser();
   useEffect(() => {
-    const interval = setInterval(updateUserKarma, 10000);
+    const interval = setInterval(updateUserKarma(currentUser), 10000);
 
     return () => clearInterval(interval);
   }, []);
