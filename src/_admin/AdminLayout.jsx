@@ -41,7 +41,7 @@ const AdminLayout = () => {
           <Footer />
         </>
       ) : (
-        <div className="flex-center flex-col h-full gap-6">
+        <div className="flex-center flex-col h-screen gap-6">
           <div className="flex-center gap-5">
             <img
               src="/assets/images/nanogram_logo-bg-primary.svg"
