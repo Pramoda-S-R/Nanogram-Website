@@ -16,7 +16,12 @@ import {
   NewsLetter,
   Messages,
 } from "./_root/pages";
-import { Admin, ControlAboutUs, ControlEvents, ControlNewsletters } from "./_admin/controls";
+import {
+  Admin,
+  ControlAboutUs,
+  ControlEvents,
+  ControlNewsletters,
+} from "./_admin/controls";
 import SigninForm from "./_auth/forms/SigninForm";
 import SignupForm from "./_auth/forms/SignupForm";
 import NotFound from "./components/shared/NotFound";
@@ -75,7 +80,10 @@ const App = () => {
                   <Route path="/admin" element={<Admin />} />
                   <Route path="/admin/about-us" element={<ControlAboutUs />} />
                   <Route path="/admin/events" element={<ControlEvents />} />
-                  <Route path="/admin/newsletter" element={<ControlNewsletters />} />
+                  <Route
+                    path="/admin/newsletter"
+                    element={<ControlNewsletters />}
+                  />
                 </Route>
                 {/* 404 */}
                 <Route path="*" element={<NotFound />} />

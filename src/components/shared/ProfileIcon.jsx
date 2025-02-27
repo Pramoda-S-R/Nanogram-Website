@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { CakeSlice, Coins } from "lucide-react";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "../ui/HoverCard";
-import { formatDate, getUserKarma } from "../../lib/utils";
+import { formatDate } from "../../lib/utils";
 import SpinLoader from "./SpinLoader";
 import FollowButton from "./FollowButton";
 import Button from "../ui/Button";
@@ -20,6 +20,7 @@ const ProfileIcon = ({
   time,
   details,
   showName = true,
+  showTime = true,
 }) => {
   const navigate = useNavigate();
   const { data: currentUser } = useGetCurrentUser();
@@ -36,9 +37,11 @@ const ProfileIcon = ({
                 <p className="base-medium lg:body-bold text-neutral-black">
                   {name}
                 </p>
-                <div className="flex-center gap-2 text-neutral-black font-light">
-                  <p className="subtle-semibold lg:small-regular">{time}</p>
-                </div>
+                {showTime && (
+                  <div className="flex-center gap-2 text-neutral-black font-light">
+                    <p className="subtle-semibold lg:small-regular">{time}</p>
+                  </div>
+                )}
               </div>
             </div>
           </Link>
@@ -87,14 +90,14 @@ const ProfileIcon = ({
             <div className="flex-start gap-2">
               <Coins />
               <p className="base-medium text-[10px] lg:body-bold text-neutral-black">
-                {getUserKarma(user)}
+                {user?.karma}
               </p>
               <p className="base-medium text-[10px] lg:body-bold text-neutral-black">
                 Nanobytes
               </p>
             </div>
             <div className="flex-center gap-4">
-              {user.$id !== currentUser.$id && (
+              {user?.$id !== currentUser.$id && (
                 <FollowButton follower={currentUser} followed={user} />
               )}
               <Button

@@ -20,7 +20,7 @@ import {
   DialogTrigger,
 } from "../../components/ui/Dialog";
 import { Followers, Following } from "../../components/shared/Follows";
-import { formatDate, getUserKarma } from "../../lib/utils";
+import { formatDate } from "../../lib/utils";
 
 const Profile = () => {
   const { id } = useParams();
@@ -139,7 +139,7 @@ const Profile = () => {
             <div className="flex-start gap-2">
               <Coins />
               <p className="base-medium text-[10px] lg:body-bold text-neutral-black">
-                {getUserKarma(user)}
+                {user?.karma}
               </p>
               <p className="base-medium text-[10px] lg:body-bold text-neutral-black">
                 Nanobytes

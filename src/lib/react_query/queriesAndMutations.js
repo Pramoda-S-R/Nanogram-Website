@@ -29,6 +29,7 @@ import {
   getPostById,
   getRecentPosts,
   getSavedPosts,
+  getTopUsers,
   getUserById,
   getUserPosts,
   getUsers,
@@ -510,6 +511,13 @@ export const useUpdateUser = () => {
         queryKey: [QUERY_KEYS.GET_USER_BY_ID, data?.$id],
       });
     },
+  });
+};
+
+export const useGetTopUsers = (limit) => {
+  return useQuery({
+    queryKey: [QUERY_KEYS.GET_TOP_USERS],
+    queryFn: () => getTopUsers(limit),
   });
 };
 

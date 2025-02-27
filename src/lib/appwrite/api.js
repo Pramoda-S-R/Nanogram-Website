@@ -1,5 +1,6 @@
 import { ID, Query } from "appwrite";
 import { account, appwriteConfig, avatars, database, storage } from "./config";
+import { getUserKarma } from "../utils";
 
 // ==================
 // Auth Functions
@@ -1034,6 +1035,41 @@ export async function updateUser(user) {
     console.log(error);
   }
 }
+// Update user karma
+export async function updateUserKarma(user) {
+  try {
+    const updatedUser = await database.updateDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.userCollectionId,
+      user.$id,
+      {
+        karma: getUserKarma(user),
+      }
+    );
+
+    if (!updatedUser) throw Error;
+
+    return updatedUser;
+  } catch (error) {
+    console.log(error);
+  }
+}
+// Get top users by karma
+export async function getTopUsers(limit) {
+  try {
+    const users = await database.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.userCollectionId,
+      [Query.orderDesc("karma"), Query.limit(limit)]
+    );
+
+    if (!users) throw Error;
+
+    return users;
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 // ==================
 // Nanogram Functions
@@ -1323,7 +1359,8 @@ export async function createEvent(event) {
         description: event.description,
         content: event.content,
         completed: event.completed,
-        registration: event.registration.length !== 0 ? event.registration : null,
+        registration:
+          event.registration.length !== 0 ? event.registration : null,
         date: event.date,
         location: event.location,
         imageUrl: fileUrl,
@@ -1392,7 +1429,8 @@ export async function updateEvent(event) {
         description: event.description,
         content: event.content,
         completed: event.completed,
-        registration: event.registration.length !== 0 ? event.registration : null,
+        registration:
+          event.registration.length !== 0 ? event.registration : null,
         date: event.date,
         location: event.location,
         imageUrl: image.imageUrl,

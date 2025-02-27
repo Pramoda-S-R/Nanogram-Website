@@ -34,7 +34,7 @@ const PostCard = ({ post }) => {
       </div>
       <div className="small-medium lg:base-medium py-5">
         <p>{ParseText(post.caption)}</p>
-        <ul className="flex gap-1 mt-2">
+        <ul className="flex flex-wrap gap-1 mt-2">
           {post.tags.length === 0
             ? null
             : post.tags.map((tag) => (

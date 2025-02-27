@@ -22,7 +22,7 @@ import {
 import { useUserContext, INITIAL_USER } from "../../context/AuthContext";
 import { communityPaths } from "../../constants";
 import { NAV_ITEMS } from "../../constants";
-import { formatDate, getUserKarma, userAge } from "../../lib/utils";
+import { formatDate, userAge } from "../../lib/utils";
 
 const Navbar = () => {
   const isSmallScreen = useMediaQuery({ query: "(max-width: 400px)" });
@@ -131,7 +131,7 @@ const Navbar = () => {
                   <div className="flex-start gap-2">
                     <Coins />
                     <p className="base-medium text-[10px] lg:body-bold text-neutral-black">
-                      {getUserKarma(currentUser)}
+                      {currentUser?.karma}
                     </p>
                     <p className="base-medium text-[10px] lg:body-bold text-neutral-black">
                       Nanobytes

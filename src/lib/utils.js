@@ -1,3 +1,5 @@
+import { updateUserKarma } from "./appwrite/api";
+
 export function timeAgo(dateString) {
   const date = new Date(dateString);
   const now = new Date();
@@ -101,7 +103,6 @@ export function formatReadableTime(isoTimestamp) {
     timeZoneName: "short", // e.g., "GMT"
   };
 
-
   return date.toLocaleString("en-US", options);
 }
 
@@ -130,7 +131,7 @@ export function formatDate(isoString, format) {
       case "YYYY-MM-DD":
         return `${year}-${month}-${day}`;
       case "YYYYMMDD":
-          return `${year}${month}${day}`;
+        return `${year}${month}${day}`;
       case "DD/MM/YYYY HH:mm:ss":
         return `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
       case "YYYY-MM-DD HH:mm":
@@ -140,8 +141,19 @@ export function formatDate(isoString, format) {
       case "HH:mm":
         return `${hours}:${minutes}`;
       case "MMMM DD, YYYY": // Example: January 01, 2024
-        const monthNames = ["January", "February", "March", "April", "May", "June",
-          "July", "August", "September", "October", "November", "December"
+        const monthNames = [
+          "January",
+          "February",
+          "March",
+          "April",
+          "May",
+          "June",
+          "July",
+          "August",
+          "September",
+          "October",
+          "November",
+          "December",
         ];
         return `${monthNames[date.getMonth()]} ${day}, ${year}`;
       // Add more cases as needed
