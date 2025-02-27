@@ -9,9 +9,7 @@ import { useGetCurrentUser } from "../lib/react_query/queriesAndMutations";
 const RootLayout = () => {
   const { data: currentUser } = useGetCurrentUser();
   useEffect(() => {
-    const interval = setInterval(updateUserKarma(currentUser), 10000);
-
-    return () => clearInterval(interval);
+    updateUserKarma(currentUser);
   }, []);
   return (
     <div className="w-full ">
