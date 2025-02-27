@@ -2,19 +2,35 @@ import React from "react";
 import {
   useGetCurrentUser,
   useGetTopUsers,
+  useUpdateUserKarma,
 } from "../../lib/react_query/queriesAndMutations";
 import Loader from "../../components/shared/Loader";
-import UserCard from "../../components/shared/UserCard";
 import ProfileIcon from "../../components/shared/ProfileIcon";
 import { Star } from "lucide-react";
+import { getUserKarma } from "../../lib/utils";
 
 const TopUsers = () => {
   const { data: currentUser } = useGetCurrentUser();
+
   const {
     data: topUsers,
     isPending: isTopUsersLoading,
     isError: isErrorTopUsers,
   } = useGetTopUsers(10);
+
+  const { mutateAsync: updateUserKarma, isPending: isLoadingUpdate } =
+    useUpdateUserKarma();
+
+  useEffect(() => {
+    if (currentUser?.$id) {
+      // console.log("looping");
+      if (getUserKarma(currentUser) !== currentUser?.karma) {
+        // console.log("yes");
+        updateUserKarma(currentUser);
+      }
+    }
+  }, [currentUser]);
+
   return (
     <div className="h-screen flex flex-col flex-1 md:pt-32 py-24 px-5 md:p-14 overflow-y-scroll custom-scrollbar">
       <div>
@@ -43,7 +59,9 @@ const TopUsers = () => {
                   />
                 )}
                 {index >= 3 && (
-                  <p className="text-neutral-black font-bold flex-center w-6">{index + 1}</p>
+                  <p className="text-neutral-black font-bold flex-center w-6">
+                    {index + 1}
+                  </p>
                 )}
                 <ProfileIcon
                   src={user?.imageUrl || "/assets/icons/user.svg"}
