@@ -15,6 +15,7 @@ import {
   UpdateProfile,
   NewsLetter,
   Messages,
+  TopUsers,
 } from "./_root/pages";
 import {
   Admin,
@@ -58,6 +59,7 @@ const App = () => {
                 {/* private routes */}
                 <Route element={<RootLayout />}>
                   <Route path="/community" element={<Community />} />
+                  <Route path="/top-users" element={<TopUsers />} />
                   <Route path="/newsletter" element={<NewsLetter />} />
                   <Route path="/newsletter/:id" element={<PDFViewer />} />
                   <Route path="/explore" element={<Explore />} />

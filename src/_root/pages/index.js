@@ -10,3 +10,4 @@ export { default as Profile } from "./Profile";
 export { default as UpdateProfile } from "./UpdateProfile";
 export { default as Messages } from "./Messages";
 export { default as NewsLetter } from "./NewsLetter";
+export { default as TopUsers } from "./TopUsers";

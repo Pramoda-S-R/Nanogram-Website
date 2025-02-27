@@ -17,10 +17,12 @@ const ProfileIcon = ({
   className,
   id,
   name,
+  username,
   time,
   details,
   showName = true,
   showTime = true,
+  showUserName = false,
 }) => {
   const navigate = useNavigate();
   const { data: currentUser } = useGetCurrentUser();
@@ -34,12 +36,21 @@ const ProfileIcon = ({
             <div className="flex items-center gap-3">
               <img src={src} alt={alt} className={className} loading="lazy" />
               <div className="flex flex-col">
-                <p className="base-medium lg:body-bold text-neutral-black">
-                  {name}
-                </p>
+                <div className="flex">
+                  <p className="base-medium lg:body-bold text-neutral-black">
+                    {name}
+                  </p>
+                </div>
                 {showTime && (
                   <div className="flex-center gap-2 text-neutral-black font-light">
                     <p className="subtle-semibold lg:small-regular">{time}</p>
+                  </div>
+                )}
+                {showUserName && (
+                  <div className="flex gap-2 text-neutral-black font-light">
+                    <p className="subtle-semibold lg:small-regular">
+                      @{username}
+                    </p>
                   </div>
                 )}
               </div>

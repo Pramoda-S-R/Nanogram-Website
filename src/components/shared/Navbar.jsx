@@ -14,7 +14,7 @@ import {
 import { Hamburger } from "../ui/Hamburger";
 import PulseLoader from "./PulseLoader";
 import Button from "../ui/Button";
-import { CakeSlice, Coins, FilePen, LogOut, UserPlus, Users } from "lucide-react";
+import { CakeSlice, Coins, FilePen, LogOut, Star, UserPlus, Users } from "lucide-react";
 import {
   useGetCurrentUser,
   useSignOutAccount,
@@ -153,6 +153,18 @@ const Navbar = () => {
                         onClick={() => navigate("/all-users")}
                       >
                         <Users /> All Users
+                      </Button>
+                    </div>
+                  </SheetClose>
+                  <div className="my-3 flex w-full border" />
+                  <SheetClose asChild>
+                    <div className="flex-center flex-wrap w-full gap-2">
+                      <Button
+                        variant="ghost"
+                        className={"flex gap-2"}
+                        onClick={() => navigate("/top-users")}
+                      >
+                        <Star /> Top Users
                       </Button>
                     </div>
                   </SheetClose>

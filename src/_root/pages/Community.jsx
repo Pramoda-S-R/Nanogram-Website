@@ -31,9 +31,9 @@ const Home = () => {
 
   useEffect(() => {
     if (currentUser?.$id) {
-      console.log("looping");
+      // console.log("looping");
       if (getUserKarma(currentUser) !== currentUser?.karma) {
-        console.log("yes");
+        // console.log("yes");
         updateUserKarma(currentUser);
       }
     }
