@@ -41,7 +41,8 @@ export default function Testimonials() {
     controls.start({ x: 0 });
   };
 
-  if (testimonials.length === 0) return <p className="flex-center">Loading testimonials...</p>;
+  if (testimonials.length === 0)
+    return <p className="flex-center">Loading testimonials...</p>;
 
   return (
     <div className="relative w-full px-4 lg:pt-20 md:pt-32 pt-52 py-16 overflow-hidden">
@@ -81,8 +82,8 @@ function Testimonial({ testimonial }) {
   return (
     <div className="flex flex-col items-center text-center">
       <motion.img
-        src={testimonial.avatarUrl}
-        alt={testimonial.name}
+        src={testimonial?.avatarUrl || "/assets/images/placeholder.png"}
+        alt={testimonial?.name || "Avatar"}
         className="w-24 h-24 rounded-full border border-neutral-black/10 object-cover mx-auto"
         whileHover={{ scale: 1.1 }}
         transition={{ type: "spring", stiffness: 300 }}
@@ -93,7 +94,7 @@ function Testimonial({ testimonial }) {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2 }}
       >
-        {testimonial.name}
+        {testimonial?.name}
       </motion.h3>
       <motion.p
         className="text-neutral-black/70 mb-4"
@@ -101,7 +102,7 @@ function Testimonial({ testimonial }) {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3 }}
       >
-        {testimonial.role}
+        {testimonial?.role}
       </motion.p>
       <motion.blockquote
         className="text-lg italic text-neutral-black"
@@ -109,7 +110,7 @@ function Testimonial({ testimonial }) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4, type: "spring", stiffness: 100 }}
       >
-        "{testimonial.content}"
+        "{testimonial?.content}"
       </motion.blockquote>
     </div>
   );
