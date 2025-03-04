@@ -12,7 +12,7 @@ export function ParseText(text) {
           rel="noopener noreferrer"
           className="text-blue-500 underline"
         >
-          {part}
+          {"click here"}
         </a>
       );
     }

@@ -108,7 +108,7 @@ const PostDetails = () => {
               className="post_details-img"
               loading="lazy"
             />
-            <div className="post_details-info max-w-[50%]">
+            <div className="post_details-info max-w-full lg:max-w-[50%]">
               <div className="flex-between flex-wrap w-full">
                 <ProfileIcon
                   src={post?.creator?.imageUrl || "/assets/icons/user.svg"}
