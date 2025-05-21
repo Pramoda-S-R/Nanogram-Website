@@ -50,7 +50,7 @@ const Profile = () => {
               loading="lazy"
             />
             <div className="flex justify-start flex-col gap-1">
-              <p className="text-xl font-semibold">{user?.name}</p>
+              <p className="text-xl font-semibold">{user?.name} {user?.admin && <span className="text-sm p-1 rounded-md bg-primary text-neutral-white">Admin</span>}</p>
               <p className="font-light">@{user?.username}</p>
               <div className="flex gap-6">
                 <div className="flex flex-col items-center">
