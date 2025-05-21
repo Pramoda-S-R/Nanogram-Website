@@ -1098,7 +1098,7 @@ export async function getAllNanograms() {
     const response = await database.listDocuments(
       appwriteConfig.databaseId,
       appwriteConfig.nanogramCollectionId,
-      [Query.orderAsc("priority")]
+      [Query.orderAsc("priority"), Query.limit(30)]
     );
     if (!response) {
       throw new Error("No nanograms found.");
