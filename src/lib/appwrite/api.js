@@ -155,7 +155,10 @@ export async function createPost(post) {
     if (!uploadedFile) throw Error;
 
     // Get file url
-    const fileUrl = getFilePreview(uploadedFile.$id);
+    const fileUrl = storage.getFileDownload(
+      appwriteConfig.storageId,
+      uploadedFile.$id
+    );
     if (!fileUrl) {
       await deleteFile(uploadedFile.$id);
       throw Error;
@@ -200,25 +203,6 @@ export async function uploadFile(file) {
     );
 
     return uploadedFile;
-  } catch (error) {
-    console.log(error);
-  }
-}
-// Get File Preview
-export function getFilePreview(fileId) {
-  try {
-    const fileUrl = storage.getFilePreview(
-      appwriteConfig.storageId,
-      fileId,
-      2000,
-      2000,
-      "top",
-      100
-    );
-
-    if (!fileUrl) throw Error;
-
-    return fileUrl;
   } catch (error) {
     console.log(error);
   }
@@ -268,7 +252,10 @@ export async function updatePost(post) {
       if (!uploadedFile) throw Error;
 
       // Get file url
-      const fileUrl = getFilePreview(uploadedFile.$id);
+      const fileUrl = storage.getFileDownload(
+        appwriteConfig.storageId,
+        uploadedFile.$id
+      );
       if (!fileUrl) {
         await deleteFile(uploadedFile.$id);
         throw Error;
@@ -993,7 +980,10 @@ export async function updateUser(user) {
       if (!uploadedFile) throw Error;
 
       // Get new file url
-      const fileUrl = getFilePreview(uploadedFile.$id);
+      const fileUrl = storage.getFileDownload(
+        appwriteConfig.storageId,
+        uploadedFile.$id
+      );
       if (!fileUrl) {
         await deleteFile(uploadedFile.$id);
         throw Error;
