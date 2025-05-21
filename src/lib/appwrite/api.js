@@ -1114,7 +1114,7 @@ export async function getCoreMembers() {
     const core = await database.listDocuments(
       appwriteConfig.databaseId,
       appwriteConfig.nanogramCollectionId,
-      [Query.orderAsc("priority"), Query.limit(20)]
+      [Query.orderAsc("priority"), Query.limit(30)]
     );
 
     if (!core || core.total === 0) {
