@@ -28,6 +28,12 @@ const ProfileIcon = ({
   const { data: currentUser } = useGetCurrentUser();
   const { data: user, isPending } = useGetUserById(id);
 
+  if (isPending) return <SpinLoader />;
+
+  if (!user) return null;
+
+  if (!currentUser) return null;
+
   return (
     <HoverCard>
       <HoverCardTrigger>
