@@ -21,21 +21,37 @@ import { getContactsRealtime } from "../../lib/appwrite/realtime";
 function Contact({ contact }) {
   return (
     <li className="pb-5" key={contact.$id}>
-      <Link to={`/messages/${contact.$id}`}>
+      {contact.$id ? (
+        <Link to={`/messages/${contact.$id}`}>
+          <div className="flex gap-3 md:justify-center justify-start lg:justify-start cursor-pointer">
+            <img
+              src={contact?.imageUrl || "/assets/icons/user.svg"}
+              alt="user"
+              className="rounded-full size-14"
+              loading="lazy"
+            />
+
+            <div className="lg:flex md:hidden flex justify-start flex-col gap-1">
+              <p className="text-xl font-semibold">{contact?.name}</p>
+              <p className="font-light">@{contact?.username}</p>
+            </div>
+          </div>
+        </Link>
+      ) : (
         <div className="flex gap-3 md:justify-center justify-start lg:justify-start cursor-pointer">
           <img
-            src={contact?.imageUrl || "/assets/icons/user.svg"}
+            src={"/assets/icons/user.svg"}
             alt="user"
             className="rounded-full size-14"
             loading="lazy"
           />
 
           <div className="lg:flex md:hidden flex justify-start flex-col gap-1">
-            <p className="text-xl font-semibold">{contact?.name}</p>
-            <p className="font-light">@{contact?.username}</p>
+            <p className="text-xl font-semibold">[Deleted User]</p>
+            <p className="font-light">@deleted_user</p>
           </div>
         </div>
-      </Link>
+      )}
     </li>
   );
 }
