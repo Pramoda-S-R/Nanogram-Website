@@ -65,16 +65,18 @@ export function getUserKarma(user) {
   let following = 0;
 
   if (user) {
-    post = user.posts.length;
-    comment = user.comments.length;
-    follower = user.followers.length;
-    following = user.following.length;
-    for (const post of user.posts) {
-      postlikes += post.likes.length;
-    }
-    for (const comment of user.comments) {
-      commentlikes += comment.likes.length;
-    }
+    post = user.posts.length ?? 0;
+    comment = user.comments.length ?? 0;
+    follower = user.followers.length ?? 0;
+    following = user.following.length ?? 0;
+    if (user.posts)
+      for (const post of user.posts) {
+        postlikes += post.likes.length ?? 0;
+      }
+    if (user.comments)
+      for (const comment of user.comments) {
+        commentlikes += comment.likes.length ?? 0;
+      }
   }
 
   karma =
